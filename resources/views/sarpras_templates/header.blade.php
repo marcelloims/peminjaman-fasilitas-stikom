@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ITB STIKOM Bali - {{ $title }}</title>
 <!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/logo-stikom.png') }}">
 <!-- Datatable -->
 <link href="{{ asset('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <!-- Custom Stylesheet -->
