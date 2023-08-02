@@ -1,0 +1,26 @@
+.row .col .form-group .form-control{
+    color: black;
+}
+
+.form-control{
+    color: black !important;
+}
+
+.form-group{
+    color: black !important;
+    font-size: 16px;
+}
+
+.row .col .form-group {
+    font-weight: 450;
+}
+
+.row .col .badge{
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.softDelete{
+    width: 50px;
+}
+
