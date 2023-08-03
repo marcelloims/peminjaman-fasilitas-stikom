@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Sarpras\DashboardController;
 use App\Http\Controllers\sarpras\OrganisasiMahasiswaController;
 use Illuminate\Support\Facades\Route;
@@ -19,17 +20,38 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'sarpras'], function () {
-    Route::get('dashboard', [DashboardController::class, 'index']);
-    Route::group(['prefix' => 'organisasi-mahasiswa'], function () {
-        Route::get('/', [OrganisasiMahasiswaController::class, 'index']);
-        Route::post('save', [OrganisasiMahasiswaController::class, 'store']);
-        Route::get('detail/{id}', [OrganisasiMahasiswaController::class, 'show']);
-        Route::get('edit/{id}', [OrganisasiMahasiswaController::class, 'edit']);
-        Route::post('update/{id}', [OrganisasiMahasiswaController::class, 'update']);
-        Route::get('delete/{id}', [OrganisasiMahasiswaController::class, 'delete']);
-        Route::get('softdelete/{corporate}', [OrganisasiMahasiswaController::class, 'softDelete']);
-        Route::get('trashed', [OrganisasiMahasiswaController::class, 'trashed']);
-        Route::get('restore/{id}', [OrganisasiMahasiswaController::class, 'restore']);
+Route::controller(AuthController::class)->group(function () {
+    Route::get('login', 'index')->name('login');
+    Route::post('login/process', 'process');
+    Route::get('logout', 'logout');
+});
+
+Route::group(['middleware' => ['CheckLogin:1']], function () {
+    Route::group(['prefix' => 'sarpras'], function () {
+        Route::get('dashboard', [DashboardController::class, 'index']);
+
+        Route::group(['prefix' => 'organisasi-mahasiswa'], function () {
+            Route::get('/', [OrganisasiMahasiswaController::class, 'index']);
+            Route::post('save', [OrganisasiMahasiswaController::class, 'store']);
+            Route::get('detail/{id}', [OrganisasiMahasiswaController::class, 'show']);
+            Route::get('edit/{id}', [OrganisasiMahasiswaController::class, 'edit']);
+            Route::post('update/{id}', [OrganisasiMahasiswaController::class, 'update']);
+            Route::get('delete/{id}', [OrganisasiMahasiswaController::class, 'delete']);
+            Route::get('softdelete/{id}', [OrganisasiMahasiswaController::class, 'softDelete']);
+            Route::get('trashed', [OrganisasiMahasiswaController::class, 'trashed']);
+            Route::get('restore/{id}', [OrganisasiMahasiswaController::class, 'restore']);
+        });
+
+        Route::group(['prefix' => 'mahasiswa'], function () {
+            Route::get('/', [OrganisasiMahasiswaController::class, 'index']);
+            Route::post('save', [OrganisasiMahasiswaController::class, 'store']);
+            Route::get('detail/{id}', [OrganisasiMahasiswaController::class, 'show']);
+            Route::get('edit/{id}', [OrganisasiMahasiswaController::class, 'edit']);
+            Route::post('update/{id}', [OrganisasiMahasiswaController::class, 'update']);
+            Route::get('delete/{id}', [OrganisasiMahasiswaController::class, 'delete']);
+            Route::get('softdelete/{id}', [OrganisasiMahasiswaController::class, 'softDelete']);
+            Route::get('trashed', [OrganisasiMahasiswaController::class, 'trashed']);
+            Route::get('restore/{id}', [OrganisasiMahasiswaController::class, 'restore']);
+        });
     });
 });

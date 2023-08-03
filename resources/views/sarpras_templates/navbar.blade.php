@@ -6,16 +6,24 @@
             </div>
         </div>
         <ul class="navbar-nav header-right">
+            <li class="nav-item">
+                <div class="input-group search-area d-xl-inline-flex d-none">
+                </div>
+            </li>
+            <li class="nav-item dropdown notification_dropdown">
+                <div class="input-group search-area d-xl-inline-flex d-none">
+                </div>
+            </li>
             <li class="nav-item dropdown header-profile">
                 <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
-                    <img src="{{ asset('assets/images/profile/17.jpg') }}" width="20" alt="" />
+                    <img src="{{ asset('assets/images/user.png') }}" width="20" alt="" />
                     <div class="header-info">
-                        <span class="text-black"><strong>User Sarpras</strong></span>
-                        <p class="fs-12 mb-0">Admin</p>
+                        <span class="text-black"><strong>{{ Auth::user()->name }}</span>
+                        <p class="fs-12 mb-0">{{ Auth::user()->email }}</p>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="{{ asset('assets/app-profile.html') }}" class="dropdown-item ai-icon">
+                    {{-- <a href="{{ asset('assets/app-profile.html') }}" class="dropdown-item ai-icon">
                         <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18"
                             height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -23,8 +31,8 @@
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                         <span class="ml-2">Profile </span>
-                    </a>
-                    <a href="{{ asset('assets/page-login.html') }}" class="dropdown-item ai-icon">
+                    </a> --}}
+                    <a href="{{ url('logout') }}" class="dropdown-item ai-icon">
                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18"
                             height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round">

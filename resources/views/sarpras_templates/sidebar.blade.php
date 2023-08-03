@@ -11,9 +11,9 @@
     </a>
     <ul aria-expanded="false">
         <li><a href="{{ url('sarpras/organisasi-mahasiswa', []) }}">Organisasi Mahasiswa</a></li>
-        <li><a href="{{ url('sarpras/organisasi-mahasiswa', []) }}">Mahasiswa</a></li>
-        <li><a href="{{ url('sarpras/organisasi-mahasiswa', []) }}">Alat-alat</a></li>
-        <li><a href="{{ url('sarpras/organisasi-mahasiswa', []) }}">Fasilitas</a></li>
+        <li><a href="{{ url('#', []) }}">Mahasiswa</a></li>
+        <li><a href="{{ url('#', []) }}">Alat-alat</a></li>
+        <li><a href="{{ url('#', []) }}">Fasilitas</a></li>
     </ul>
 </li>
 <li>
@@ -22,9 +22,9 @@
         <span class="nav-text">Pengajuan</span>
     </a>
     <ul aria-expanded="false">
-        <li><a href="{{ url('sarpras/organisasi-mahasiswa', []) }}">Surat Pengajuan</a></li>
-        <li><a href="{{ url('sarpras/organisasi-mahasiswa', []) }}">Peminjaman Alat</a></li>
-        <li><a href="{{ url('sarpras/organisasi-mahasiswa', []) }}">Peminjaman Fasilitas</a></li>
+        <li><a href="{{ url('#', []) }}">Surat Pengajuan</a></li>
+        <li><a href="{{ url('#', []) }}">Peminjaman Alat</a></li>
+        <li><a href="{{ url('#', []) }}">Peminjaman Fasilitas</a></li>
     </ul>
 </li>
 <li>
@@ -33,8 +33,8 @@
         <span class="nav-text">Laporan</span>
     </a>
     <ul aria-expanded="false">
-        <li><a href="{{ url('sarpras/organisasi-mahasiswa', []) }}">Pengajuan</a></li>
-        <li><a href="{{ url('sarpras/organisasi-mahasiswa', []) }}">Alat-Alat</a></li>
-        <li><a href="{{ url('sarpras/organisasi-mahasiswa', []) }}">Fasilitas</a></li>
+        <li><a href="{{ url('#', []) }}">Pengajuan</a></li>
+        <li><a href="{{ url('#', []) }}">Alat-Alat</a></li>
+        <li><a href="{{ url('#', []) }}">Fasilitas</a></li>
     </ul>
 </li>
