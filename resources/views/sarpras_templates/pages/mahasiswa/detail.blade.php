@@ -24,7 +24,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Form Ubah {{ $title }}</h4>
+                    <h4 class="card-title">Detail Data {{ $title }}</h4>
                 </div>
                 <div class="card-body">
                     @csrf

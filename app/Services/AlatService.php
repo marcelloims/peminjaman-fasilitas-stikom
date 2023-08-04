@@ -19,6 +19,11 @@ class AlatService
         return $this->alatRepository->getData($table, $id);
     }
 
+    public function getDataByRequest($table, $id)
+    {
+        return $this->alatRepository->getToolByRequest($table, $id);
+    }
+
     public function store($table, $request)
     {
         $request->validate(
@@ -37,6 +42,7 @@ class AlatService
         );
 
         $data = [
+            'facilities_id' => $request->fasilitas_id,
             'code'          => $request->kode,
             'name'          => $request->nama,
             'category'      => $request->kategori,
@@ -47,6 +53,8 @@ class AlatService
             'created_at'    => now(),
             'updated_at'    => now()
         ];
+
+        // dd($data);
 
         return $this->alatRepository->store($table, $data);
     }
@@ -69,6 +77,7 @@ class AlatService
         );
 
         $data = [
+            'facilities_id' => $request->fasilitas_id,
             'code'          => $request->kode,
             'name'          => $request->nama,
             'category'      => $request->kategori,

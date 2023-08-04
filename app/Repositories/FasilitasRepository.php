@@ -2,16 +2,11 @@
 
 namespace App\Repositories;
 
-class AlatRepository extends BaseRepository
+class FasilitasRepository extends BaseRepository
 {
     public function getData($table, $id)
     {
         return BaseRepository::getData($table, $id);
-    }
-
-    public function getToolByRequest($table, $id)
-    {
-        return BaseRepository::getToolByRequest($table, $id);
     }
 
     public function store($table, $data)

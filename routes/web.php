@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Sarpras\AlatController;
 use App\Http\Controllers\Sarpras\DashboardController;
+use App\Http\Controllers\Sarpras\FasilitasController;
 use App\Http\Controllers\Sarpras\MahasiswaController;
 use App\Http\Controllers\sarpras\OrganisasiMahasiswaController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,18 @@ Route::group(['middleware' => ['CheckLogin:1']], function () {
             Route::get('edit/{id}', [AlatController::class, 'edit']);
             Route::post('update/{id}', [AlatController::class, 'update']);
             Route::get('softdelete/{id}', [AlatController::class, 'softDelete']);
+        });
+
+        Route::group(['prefix' => 'fasilitas'], function () {
+            Route::get('/', [FasilitasController::class, 'index']);
+            Route::post('save', [FasilitasController::class, 'store']);
+            Route::post('fasilitas-save', [FasilitasController::class, 'store_tool']);
+            Route::get('detail/{id}', [FasilitasController::class, 'show']);
+            Route::get('edit/{id}', [FasilitasController::class, 'edit']);
+            Route::get('fasilitas-edit/{id}', [FasilitasController::class, 'edit_tool']);
+            Route::post('update/{id}', [FasilitasController::class, 'update']);
+            Route::post('fasilitas-update/{id}', [FasilitasController::class, 'update_tool']);
+            Route::get('softdelete/{id}', [FasilitasController::class, 'softDelete']);
         });
     });
 });

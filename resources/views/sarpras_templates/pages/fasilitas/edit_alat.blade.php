@@ -27,7 +27,7 @@
                     <h4 class="card-title">Form Ubah {{ $title }}</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('sarpras/alat/update/' . $data->id, []) }}" method="POST"
+                    <form action="{{ url('sarpras/fasilitas/fasilitas-update/' . $data->id, []) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
@@ -39,6 +39,7 @@
                                 <label for="">Kode</label>
                                 <input type="text" name="kode" class="form-control input-default"
                                     placeholder="Masukan kode" value="{{ $data->code }}" readonly>
+
                                 <input type="hidden" name="fasilitas_id" class="form-control input-default"
                                     value="{{ $data->facilities_id }}" readonly>
                                 @error('kode')

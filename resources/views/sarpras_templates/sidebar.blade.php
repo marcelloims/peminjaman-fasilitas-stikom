@@ -13,7 +13,7 @@
         <li><a href="{{ url('sarpras/organisasi-mahasiswa', []) }}">Organisasi Mahasiswa</a></li>
         <li><a href="{{ url('sarpras/mahasiswa', []) }}">Mahasiswa</a></li>
         <li><a href="{{ url('sarpras/alat', []) }}">Alat-alat</a></li>
-        <li><a href="{{ url('#', []) }}">Fasilitas</a></li>
+        <li><a href="{{ url('sarpras/fasilitas', []) }}">Fasilitas</a></li>
     </ul>
 </li>
 <li>

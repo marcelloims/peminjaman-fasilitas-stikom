@@ -20,6 +20,11 @@ class BaseRepository
         return DB::table($table)->whereNull('deleted_at')->get();
     }
 
+    public function getToolByRequest($table, $id)
+    {
+        return DB::table($table)->whereNull('deleted_at')->where('facilities_id', $id)->get();
+    }
+
     public function create($table, $data)
     {
         return DB::table($table)->insert($data);
