@@ -24,17 +24,24 @@ class AlatService
         $request->validate(
             [
                 'nama'      => 'required',
-                'status'    => 'required'
+                'kategori'  => 'required',
+                'jenis'     => 'required',
+                'jumlah'    => 'required|min:1'
             ],
             [
                 'nama.required'      => 'Nama tidak boleh kosong',
-                'status.required'    => 'Status tidak boleh kosong',
+                'kategori.required'  => 'Kategori tidak boleh kosong',
+                'jenis.required'     => 'Jenis tidak boleh kosong',
+                'jumlah.required'    => 'Jumlah tidak boleh kosong'
             ]
         );
 
         $data = [
+            'code'          => $request->kode,
             'name'          => $request->nama,
-            'status'        => $request->status,
+            'category'      => $request->kategori,
+            'type'          => $request->jenis,
+            'qty'           => $request->jumlah,
             'created_by'    => Auth::user()->email,
             'updated_by'    => Auth::user()->email,
             'created_at'    => now(),
@@ -49,19 +56,26 @@ class AlatService
         $request->validate(
             [
                 'nama'      => 'required',
-                'status'    => 'required'
+                'kategori'  => 'required',
+                'jenis'     => 'required',
+                'jumlah'    => 'required|min:1'
             ],
             [
                 'nama.required'      => 'Nama tidak boleh kosong',
-                'status.required'    => 'Status tidak boleh kosong',
+                'kategori.required'  => 'Kategori tidak boleh kosong',
+                'jenis.required'     => 'Jenis tidak boleh kosong',
+                'jumlah.required'    => 'Jumlah tidak boleh kosong'
             ]
         );
 
         $data = [
+            'code'          => $request->kode,
             'name'          => $request->nama,
-            'status'        => $request->status,
-            "updated_by"    => Auth::user()->email,
-            "updated_at"    => now()
+            'category'      => $request->kategori,
+            'type'          => $request->jenis,
+            'qty'           => $request->jumlah,
+            'updated_by'    => Auth::user()->email,
+            'updated_at'    => now()
         ];
 
         return $this->alatRepository->update($table, $id, $data);

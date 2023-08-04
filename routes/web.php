@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Sarpras\AlatController;
 use App\Http\Controllers\Sarpras\DashboardController;
 use App\Http\Controllers\Sarpras\MahasiswaController;
 use App\Http\Controllers\sarpras\OrganisasiMahasiswaController;
@@ -49,8 +50,11 @@ Route::group(['middleware' => ['CheckLogin:1']], function () {
         });
 
         Route::group(['prefix' => 'alat'], function () {
-            Route::get('/', [MahasiswaController::class, 'index']);
-            Route::get('detail/{id}', [MahasiswaController::class, 'show']);
+            Route::get('/', [AlatController::class, 'index']);
+            Route::post('save', [AlatController::class, 'store']);
+            Route::get('edit/{id}', [AlatController::class, 'edit']);
+            Route::post('update/{id}', [AlatController::class, 'update']);
+            Route::get('softdelete/{id}', [AlatController::class, 'softDelete']);
         });
     });
 });

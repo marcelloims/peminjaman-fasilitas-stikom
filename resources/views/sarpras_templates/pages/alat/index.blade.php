@@ -35,9 +35,21 @@
                             <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                             </button>
                         </div>
-                        <form action="{{ url('sarpras/organisasi-mahasiswa/save', []) }}" method="POST">
+                        <form action="{{ url('sarpras/alat/save', []) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
+                                <div
+                                    class="form-group
+                                    @error('kode')
+                                        input-danger
+                                    @enderror">
+                                    <label for="">Kode</label>
+                                    <input type="text" name="kode" class="form-control input-default"
+                                        placeholder="Masukan kode" value="#BRG-{{ $kode }}" readonly>
+                                    @error('kode')
+                                        <span class="badge light badge-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                                 <div
                                     class="form-group
                                     @error('nama')
@@ -50,19 +62,39 @@
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="">Status</label>
-                                    <select name="status"
-                                        class="form-control input-default
-                                        @error('status')
-                                            input-danger
-                                        @enderror">
-                                        ">
-                                        <option disabled selected>Pilih Status</option>
-                                        <option value="Aktif">Aktif</option>
-                                        <option value="Non-Aktif">Non-Aktif</option>
-                                    </select>
-                                    @error('status')
+                                <div
+                                    class="form-group
+                                    @error('kategori')
+                                        input-danger
+                                    @enderror">
+                                    <label for="">Kategori</label>
+                                    <input type="text" name="kategori" class="form-control input-default"
+                                        placeholder="Masukan kategori" value="{{ old('kategori') }}">
+                                    @error('kategori')
+                                        <span class="badge light badge-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div
+                                    class="form-group
+                                    @error('jenis')
+                                        input-danger
+                                    @enderror">
+                                    <label for="">Jenis</label>
+                                    <input type="text" name="jenis" class="form-control input-default"
+                                        placeholder="Masukan jenis" value="{{ old('jenis') }}">
+                                    @error('jenis')
+                                        <span class="badge light badge-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div
+                                    class="form-group
+                                    @error('jumlah')
+                                        input-danger
+                                    @enderror">
+                                    <label for="">Jumlah</label>
+                                    <input type="number" min="1" name="jumlah" class="form-control input-default"
+                                        placeholder="Masukan jumlah" value="{{ old('jumlah') }}">
+                                    @error('jumlah')
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -89,10 +121,11 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
+                                    <th>Kode</th>
                                     <th>Nama</th>
-                                    <th>Email</th>
                                     <th>Kategori</th>
-                                    <th>Status</th>
+                                    <th>Jenis</th>
+                                    <th>Jumlah</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -100,13 +133,17 @@
                                 @foreach ($datas as $data)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td>{{ $data->code }}</td>
                                         <td>{{ $data->name }}</td>
-                                        <td>{{ $data->email }}</td>
                                         <td>{{ $data->category }}</td>
-                                        <td>{{ $data->status }}</td>
+                                        <td>{{ $data->type }}</td>
+                                        <td>{{ $data->qty }}</td>
                                         <td class="text-center">
-                                            <a href="{{ url('sarpras/mahasiswa/detail/' . $data->id, []) }}"
-                                                class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a>
+                                            <a href="{{ url('sarpras/alat/edit/' . $data->id, []) }}"
+                                                class="btn btn-sm btn-warning"><i class="flaticon-381-edit-1"></i></a>
+                                            <a href="{{ url('sarpras/alat/softdelete/' . $data->id) }}"
+                                                class="btn btn-sm btn-danger button-delete"><i
+                                                    class="flaticon-381-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
