@@ -45,14 +45,12 @@ Route::group(['middleware' => ['CheckLogin:1']], function () {
 
         Route::group(['prefix' => 'mahasiswa'], function () {
             Route::get('/', [MahasiswaController::class, 'index']);
-            Route::post('save', [MahasiswaController::class, 'store']);
             Route::get('detail/{id}', [MahasiswaController::class, 'show']);
-            Route::get('edit/{id}', [MahasiswaController::class, 'edit']);
-            Route::post('update/{id}', [MahasiswaController::class, 'update']);
-            Route::get('delete/{id}', [MahasiswaController::class, 'delete']);
-            Route::get('softdelete/{id}', [MahasiswaController::class, 'softDelete']);
-            Route::get('trashed', [MahasiswaController::class, 'trashed']);
-            Route::get('restore/{id}', [MahasiswaController::class, 'restore']);
+        });
+
+        Route::group(['prefix' => 'alat'], function () {
+            Route::get('/', [MahasiswaController::class, 'index']);
+            Route::get('detail/{id}', [MahasiswaController::class, 'show']);
         });
     });
 });

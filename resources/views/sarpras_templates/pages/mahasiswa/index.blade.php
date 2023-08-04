@@ -102,16 +102,11 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>{{ $data->email }}</td>
-                                        <td>{{ $data->name }}</td>
-                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->category }}</td>
+                                        <td>{{ $data->status }}</td>
                                         <td class="text-center">
-                                            {{-- <a href="{{ url('sarpras/organisasi-mahasiswa/' . $data->id, []) }}"
-                                                class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a> --}}
-                                            <a href="{{ url('sarpras/organisasi-mahasiswa/edit/' . $data->id, []) }}"
-                                                class="btn btn-sm btn-warning"><i class="flaticon-381-edit-1"></i></a>
-                                            <a href="{{ url('sarpras/organisasi-mahasiswa/softdelete/' . $data->id) }}"
-                                                class="btn btn-sm btn-danger button-delete"><i
-                                                    class="flaticon-381-trash"></i></a>
+                                            <a href="{{ url('sarpras/mahasiswa/detail/' . $data->id, []) }}"
+                                                class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
