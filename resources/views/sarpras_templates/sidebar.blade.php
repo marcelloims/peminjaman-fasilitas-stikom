@@ -11,7 +11,7 @@
     </a>
     <ul aria-expanded="false">
         <li><a href="{{ url('sarpras/organisasi-mahasiswa', []) }}">Organisasi Mahasiswa</a></li>
-        <li><a href="{{ url('#', []) }}">Mahasiswa</a></li>
+        <li><a href="{{ url('sarpras/mahasiswa', []) }}">Mahasiswa</a></li>
         <li><a href="{{ url('#', []) }}">Alat-alat</a></li>
         <li><a href="{{ url('#', []) }}">Fasilitas</a></li>
     </ul>

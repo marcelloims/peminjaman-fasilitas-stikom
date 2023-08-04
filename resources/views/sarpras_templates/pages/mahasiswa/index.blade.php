@@ -35,8 +35,7 @@
                             <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                             </button>
                         </div>
-                        <form action="{{ url('sarpras/organisasi-mahasiswa/save', []) }}" method="POST"
-                            enctype="multipart/form-data">
+                        <form action="{{ url('sarpras/organisasi-mahasiswa/save', []) }}" method="POST">
                             @csrf
                             <div class="modal-body">
                                 <div
@@ -48,18 +47,6 @@
                                     <input type="text" name="nama" class="form-control input-default"
                                         placeholder="Masukan nama" value="{{ old('nama') }}">
                                     @error('nama')
-                                        <span class="badge light badge-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div
-                                    class="form-group
-                                    @error('logo')
-                                        input-danger
-                                    @enderror">
-                                    <label for="">Logo</label>
-                                    <input type="file" name="logo" class="form-control input-default"
-                                        placeholder="Masukan logo" value="{{ old('logo') }}">
-                                    @error('logo')
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -81,8 +68,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary light">Simpan</button>
                                 <button type="button" class="btn btn-danger light" data-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary light">Simpan</button>
                             </div>
                         </form>
                     </div>
@@ -103,33 +90,26 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th>Nama</th>
-                                    <th class="text-center">logo</th>
-                                    <th class="text-center">Status</th>
+                                    <th>Email</th>
+                                    <th>Kategori</th>
+                                    <th>Status</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($ukms as $ukm)
+                                @foreach ($datas as $data)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $ukm->name }}</td>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->email }}</td>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->name }}</td>
                                         <td class="text-center">
-                                            <img src="{{ asset('logo_ukm/' . $ukm->logo) }}" width="50" height="50"
-                                                alt="logo-ukm" />
-                                        </td>
-                                        <td class="text-center">
-                                            @if ($ukm->status == 'Aktif')
-                                                <span class="badge light badge-success">{{ $ukm->status }}</span>
-                                            @else
-                                                <span class="badge light badge-danger">{{ $ukm->status }}</span>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            {{-- <a href="{{ url('sarpras/organisasi-mahasiswa/' . $ukm->id, []) }}"
+                                            {{-- <a href="{{ url('sarpras/organisasi-mahasiswa/' . $data->id, []) }}"
                                                 class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a> --}}
-                                            <a href="{{ url('sarpras/organisasi-mahasiswa/edit/' . $ukm->id, []) }}"
+                                            <a href="{{ url('sarpras/organisasi-mahasiswa/edit/' . $data->id, []) }}"
                                                 class="btn btn-sm btn-warning"><i class="flaticon-381-edit-1"></i></a>
-                                            <a href="{{ url('sarpras/organisasi-mahasiswa/softdelete/' . $ukm->id) }}"
+                                            <a href="{{ url('sarpras/organisasi-mahasiswa/softdelete/' . $data->id) }}"
                                                 class="btn btn-sm btn-danger button-delete"><i
                                                     class="flaticon-381-trash"></i></a>
                                         </td>

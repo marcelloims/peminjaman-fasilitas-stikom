@@ -27,7 +27,8 @@
                     <h4 class="card-title">Form Ubah {{ $title }}</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('sarpras/organisasi-mahasiswa/update/' . $ukm->id, []) }}" method="POST">
+                    <form action="{{ url('sarpras/organisasi-mahasiswa/update/' . $ukm->id, []) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div
                             class="form-group
@@ -40,6 +41,19 @@
                             @error('nama')
                                 <span class="badge light badge-danger">{{ $message }}</span>
                             @enderror
+                        </div>
+                        <div
+                            class="form-group
+                                    @error('logo')
+                                        input-danger
+                                    @enderror">
+                            <label for="">Logo</label>
+                            <input type="file" name="logo" class="form-control input-default"
+                                placeholder="Masukan logo">
+                            @error('logo')
+                                <span class="badge light badge-danger">{{ $message }}</span>
+                            @enderror
+                            <img src="{{ asset('logo_ukm/' . $ukm->logo) }}" width="50" alt="logo-ukm" />
                         </div>
                         <div class="form-group">
                             <label for="">Status</label>

@@ -2,21 +2,21 @@
 
 namespace App\Services;
 
-use App\Repositories\OrganisasiMahasiswaRepository;
+use App\Repositories\MahasiswaRepository;
 use Illuminate\Support\Facades\Auth;
 
-class OrganisasiMahasiswaService
+class MahasiswaService
 {
-    private $organisasiMahasiswaRepository;
+    private $mahasiswaRepository;
 
-    public function __construct(OrganisasiMahasiswaRepository $repository)
+    public function __construct(MahasiswaRepository $repository)
     {
-        $this->organisasiMahasiswaRepository = $repository;
+        $this->mahasiswaRepository = $repository;
     }
 
     public function getData($table, $id)
     {
-        return $this->organisasiMahasiswaRepository->getData($table, $id);
+        return $this->mahasiswaRepository->getData($table, $id);
     }
 
     public function store($table, $request)
@@ -24,19 +24,16 @@ class OrganisasiMahasiswaService
         $request->validate(
             [
                 'nama'      => 'required',
-                'logo'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'status'    => 'required'
             ],
             [
                 'nama.required'      => 'Nama tidak boleh kosong',
-                'logo.required'      => 'Logo tidak boleh kosong',
                 'status.required'    => 'Status tidak boleh kosong',
             ]
         );
 
         $data = [
             'name'          => $request->nama,
-            'logo'          => $request->file('logo')->getClientOriginalName(),
             'status'        => $request->status,
             'created_by'    => Auth::user()->email,
             'updated_by'    => Auth::user()->email,
@@ -44,11 +41,7 @@ class OrganisasiMahasiswaService
             'updated_at'    => now()
         ];
 
-        if ($request->hasFile('logo')) {
-            $request->logo->move('logo_ukm', $request->file('logo')->getClientOriginalName());
-        }
-
-        return $this->organisasiMahasiswaRepository->store($table, $data);
+        return $this->mahasiswaRepository->store($table, $data);
     }
 
     public function update($table, $request, $id)
@@ -66,25 +59,17 @@ class OrganisasiMahasiswaService
 
         $data = [
             'name'          => $request->nama,
-            'logo'          => $request->logo,
             'status'        => $request->status,
             "updated_by"    => Auth::user()->email,
             "updated_at"    => now()
         ];
 
-        if ($request->hasFile('logo')) {
-            $request->logo->move('logo_ukm', $request->file('logo')->getClientOriginalName());
-            $data['logo'] = $request->file('logo')->getClientOriginalName();
-        } else {
-            unset($data['logo']);
-        }
-
-        return $this->organisasiMahasiswaRepository->update($table, $id, $data);
+        return $this->mahasiswaRepository->update($table, $id, $data);
     }
 
     public function delete($table, $id)
     {
-        return $this->organisasiMahasiswaRepository->delete($table, $id);
+        return $this->mahasiswaRepository->delete($table, $id);
     }
 
     public function softDelete($table, $id)
@@ -94,12 +79,12 @@ class OrganisasiMahasiswaService
             'deleted_at' => now()
         ];
 
-        return $this->organisasiMahasiswaRepository->softDelete($table, $id, $data);
+        return $this->mahasiswaRepository->softDelete($table, $id, $data);
     }
 
     public function getTrashed($table, $id)
     {
-        return $this->organisasiMahasiswaRepository->getTrashed($table, $id);
+        return $this->mahasiswaRepository->getTrashed($table, $id);
     }
 
     public function restore($table, $id)
@@ -109,6 +94,6 @@ class OrganisasiMahasiswaService
             'deleted_at'    => null
         ];
 
-        return $this->organisasiMahasiswaRepository->restore($table, $id, $data);
+        return $this->mahasiswaRepository->restore($table, $id, $data);
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('status');
+            $table->string('logo');
             $table->string('created_by');
             $table->string('updated_by')->nullable();
             $table->string('deleted_by')->nullable();

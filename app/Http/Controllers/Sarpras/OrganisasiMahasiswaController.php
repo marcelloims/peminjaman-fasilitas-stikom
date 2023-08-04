@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\sarpras;
+namespace App\Http\Controllers\Sarpras;
 
 use App\Http\Controllers\Controller;
 use App\Services\OrganisasiMahasiswaService;
@@ -72,10 +72,10 @@ class OrganisasiMahasiswaController extends Controller
 
     public function trashed($id = null)
     {
-        $data['title'] = 'Corporate';
-        $data['corporates'] = $this->organisasiMahasiswaSerivce->getTrashed($this->table, $id);
+        $data['title'] = 'Organisasi Mahasiswa';
+        $data['ukm'] = $this->organisasiMahasiswaSerivce->getTrashed($this->table, $id);
 
-        return view('admin.trashed_corporate', $data);
+        return view('sarpras/organisasi-mahasiswa', $data);
     }
 
     public function restore($id)
