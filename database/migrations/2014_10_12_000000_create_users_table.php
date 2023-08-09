@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('role');
-            $table->unsignedBigInteger('student_organizaions_id')->nullable();
+            $table->unsignedBigInteger('student_organizations_id')->nullable();
             $table->string('created_by');
             $table->string('updated_by')->nullable();
             $table->string('deleted_by')->nullable();

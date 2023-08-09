@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sarpras;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Services\MahasiswaService;
 use Illuminate\Http\Request;
 
@@ -20,8 +21,8 @@ class MahasiswaController extends Controller
 
     public function index($id = null)
     {
-        $data['title'] = 'Mahasiswa';
-        $data['datas'] = $this->mahasiswaSerivce->getData($this->table, $id);
+        $data['title'] = 'Mahasiswa';;
+        $data['datas'] = User::where('role', 3)->get();
 
         return view('sarpras_templates.pages.mahasiswa.index', $data);
     }
@@ -29,8 +30,11 @@ class MahasiswaController extends Controller
     public function show($id)
     {
         $data['title'] = 'Mahasiswa';
-        $data['data'] = $this->mahasiswaSerivce->getData($this->table, $id);
-
+        $data['data'] =
+            User::join('student_organizations', 'users.student_organizations_id', 'student_organizations.id')
+            ->select('users.*', 'student_organizations.name as ukm_name')
+            ->where('users.id', $id)
+            ->first();
         return view('sarpras_templates.pages.mahasiswa.detail', $data);
     }
 }

@@ -35,18 +35,31 @@
                             <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                             </button>
                         </div>
-                        <form action="{{ url('sarpras/fasilitas/save', []) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('sarpras/organisasi-mahasiswa/save', []) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
                                 <div
                                     class="form-group
-                                    @error('kode')
+                                    @error('nama')
                                         input-danger
                                     @enderror">
-                                    <label for="">Kode</label>
-                                    <input type="text" name="kode" class="form-control input-default"
-                                        placeholder="Masukan kode" value="{{ old('kode') }}">
-                                    @error('kode')
+                                    <label for="">Nama</label>
+                                    <input type="text" name="nama" class="form-control input-default"
+                                        placeholder="Masukan nama" value="{{ old('nama') }}">
+                                    @error('nama')
+                                        <span class="badge light badge-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div
+                                    class="form-group
+                                    @error('logo')
+                                        input-danger
+                                    @enderror">
+                                    <label for="">Logo</label>
+                                    <input type="file" name="logo" class="form-control input-default"
+                                        placeholder="Masukan logo" value="{{ old('logo') }}">
+                                    @error('logo')
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -59,8 +72,8 @@
                                         @enderror">
                                         ">
                                         <option disabled selected>Pilih Status</option>
-                                        <option value="Tersedia">Tersedia</option>
-                                        <option value="Sibuk">Sibuk</option>
+                                        <option value="Aktif">Aktif</option>
+                                        <option value="Non-Aktif">Non-Aktif</option>
                                     </select>
                                     @error('status')
                                         <span class="badge light badge-danger">{{ $message }}</span>
@@ -89,25 +102,36 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
-                                    <th>Kode</th>
-                                    <th>Status</th>
+                                    <th>Nama</th>
+                                    <th class="text-center">logo</th>
+                                    <th class="text-center">Status</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($datas as $data)
+                                @foreach ($ukms as $ukm)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $data->code }}</td>
-                                        <td>{{ $data->status }}</td>
+                                        <td>{{ $ukm->name }}</td>
                                         <td class="text-center">
-                                            <a href="{{ url('sarpras/fasilitas/detail/' . $data->id, []) }}"
-                                                class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a>
-                                            {{-- <a href="{{ url('sarpras/fasilitas/edit/' . $data->id, []) }}"
-                                                class="btn btn-sm btn-warning"><i class="flaticon-381-edit-1"></i></a> --}}
-                                            {{-- <a href="{{ url('sarpras/fasilitas/softdelete/' . $data->id) }}"
+                                            <img src="{{ asset('logo_ukm/' . $ukm->logo) }}" width="50" height="50"
+                                                alt="logo-ukm" />
+                                        </td>
+                                        <td class="text-center">
+                                            @if ($ukm->status == 'Aktif')
+                                                <span class="badge light badge-success">{{ $ukm->status }}</span>
+                                            @else
+                                                <span class="badge light badge-danger">{{ $ukm->status }}</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">
+                                            {{-- <a href="{{ url('sarpras/organisasi-mahasiswa/' . $ukm->id, []) }}"
+                                                class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a> --}}
+                                            <a href="{{ url('sarpras/organisasi-mahasiswa/edit/' . $ukm->id, []) }}"
+                                                class="btn btn-sm btn-warning"><i class="flaticon-381-edit-1"></i></a>
+                                            <a href="{{ url('sarpras/organisasi-mahasiswa/softdelete/' . $ukm->id) }}"
                                                 class="btn btn-sm btn-danger button-delete"><i
-                                                    class="flaticon-381-trash"></i></a> --}}
+                                                    class="flaticon-381-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

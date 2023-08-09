@@ -9,6 +9,16 @@ class MahasiswaRepository extends BaseRepository
         return BaseRepository::getData($table, $id);
     }
 
+    public function getDataByCondition($table, $where)
+    {
+        return BaseRepository::getDataByCondition($table, $where);
+    }
+
+    public function getDataByConditionJoin($table, $where)
+    {
+        return BaseRepository::getDataByConditionJoin($table, $where);
+    }
+
     public function store($table, $data)
     {
         return BaseRepository::create($table, $data);

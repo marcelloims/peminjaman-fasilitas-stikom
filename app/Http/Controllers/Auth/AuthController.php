@@ -42,6 +42,10 @@ class AuthController extends Controller
             $user = Auth::user();
             if ($user->role == 1) {
                 return redirect()->intended('sarpras/dashboard');
+            } elseif ($user->role == 2) {
+                return redirect()->intended('bem/dashboard');
+            } elseif ($user->role == 3) {
+                return redirect()->intended('mahasiswa/dashboard');
             }
         }
 

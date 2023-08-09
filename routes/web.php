@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Akademik\DashboardController as AkademikDashboardController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Bem\DashboardController as BemDashboardController;
+use App\Http\Controllers\Bem\MahasiswaController as BemMahasiswaController;
+use App\Http\Controllers\Bem\OrganisasiMahasiswaController as BemOrganisasiMahasiswaController;
 use App\Http\Controllers\Sarpras\AlatController;
 use App\Http\Controllers\Sarpras\DashboardController;
 use App\Http\Controllers\Sarpras\FasilitasController;
@@ -69,5 +73,35 @@ Route::group(['middleware' => ['CheckLogin:1']], function () {
             Route::post('fasilitas-update/{id}', [FasilitasController::class, 'update_tool']);
             Route::get('softdelete/{id}', [FasilitasController::class, 'softDelete']);
         });
+    });
+});
+
+Route::group(['middleware' => ['CheckLogin:2']], function () {
+    Route::group(['prefix' => 'bem'], function () {
+        Route::get('dashboard', [BemDashboardController::class, 'index']);
+
+        Route::group(['prefix' => 'organisasi-mahasiswa'], function () {
+            Route::get('/', [BemOrganisasiMahasiswaController::class, 'index']);
+            Route::post('save', [BemOrganisasiMahasiswaController::class, 'store']);
+            Route::get('detail/{id}', [BemOrganisasiMahasiswaController::class, 'show']);
+            Route::get('edit/{id}', [BemOrganisasiMahasiswaController::class, 'edit']);
+            Route::post('update/{id}', [BemOrganisasiMahasiswaController::class, 'update']);
+            Route::get('delete/{id}', [BemOrganisasiMahasiswaController::class, 'delete']);
+            Route::get('softdelete/{id}', [BemOrganisasiMahasiswaController::class, 'softDelete']);
+            Route::get('trashed', [BemOrganisasiMahasiswaController::class, 'trashed']);
+            Route::get('restore/{id}', [BemOrganisasiMahasiswaController::class, 'restore']);
+        });
+
+        Route::group(['prefix' => 'mahasiswa'], function () {
+            Route::get('/', [BemMahasiswaController::class, 'index']);
+            Route::post('save', [BemMahasiswaController::class, 'store']);
+            Route::get('detail/{id}', [BemMahasiswaController::class, 'show']);
+        });
+    });
+});
+
+Route::group(['middleware' => ['CheckLogin:4']], function () {
+    Route::group(['prefix' => 'akademik'], function () {
+        Route::get('dashboard', [AkademikDashboardController::class, 'index']);
     });
 });

@@ -1,4 +1,4 @@
-@extends('sarpras_templates.index')
+@extends('mahasiswa_templates.index')
 @section('container')
     @if ($errors->all())
         <div class="alert alert-danger solid alert-dismissible fade show">
@@ -42,13 +42,25 @@
                     </div>
                     <div
                         class="form-group
-                                    @error('nama')
+                                    @error('telepon')
                                         input-danger
                                     @enderror">
                         <label for="">Telepon</label>
-                        <input type="text" name="nama" class="form-control input-default" placeholder="Masukan nama"
-                            value="{{ $data->telephone }}" readonly>
-                        @error('nama')
+                        <input type="text" name="telepon" class="form-control input-default"
+                            placeholder="Masukan telepon" value="{{ $data->telephone }}" readonly>
+                        @error('telepon')
+                            <span class="badge light badge-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div
+                        class="form-group
+                                    @error('email')
+                                        input-danger
+                                    @enderror">
+                        <label for="">Email</label>
+                        <input type="text" name="email" class="form-control input-default" placeholder="Masukan email"
+                            value="{{ $data->email }}" readonly>
+                        @error('email')
                             <span class="badge light badge-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -60,7 +72,7 @@
                         <label for="">Kategori</label>
                         <input type="text" name="kategori" class="form-control input-default" placeholder="Masukan nama"
                             value="{{ $data->category }}" readonly>
-                        @error('kategoris')
+                        @error('kategori')
                             <span class="badge light badge-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -72,23 +84,23 @@
                         <label for="">Status</label>
                         <input type="text" name="status" class="form-control input-default" placeholder="Masukan nama"
                             value="{{ $data->status }}" readonly>
-                        @error('statiu')
+                        @error('status')
                             <span class="badge light badge-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div
                         class="form-group
-                                @error('status')
+                                @error('organisasi')
                                     input-danger
                                 @enderror">
                         <label for="">Organisasi</label>
-                        <input type="text" name="status" class="form-control input-default" placeholder="Masukan nama"
-                            value="{{ $data->ukm_name }}" readonly>
-                        @error('statiu')
+                        <input type="text" name="organisasi" class="form-control input-default"
+                            placeholder="Masukan organisasi" value="{{ $data->ukm_name }}" readonly>
+                        @error('organisasi')
                             <span class="badge light badge-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <a href="{{ url('sarpras/mahasiswa', []) }}" class="btn btn-danger light float-right"
+                    <a href="{{ url('mahasiswa/mahasiswa', []) }}" class="btn btn-danger light float-right"
                         data-dismiss="modal">Tutup</a>
                 </div>
             </div>

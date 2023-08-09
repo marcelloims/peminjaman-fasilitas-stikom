@@ -19,27 +19,59 @@ class MahasiswaService
         return $this->mahasiswaRepository->getData($table, $id);
     }
 
+    public function getDataByCondition($table, $where)
+    {
+        return $this->mahasiswaRepository->getDataByCondition($table, $where);
+    }
+
+    public function getDataByConditionJoin($table, $where)
+    {
+        return $this->mahasiswaRepository->getDataByConditionJoin($table, $where);
+    }
+
     public function store($table, $request)
     {
         $request->validate(
             [
-                'nama'      => 'required',
-                'status'    => 'required'
+                'nama'          => 'required',
+                'telepon'       => 'required',
+                'email'         => 'required|email',
+                'organisasi'    => 'required',
+                'ttd'           => 'required',
+                'kategori'      => 'required',
+                'status'        => 'required'
             ],
             [
-                'nama.required'      => 'Nama tidak boleh kosong',
-                'status.required'    => 'Status tidak boleh kosong',
+                'nama.required'         => 'Nama tidak boleh kosong!',
+                'telepon.required'      => 'Telepon tidak boleh kosong!',
+                'email.required'        => 'Email tidak boleh kosong!',
+                'organisasi.required'   => 'Organisasi tidak boleh kosong!',
+                'ttd.required'          => 'Tandang Tangan tidak boleh kosong!',
+                'kategori.required'     => 'Kategori tidak boleh kosong!',
+                'status.required'       => 'Status tidak boleh kosong!'
             ]
         );
 
         $data = [
-            'name'          => $request->nama,
-            'status'        => $request->status,
-            'created_by'    => Auth::user()->email,
-            'updated_by'    => Auth::user()->email,
-            'created_at'    => now(),
-            'updated_at'    => now()
+            'name'                      => $request->nama,
+            'telephone'                 => $request->telepon,
+            'email'                     => $request->email,
+            'password'                  => bcrypt('password'),
+            'student_organizations_id'  => $request->organisasi,
+            'category'                  => $request->kategori,
+            'status'                    => $request->status,
+            'signature'                 => $request->ttd,
+            'role'                      => 3,
+            'created_by'                => Auth::user()->email,
+            'updated_by'                => Auth::user()->email,
+            'created_at'                => now(),
+            'updated_at'                => now()
         ];
+
+        if ($request->hasFile('ttd')) {
+            $request->ttd->move('signature', $request->file('ttd')->getClientOriginalName());
+            $data['signature'] = $request->file('ttd')->getClientOriginalName();
+        }
 
         return $this->mahasiswaRepository->store($table, $data);
     }
