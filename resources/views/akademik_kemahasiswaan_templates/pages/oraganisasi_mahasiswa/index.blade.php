@@ -35,7 +35,7 @@
                             <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                             </button>
                         </div>
-                        <form action="{{ url('mahasiswa/mahasiswa/save', []) }}" method="POST"
+                        <form action="{{ url('akademik_kemahasiswaan/organisasi-mahasiswa/save', []) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
@@ -53,70 +53,13 @@
                                 </div>
                                 <div
                                     class="form-group
-                                    @error('telepon')
+                                    @error('logo')
                                         input-danger
                                     @enderror">
-                                    <label for="">Telepon</label>
-                                    <input type="text" name="telepon" class="form-control input-default"
-                                        placeholder="Masukan telepon" value="{{ old('telepon') }}">
-                                    @error('telepon')
-                                        <span class="badge light badge-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div
-                                    class="form-group
-                                    @error('email')
-                                        input-danger
-                                    @enderror">
-                                    <label for="">Email</label>
-                                    <input type="text" name="email" class="form-control input-default"
-                                        placeholder="Masukan email" value="{{ old('email') }}">
-                                    @error('email')
-                                        <span class="badge light badge-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Organisasi</label>
-                                    <select name="organisasi"
-                                        class="form-control input-default
-                                        @error('organisasi')
-                                            input-danger
-                                        @enderror">
-                                        ">
-                                        <option disabled selected>Pilih organisasi</option>
-                                        @foreach ($ukms as $ukm)
-                                            <option value="{{ $ukm->id }}">{{ $ukm->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('organisasi')
-                                        <span class="badge light badge-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div
-                                    class="form-group
-                                    @error('ttd')
-                                        input-danger
-                                    @enderror">
-                                    <label for="">Tanda Tangan</label>
-                                    <input type="file" name="ttd" class="form-control input-default"
-                                        placeholder="Masukan ttd" value="{{ old('ttd') }}">
-                                    @error('ttd')
-                                        <span class="badge light badge-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Kategori</label>
-                                    <select name="kategori"
-                                        class="form-control input-default
-                                        @error('kategori')
-                                            input-danger
-                                        @enderror">
-                                        ">
-                                        <option disabled selected>Pilih kategori</option>
-                                        <option value="Ketua Umum">Ketua Umum</option>
-                                        <option value="Ketua Panitia">Ketua Panitia</option>
-                                    </select>
-                                    @error('kategori')
+                                    <label for="">Logo</label>
+                                    <input type="file" name="logo" class="form-control input-default"
+                                        placeholder="Masukan logo" value="{{ old('logo') }}">
+                                    @error('logo')
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -160,23 +103,35 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Kategori</th>
-                                    <th>Status</th>
+                                    <th class="text-center">logo</th>
+                                    <th class="text-center">Status</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($datas as $data)
+                                @foreach ($ukms as $ukm)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $data->name }}</td>
-                                        <td>{{ $data->email }}</td>
-                                        <td>{{ $data->category }}</td>
-                                        <td>{{ $data->status }}</td>
+                                        <td>{{ $ukm->name }}</td>
                                         <td class="text-center">
-                                            <a href="{{ url('akademik_kemahasiswaan/mahasiswa/detail/' . $data->id, []) }}"
-                                                class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a>
+                                            <img src="{{ asset('logo_ukm/' . $ukm->logo) }}" width="50" height="50"
+                                                alt="logo-ukm" />
+                                        </td>
+                                        <td class="text-center">
+                                            @if ($ukm->status == 'Aktif')
+                                                <span class="badge light badge-success">{{ $ukm->status }}</span>
+                                            @else
+                                                <span class="badge light badge-danger">{{ $ukm->status }}</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">
+                                            {{-- <a href="{{ url('akademik_kemahasiswaan/organisasi-mahasiswa/' . $ukm->id, []) }}"
+                                                class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a> --}}
+                                            <a href="{{ url('akademik_kemahasiswaan/organisasi-mahasiswa/edit/' . $ukm->id, []) }}"
+                                                class="btn btn-sm btn-warning"><i class="flaticon-381-edit-1"></i></a>
+                                            <a href="{{ url('akademik_kemahasiswaan/organisasi-mahasiswa/softdelete/' . $ukm->id) }}"
+                                                class="btn btn-sm btn-danger button-delete"><i
+                                                    class="flaticon-381-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

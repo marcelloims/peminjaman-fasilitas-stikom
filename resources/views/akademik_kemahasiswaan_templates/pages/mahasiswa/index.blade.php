@@ -22,10 +22,10 @@
     <div class="row">
         <div class="col-12">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary light mb-2" data-toggle="modal" data-target="#exampleModalCenter">
+            {{-- <button type="button" class="btn btn-primary light mb-2" data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="flaticon-381-add-2 mr-2" id="title" data-flashdata="{{ $title }}"></i>
                 {{ $title }}
-            </button>
+            </button> --}}
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter">
                 <div class="modal-dialog modal-dialog-centered" role="document">

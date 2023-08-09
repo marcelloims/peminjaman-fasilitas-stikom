@@ -19,26 +19,80 @@
         <div class="sweetalert sweet-success" id="flash-data" data-flashdata="{{ $message }}">
         </div>
     @endif
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Detail Data {{ $title }}</h4>
+                </div>
+                <div class="card-body">
+                    @csrf
+                    <div
+                        class="form-group
+                            @error('kode')
+                                input-danger
+                            @enderror">
+                        <label for="">Kode</label>
+                        <input type="text" name="kode" class="form-control input-default" placeholder="Masukan kode"
+                            value="{{ $data->code }}" readonly>
+                        @error('kode')
+                            <span class="badge light badge-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div
+                        class="form-group
+                            @error('status')
+                                input-danger
+                            @enderror">
+                        <label for="">Status</label>
+                        <input type="text" name="status" class="form-control input-default" placeholder="Masukan status"
+                            value="{{ $data->status }}" readonly>
+                        @error('status')
+                            <span class="badge light badge-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <a href="{{ url('akademik_kemahasiswaan/fasilitas', []) }}" class="btn btn-danger light float-right"
+                        data-dismiss="modal">Tutup</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-12">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary light mb-2" data-toggle="modal" data-target="#exampleModalCenter">
+            {{-- <button type="button" class="btn btn-primary light mb-2" data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="flaticon-381-add-2 mr-2" id="title" data-flashdata="{{ $title }}"></i>
-                {{ $title }}
-            </button>
+                Alat-alat
+            </button> --}}
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Tambah {{ $title }}</h5>
+                            <h5 class="modal-title">Tambah Alat-alat</h5>
                             <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                             </button>
                         </div>
-                        <form action="{{ url('mahasiswa/mahasiswa/save', []) }}" method="POST"
+                        <form action="{{ url('akademik_kemahasiswaan/fasilitas/fasilitas-save', []) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
+                                <div
+                                    class="form-group
+                                    @error('kode')
+                                        input-danger
+                                    @enderror">
+                                    <label for="">Kode</label>
+                                    <input type="text" name="kode" class="form-control input-default"
+                                        placeholder="Masukan kode" value="#BRG-{{ $kode }}" readonly>
+                                    <input type="hidden" name="fasilitas_id" class="form-control input-default"
+                                        value="{{ $data->id }}" readonly>
+                                    @error('kode')
+                                        <span class="badge light badge-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                                 <div
                                     class="form-group
                                     @error('nama')
@@ -53,86 +107,38 @@
                                 </div>
                                 <div
                                     class="form-group
-                                    @error('telepon')
+                                    @error('kategori')
                                         input-danger
                                     @enderror">
-                                    <label for="">Telepon</label>
-                                    <input type="text" name="telepon" class="form-control input-default"
-                                        placeholder="Masukan telepon" value="{{ old('telepon') }}">
-                                    @error('telepon')
-                                        <span class="badge light badge-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div
-                                    class="form-group
-                                    @error('email')
-                                        input-danger
-                                    @enderror">
-                                    <label for="">Email</label>
-                                    <input type="text" name="email" class="form-control input-default"
-                                        placeholder="Masukan email" value="{{ old('email') }}">
-                                    @error('email')
-                                        <span class="badge light badge-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Organisasi</label>
-                                    <select name="organisasi"
-                                        class="form-control input-default
-                                        @error('organisasi')
-                                            input-danger
-                                        @enderror">
-                                        ">
-                                        <option disabled selected>Pilih organisasi</option>
-                                        @foreach ($ukms as $ukm)
-                                            <option value="{{ $ukm->id }}">{{ $ukm->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('organisasi')
-                                        <span class="badge light badge-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div
-                                    class="form-group
-                                    @error('ttd')
-                                        input-danger
-                                    @enderror">
-                                    <label for="">Tanda Tangan</label>
-                                    <input type="file" name="ttd" class="form-control input-default"
-                                        placeholder="Masukan ttd" value="{{ old('ttd') }}">
-                                    @error('ttd')
-                                        <span class="badge light badge-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
                                     <label for="">Kategori</label>
-                                    <select name="kategori"
-                                        class="form-control input-default
-                                        @error('kategori')
-                                            input-danger
-                                        @enderror">
-                                        ">
-                                        <option disabled selected>Pilih kategori</option>
-                                        <option value="Ketua Umum">Ketua Umum</option>
-                                        <option value="Ketua Panitia">Ketua Panitia</option>
-                                    </select>
+                                    <input type="text" name="kategori" class="form-control input-default"
+                                        placeholder="Masukan kategori" value="{{ old('kategori') }}">
                                     @error('kategori')
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="">Status</label>
-                                    <select name="status"
-                                        class="form-control input-default
-                                        @error('status')
-                                            input-danger
-                                        @enderror">
-                                        ">
-                                        <option disabled selected>Pilih Status</option>
-                                        <option value="Aktif">Aktif</option>
-                                        <option value="Non-Aktif">Non-Aktif</option>
-                                    </select>
-                                    @error('status')
+                                <div
+                                    class="form-group
+                                    @error('jenis')
+                                        input-danger
+                                    @enderror">
+                                    <label for="">Jenis</label>
+                                    <input type="text" name="jenis" class="form-control input-default"
+                                        placeholder="Masukan jenis" value="{{ old('jenis') }}">
+                                    @error('jenis')
+                                        <span class="badge light badge-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div
+                                    class="form-group
+                                    @error('jumlah')
+                                        input-danger
+                                    @enderror">
+                                    <label for="">Jumlah</label>
+                                    <input type="number" min="1" name="jumlah"
+                                        class="form-control input-default" placeholder="Masukan jumlah"
+                                        value="{{ old('jumlah') }}">
+                                    @error('jumlah')
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -147,11 +153,12 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Data {{ $title }}</h4>
+                    <h4 class="card-title">Data Barang Per-{{ $title }}</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -159,25 +166,30 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
+                                    <th>Kode</th>
                                     <th>Nama</th>
-                                    <th>Email</th>
                                     <th>Kategori</th>
-                                    <th>Status</th>
-                                    <th class="text-center">Aksi</th>
+                                    <th>Jenis</th>
+                                    <th>Jumlah</th>
+                                    {{-- <th class="text-center">Aksi</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($datas as $data)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td>{{ $data->code }}</td>
                                         <td>{{ $data->name }}</td>
-                                        <td>{{ $data->email }}</td>
                                         <td>{{ $data->category }}</td>
-                                        <td>{{ $data->status }}</td>
-                                        <td class="text-center">
-                                            <a href="{{ url('akademik_kemahasiswaan/mahasiswa/detail/' . $data->id, []) }}"
-                                                class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a>
-                                        </td>
+                                        <td>{{ $data->type }}</td>
+                                        <td>{{ $data->qty }}</td>
+                                        {{-- <td class="text-center">
+                                            <a href="{{ url('akademik_kemahasiswaan/fasilitas/fasilitas-edit/' . $data->id, []) }}"
+                                                class="btn btn-sm btn-warning"><i class="flaticon-381-edit-1"></i></a>
+                                            <a href="{{ url('akademik_kemahasiswaan/alat/softdelete/' . $data->id) }}"
+                                                class="btn btn-sm btn-danger button-delete"><i
+                                                    class="flaticon-381-trash"></i></a>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
