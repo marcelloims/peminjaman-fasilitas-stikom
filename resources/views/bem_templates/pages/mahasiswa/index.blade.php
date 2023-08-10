@@ -1,4 +1,4 @@
-@extends('akademik_kemahasiswaan_templates.index')
+@extends('bem_templates.index')
 @section('container')
     @if ($errors->all())
         <div class="alert alert-danger solid alert-dismissible fade show">
@@ -175,7 +175,7 @@
                                         <td>{{ $data->category }}</td>
                                         <td>{{ $data->status }}</td>
                                         <td class="text-center">
-                                            <a href="{{ url('akademik_kemahasiswaan/mahasiswa/detail/' . $data->id, []) }}"
+                                            <a href="{{ url('bem/mahasiswa/detail/' . $data->id, []) }}"
                                                 class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a>
                                         </td>
                                     </tr>

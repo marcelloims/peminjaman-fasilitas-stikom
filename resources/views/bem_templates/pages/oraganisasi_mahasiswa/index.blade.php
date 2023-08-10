@@ -22,10 +22,10 @@
     <div class="row">
         <div class="col-12">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary light mb-2" data-toggle="modal" data-target="#exampleModalCenter">
+            {{-- <button type="button" class="btn btn-primary light mb-2" data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="flaticon-381-add-2 mr-2" id="title" data-flashdata="{{ $title }}"></i>
                 {{ $title }}
-            </button>
+            </button> --}}
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -105,7 +105,7 @@
                                     <th>Nama</th>
                                     <th class="text-center">logo</th>
                                     <th class="text-center">Status</th>
-                                    <th class="text-center">Aksi</th>
+                                    {{-- <th class="text-center">Aksi</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -124,15 +124,15 @@
                                                 <span class="badge light badge-danger">{{ $ukm->status }}</span>
                                             @endif
                                         </td>
-                                        <td class="text-center">
-                                            {{-- <a href="{{ url('bem/organisasi-mahasiswa/' . $ukm->id, []) }}"
-                                                class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a> --}}
+                                        {{-- <td class="text-center">
+                                            <a href="{{ url('bem/organisasi-mahasiswa/' . $ukm->id, []) }}"
+                                                class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a>
                                             <a href="{{ url('bem/organisasi-mahasiswa/edit/' . $ukm->id, []) }}"
                                                 class="btn btn-sm btn-warning"><i class="flaticon-381-edit-1"></i></a>
                                             <a href="{{ url('bem/organisasi-mahasiswa/softdelete/' . $ukm->id) }}"
                                                 class="btn btn-sm btn-danger button-delete"><i
                                                     class="flaticon-381-trash"></i></a>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
