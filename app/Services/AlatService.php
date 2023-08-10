@@ -21,7 +21,7 @@ class AlatService
 
     public function getDataByRequest($table, $id)
     {
-        return $this->alatRepository->getToolByRequest($table, $id);
+        return $this->alatRepository->getDataByRequest($table, $id);
     }
 
     public function store($table, $request)

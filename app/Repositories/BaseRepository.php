@@ -33,9 +33,10 @@ class BaseRepository
             ->get();
     }
 
-    public function getToolByRequest($table, $id)
+    public function getDataByRequest($table, $id)
     {
-        return DB::table($table)->whereNull('deleted_at')->where('facilities_id', $id)->get();
+
+        return DB::table($table)->where('facilities_id', $id)->whereNull('deleted_at')->get();
     }
 
     public function create($table, $data)

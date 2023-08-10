@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Bem;
 
 use App\Http\Controllers\Controller;
+use App\Models\StudentOrganization;
 use App\Models\User;
 use App\Services\MahasiswaService;
 use App\Services\OrganisasiMahasiswaService;
@@ -36,6 +37,28 @@ class MahasiswaController extends Controller
     public function store(Request $request)
     {
         $this->mahasiswaSerivce->store($this->table, $request);
+
+        return redirect('bem/mahasiswa')->with('message', 'Berhasil disimpan');
+    }
+
+    public function edit($id)
+    {
+        $data['title'] = "Mahasiswa";
+        $data['data'] =
+            User::join('student_organizations', 'users.student_organizations_id', 'student_organizations.id')
+            ->select('users.*', 'student_organizations.name as ukm_name')
+            ->where('users.id', $id)
+            ->first();
+        $data['ukms'] = StudentOrganization::get();
+        $data['kategori'] = ['Ketua Umum', 'Ketua Panitia'];
+        $data['status'] = ['Aktif', 'Non-Aktif'];
+
+        return view('bem_templates.pages.mahasiswa.edit', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->mahasiswaSerivce->update($this->table, $request, $id);
 
         return redirect('bem/mahasiswa')->with('message', 'Berhasil disimpan');
     }

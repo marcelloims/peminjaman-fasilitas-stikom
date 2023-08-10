@@ -1,4 +1,4 @@
-@extends('mahasiswa_templates.index')
+@extends('bem_templates.index')
 @section('container')
     @if ($errors->all())
         <div class="alert alert-danger solid alert-dismissible fade show">

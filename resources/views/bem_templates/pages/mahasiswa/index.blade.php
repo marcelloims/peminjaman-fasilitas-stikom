@@ -176,6 +176,8 @@
                                         <td class="text-center">
                                             <a href="{{ url('bem/mahasiswa/detail/' . $data->id, []) }}"
                                                 class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a>
+                                            <a href="{{ url('bem/mahasiswa/edit/' . $data->id, []) }}"
+                                                class="btn btn-sm btn-warning"><i class="flaticon-381-edit-1"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

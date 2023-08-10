@@ -20,6 +20,6 @@ class DashboardController extends Controller
     {
         $data['title'] = 'Dashboard';
 
-        return view('bem_templates.pages.dashboard', $data);
+        return view('mahasiswa_templates.pages.dashboard', $data);
     }
 }

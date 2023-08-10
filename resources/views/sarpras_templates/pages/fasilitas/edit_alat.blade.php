@@ -95,8 +95,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <a href="{{ url('sarpras/alat', []) }}" class="btn btn-danger light float-right"
-                            data-dismiss="modal">Tutup</a>
+                        <a href="{{ url('sarpras/fasilitas/detail/' . $data->facilities_id, []) }}"
+                            class="btn btn-danger light float-right" data-dismiss="modal">Tutup</a>
                         <button type="submit" class="btn btn-primary light float-right mr-2">Simpan</button>
                     </form>
                 </div>

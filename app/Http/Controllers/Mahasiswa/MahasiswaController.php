@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\StudentOrganization;
 use App\Models\User;
 use App\Services\MahasiswaService;
 use App\Services\OrganisasiMahasiswaService;
@@ -30,14 +31,7 @@ class MahasiswaController extends Controller
         $data['datas']  = $this->mahasiswaSerivce->getDataByCondition($this->table, $where);
         $data['ukms']   = $this->mahasiswaSerivce->getData('student_organizations', $id);
 
-        return view('bem_templates.pages.mahasiswa.index', $data);
-    }
-
-    public function store(Request $request)
-    {
-        $this->mahasiswaSerivce->store($this->table, $request);
-
-        return redirect('bem/mahasiswa')->with('message', 'Berhasil disimpan');
+        return view('mahasiswa_templates.pages.mahasiswa.index', $data);
     }
 
     public function show($id)
@@ -49,6 +43,6 @@ class MahasiswaController extends Controller
             ->where('users.id', $id)
             ->first();
 
-        return view('bem_templates.pages.mahasiswa.detail', $data);
+        return view('mahasiswa_templates.pages.mahasiswa.detail', $data);
     }
 }

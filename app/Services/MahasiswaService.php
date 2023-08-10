@@ -80,21 +80,41 @@ class MahasiswaService
     {
         $request->validate(
             [
-                'nama'      => 'required',
-                'status'    => 'required'
+                'nama'          => 'required',
+                'telepon'       => 'required',
+                'email'         => 'required|email',
+                'organisasi'    => 'required',
+                'kategori'      => 'required',
+                'status'        => 'required'
             ],
             [
-                'nama.required'      => 'Nama tidak boleh kosong',
-                'status.required'    => 'Status tidak boleh kosong',
+                'nama.required'         => 'Nama tidak boleh kosong!',
+                'telepon.required'      => 'Telepon tidak boleh kosong!',
+                'email.required'        => 'Email tidak boleh kosong!',
+                'organisasi.required'   => 'Organisasi tidak boleh kosong!',
+                'kategori.required'     => 'Kategori tidak boleh kosong!',
+                'status.required'       => 'Status tidak boleh kosong!'
             ]
         );
 
         $data = [
-            'name'          => $request->nama,
-            'status'        => $request->status,
-            "updated_by"    => Auth::user()->email,
-            "updated_at"    => now()
+            'name'                      => $request->nama,
+            'telephone'                 => $request->telepon,
+            'email'                     => $request->email,
+            'student_organizations_id'  => $request->organisasi,
+            'category'                  => $request->kategori,
+            'status'                    => $request->status,
+            'signature'                 => $request->ttd,
+            "updated_by"                => Auth::user()->email,
+            "updated_at"                => now()
         ];
+
+        if ($request->hasFile('ttd')) {
+            $request->ttd->move('signature', $request->file('ttd')->getClientOriginalName());
+            $data['signature'] = $request->file('ttd')->getClientOriginalName();
+        } else {
+            unset($data['signature']);
+        }
 
         return $this->mahasiswaRepository->update($table, $id, $data);
     }

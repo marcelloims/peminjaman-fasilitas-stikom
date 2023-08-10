@@ -27,8 +27,8 @@
                     <h4 class="card-title">Form Ubah {{ $title }}</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('akademik_kemahasiswaan/fasilitas/fasilitas-update/' . $data->id, []) }}"
-                        method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('akademik_kemahasiswaan/fasilitas/update/' . $data->id, []) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <div

@@ -50,30 +50,9 @@ class AlatController extends Controller
         return redirect('sarpras/alat')->with('message', 'Berhasil diperbaharui');
     }
 
-    public function delete($id)
-    {
-        $this->alatService->delete($this->table, $id);
-
-        return redirect('sarpras/organisasi-mahasiswa')->with('message', 'Has been deleted permanent');
-    }
-
     public function softDelete($id)
     {
         $this->alatService->softDelete($this->table, $id);
         return redirect('sarpras/alat')->with('message', 'Berhasil dihapus');
-    }
-
-    public function trashed($id = null)
-    {
-        $data['title'] = 'Alat-alat';
-        $data['ukm'] = $this->alatService->getTrashed($this->table, $id);
-
-        return view('sarpras/organisasi-mahasiswa', $data);
-    }
-
-    public function restore($id)
-    {
-        $this->alatService->restore($this->table, $id);
-        return redirect('sarpras/organisasi-mahasiswa/trashed')->with('message', 'Has been deleted');
     }
 }

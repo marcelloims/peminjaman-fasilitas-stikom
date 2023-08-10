@@ -100,7 +100,13 @@
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $data->code }}</td>
-                                        <td>{{ $data->status }}</td>
+                                        <td>
+                                            @if ($data->status == 'Tersedia')
+                                                <span class="badge light badge-success">{{ $data->status }}</span>
+                                            @else
+                                                <span class="badge light badge-danger">{{ $data->status }}</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             <a href="{{ url('akademik_kemahasiswaan/fasilitas/detail/' . $data->id, []) }}"
                                                 class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sarpras;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tool;
 use App\Services\AlatService;
 use App\Services\FasilitasService;
 use Illuminate\Http\Request;
@@ -31,13 +32,6 @@ class FasilitasController extends Controller
         return view('sarpras_templates.pages.fasilitas.index', $data);
     }
 
-    public function store(Request $request)
-    {
-        $this->fasilitasService->store($this->table, $request);
-
-        return redirect('sarpras/fasilitas')->with('message', 'Berhasil disimpan');
-    }
-
     public function store_tool(Request $request)
     {
         $this->alatService->store('tools', $request);
@@ -47,22 +41,14 @@ class FasilitasController extends Controller
 
     public function show($id)
     {
-        $data['title']  = 'Fasilitas';
-        $data['data']   = $this->fasilitasService->getData($this->table, $id);
-        $data['datas']  = $this->alatService->getDataByRequest('tools', $id);
-        $kode           = substr($data['datas']->max('code'), 5);
-        $data['kode']   = (int)$kode + 1;
+        $data['tools']      = $this->alatService->getDataByRequest('tools', $id);
+        $data['title']      = 'Fasilitas';
+        $data['fasilitas']  = $this->fasilitasService->getData($this->table, $id);
+        $tools              = $this->alatService->getData('tools', $id = null);
+        $kode               = substr($tools->max('code'), 5);
+        $data['kode']       = (int)$kode + 1;
 
         return view('sarpras_templates.pages.fasilitas.detail', $data);
-    }
-
-    public function edit($id)
-    {
-        $data['title']  = 'Fasilitas';
-        $data['data']   = $this->fasilitasService->getData($this->table, $id);
-        $data['status'] = ['Tersedia', 'Sibuk'];
-
-        return view('sarpras_templates.pages.fasilitas.edit', $data);
     }
 
     public function edit_tool($id)
@@ -73,13 +59,6 @@ class FasilitasController extends Controller
         return view('sarpras_templates.pages.fasilitas.edit_alat', $data);
     }
 
-    public function update(Request $request, $id)
-    {
-        $this->alatService->update($this->table, $request, $id);
-
-        return redirect('sarpras/alat')->with('message', 'Berhasil diperbaharui');
-    }
-
     public function update_tool(Request $request, $id)
     {
         $this->alatService->update('tools', $request, $id);
@@ -87,30 +66,11 @@ class FasilitasController extends Controller
         return redirect('sarpras/fasilitas/detail/' . $request->fasilitas_id)->with('message', 'Berhasil diperbaharui');
     }
 
-    public function delete($id)
-    {
-        $this->fasilitasService->delete($this->table, $id);
-
-        return redirect('sarpras/organisasi-mahasiswa')->with('message', 'Has been deleted permanent');
-    }
-
     public function softDelete($id)
     {
-        $this->fasilitasService->softDelete($this->table, $id);
-        return redirect('sarpras/fasilitas')->with('message', 'Berhasil dihapus');
-    }
+        $tool = Tool::where('id', $id)->first();
+        $this->fasilitasService->softDelete('tools', $id);
 
-    public function trashed($id = null)
-    {
-        $data['title'] = 'Fasilitas';
-        $data['ukm'] = $this->fasilitasService->getTrashed($this->table, $id);
-
-        return view('sarpras/organisasi-mahasiswa', $data);
-    }
-
-    public function restore($id)
-    {
-        $this->fasilitasService->restore($this->table, $id);
-        return redirect('sarpras/organisasi-mahasiswa/trashed')->with('message', 'Has been deleted');
+        return redirect('sarpras/fasilitas/detail/' . $tool->facilities_id)->with('message', 'Berhasil dihapus');
     }
 }

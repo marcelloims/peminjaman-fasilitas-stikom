@@ -33,14 +33,6 @@ class OrganisasiMahasiswaController extends Controller
         return redirect('akademik_kemahasiswaan/organisasi-mahasiswa')->with('message', 'Berhasil disimpan');
     }
 
-    public function show($id)
-    {
-        $data['title'] = 'Organisasi Mahasiswa';
-        $data['ukm'] = $this->organisasiMahasiswaSerivce->getData($this->table, $id);
-
-        return view('akademik_kemahasiswaan_templates.pages.detail', $data);
-    }
-
     public function edit($id)
     {
         $data['title']  = 'Organisasi Mahasiswa';
@@ -57,30 +49,9 @@ class OrganisasiMahasiswaController extends Controller
         return redirect('akademik_kemahasiswaan/organisasi-mahasiswa')->with('message', 'Berhasil diperbaharui');
     }
 
-    public function delete($id)
-    {
-        $this->organisasiMahasiswaSerivce->delete($this->table, $id);
-
-        return redirect('akademik_kemahasiswaan/organisasi-mahasiswa')->with('message', 'Has been deleted permanent');
-    }
-
     public function softDelete($id)
     {
         $this->organisasiMahasiswaSerivce->softDelete($this->table, $id);
         return redirect('akademik_kemahasiswaan/organisasi-mahasiswa')->with('message', 'Berhasil dihapus');
-    }
-
-    public function trashed($id = null)
-    {
-        $data['title'] = 'Organisasi Mahasiswa';
-        $data['ukm'] = $this->organisasiMahasiswaSerivce->getTrashed($this->table, $id);
-
-        return view('akademik_kemahasiswaan/organisasi-mahasiswa', $data);
-    }
-
-    public function restore($id)
-    {
-        $this->organisasiMahasiswaSerivce->restore($this->table, $id);
-        return redirect('akademik_kemahasiswaan/organisasi-mahasiswa/trashed')->with('message', 'Has been deleted');
     }
 }

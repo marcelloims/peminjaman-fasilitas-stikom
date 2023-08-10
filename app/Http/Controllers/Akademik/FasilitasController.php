@@ -75,9 +75,9 @@ class FasilitasController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->alatService->update($this->table, $request, $id);
+        $this->fasilitasService->update($this->table, $request, $id);
 
-        return redirect('akademik_kemahasiswaan/alat')->with('message', 'Berhasil diperbaharui');
+        return redirect('akademik_kemahasiswaan/fasilitas')->with('message', 'Berhasil diperbaharui');
     }
 
     public function update_tool(Request $request, $id)

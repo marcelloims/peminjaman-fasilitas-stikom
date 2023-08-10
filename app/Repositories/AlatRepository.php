@@ -9,9 +9,9 @@ class AlatRepository extends BaseRepository
         return BaseRepository::getData($table, $id);
     }
 
-    public function getToolByRequest($table, $id)
+    public function getDataByRequest($table, $id)
     {
-        return BaseRepository::getToolByRequest($table, $id);
+        return BaseRepository::getDataByRequest($table, $id);
     }
 
     public function store($table, $data)

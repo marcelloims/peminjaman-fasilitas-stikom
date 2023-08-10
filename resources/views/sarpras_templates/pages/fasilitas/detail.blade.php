@@ -35,7 +35,7 @@
                             @enderror">
                         <label for="">Kode</label>
                         <input type="text" name="kode" class="form-control input-default" placeholder="Masukan kode"
-                            value="{{ $data->code }}" readonly>
+                            value="{{ $fasilitas->code }}" readonly>
                         @error('kode')
                             <span class="badge light badge-danger">{{ $message }}</span>
                         @enderror
@@ -47,7 +47,7 @@
                             @enderror">
                         <label for="">Status</label>
                         <input type="text" name="status" class="form-control input-default" placeholder="Masukan status"
-                            value="{{ $data->status }}" readonly>
+                            value="{{ $fasilitas->status }}" readonly>
                         @error('status')
                             <span class="badge light badge-danger">{{ $message }}</span>
                         @enderror
@@ -88,7 +88,7 @@
                                     <input type="text" name="kode" class="form-control input-default"
                                         placeholder="Masukan kode" value="#BRG-{{ $kode }}" readonly>
                                     <input type="hidden" name="fasilitas_id" class="form-control input-default"
-                                        value="{{ $data->id }}" readonly>
+                                        value="{{ $fasilitas->id }}" readonly>
                                     @error('kode')
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror
@@ -175,18 +175,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($datas as $data)
+                                @foreach ($tools as $tool)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $data->code }}</td>
-                                        <td>{{ $data->name }}</td>
-                                        <td>{{ $data->category }}</td>
-                                        <td>{{ $data->type }}</td>
-                                        <td>{{ $data->qty }}</td>
+                                        <td>{{ $tool->code }}</td>
+                                        <td>{{ $tool->name }}</td>
+                                        <td>{{ $tool->category }}</td>
+                                        <td>{{ $tool->type }}</td>
+                                        <td>{{ $tool->qty }}</td>
                                         <td class="text-center">
-                                            <a href="{{ url('sarpras/fasilitas/fasilitas-edit/' . $data->id, []) }}"
+                                            <a href="{{ url('sarpras/fasilitas/fasilitas-edit/' . $tool->id) }}"
                                                 class="btn btn-sm btn-warning"><i class="flaticon-381-edit-1"></i></a>
-                                            <a href="{{ url('sarpras/alat/softdelete/' . $data->id) }}"
+                                            <a href="{{ url('sarpras/fasilitas/fasilitas-softdelete/' . $tool->id) }}"
                                                 class="btn btn-sm btn-danger button-delete"><i
                                                     class="flaticon-381-trash"></i></a>
                                         </td>
