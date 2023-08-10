@@ -35,8 +35,7 @@
                             <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                             </button>
                         </div>
-                        <form action="{{ url('mahasiswa/mahasiswa/save', []) }}" method="POST"
-                            enctype="multipart/form-data">
+                        <form action="{{ url('bem/mahasiswa/save', []) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
                                 <div
