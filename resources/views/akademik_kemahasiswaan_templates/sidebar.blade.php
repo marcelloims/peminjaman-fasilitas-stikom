@@ -21,8 +21,6 @@
         <span class="nav-text">Pengajuan</span>
     </a>
     <ul aria-expanded="false">
-        <li><a href="{{ url('#', []) }}">Surat Pengajuan</a></li>
-        <li><a href="{{ url('#', []) }}">Peminjaman Alat</a></li>
-        <li><a href="{{ url('#', []) }}">Peminjaman Fasilitas</a></li>
+        <li><a href="{{ url('#', []) }}">Peminjaman Aula dan Alat</a></li>
     </ul>
 </li>
