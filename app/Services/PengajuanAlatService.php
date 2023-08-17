@@ -7,11 +7,30 @@ use Illuminate\Support\Facades\Auth;
 
 class PengajuanAlatService
 {
-    private $pengajuanAulaAlatServiceRepository;
+    private $pengajuanAlatRepository;
 
     public function __construct(PengajuanAlatRepository $repository)
     {
-        $this->pengajuanAulaAlatServiceRepository = $repository;
+        $this->pengajuanAlatRepository = $repository;
+    }
+
+    public function getTotalCart()
+    {
+        return $this->pengajuanAlatRepository->getTotalCart();
+    }
+
+    public function addToCart($request, $id)
+    {
+        $request->validate(
+            [
+                'qty'   => 'required',
+            ],
+            [
+                'qty.required' => 'Jumlah tidak boleh kosong'
+            ]
+        );
+
+        return $this->pengajuanAlatRepository->addToCart($request,$id);
     }
 
     public function store($table, $request)

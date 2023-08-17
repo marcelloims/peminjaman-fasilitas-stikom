@@ -106,7 +106,7 @@ Route::group(['middleware' => ['CheckLogin:3']], function () {
         Route::group(['prefix' => 'pengajuan'], function () {
             Route::group(['prefix' => 'alat'], function () {
                 Route::get('/', [PengajuanAlatController::class, 'index']);
-                Route::post('/save', [PengajuanAlatController::class, 'store']);
+                Route::post('/addToCart/{id}', [PengajuanAlatController::class, 'addToCart']);
             });
         });
     });
