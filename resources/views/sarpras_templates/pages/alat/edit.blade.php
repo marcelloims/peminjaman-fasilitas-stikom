@@ -93,6 +93,20 @@
                                     <span class="badge light badge-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div
+                                class="form-group
+                                    @error('gambar')
+                                        input-danger
+                                    @enderror">
+                                <label for="">Gambar</label>
+                                <input type="file" name="gambar" class="form-control input-default"
+                                    placeholder="Masukan gambar" value="{{ old('gambar') }}">
+                                @error('gambar')
+                                    <span class="badge light badge-danger">{{ $message }}</span>
+                                @enderror
+                                <img src="{{ asset('logo_ukm/' . $data->image) }}" width="300" height="300"
+                                    alt="logo-ukm" />
+                            </div>
                         </div>
                         <a href="{{ url('sarpras/alat', []) }}" class="btn btn-danger light float-right"
                             data-dismiss="modal">Tutup</a>

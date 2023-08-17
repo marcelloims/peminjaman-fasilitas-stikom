@@ -11,6 +11,7 @@ use App\Http\Controllers\Bem\OrganisasiMahasiswaController as BemOrganisasiMahas
 use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboardController;
 use App\Http\Controllers\Mahasiswa\MahasiswaController as MahasiswaMahasiswaController;
 use App\Http\Controllers\Mahasiswa\OrganisasiMahasiswaController as MahasiswaOrganisasiMahasiswaController;
+use App\Http\Controllers\Mahasiswa\PengajuanAlatController;
 use App\Http\Controllers\Sarpras\AlatController;
 use App\Http\Controllers\Sarpras\DashboardController;
 use App\Http\Controllers\Sarpras\FasilitasController;
@@ -100,6 +101,13 @@ Route::group(['middleware' => ['CheckLogin:3']], function () {
         Route::group(['prefix' => 'mahasiswa'], function () {
             Route::get('/', [MahasiswaMahasiswaController::class, 'index']);
             Route::get('detail/{id}', [MahasiswaMahasiswaController::class, 'show']);
+        });
+
+        Route::group(['prefix' => 'pengajuan'], function () {
+            Route::group(['prefix' => 'alat'], function () {
+                Route::get('/', [PengajuanAlatController::class, 'index']);
+                Route::post('/save', [PengajuanAlatController::class, 'store']);
+            });
         });
     });
 });

@@ -98,6 +98,18 @@
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                <div
+                                    class="form-group
+                                    @error('gambar')
+                                        input-danger
+                                    @enderror">
+                                    <label for="">Gambar</label>
+                                    <input type="file" name="gambar" class="form-control input-default"
+                                        placeholder="Masukan gambar" value="{{ old('gambar') }}">
+                                    @error('gambar')
+                                        <span class="badge light badge-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary light">Simpan</button>

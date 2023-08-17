@@ -2,11 +2,18 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\DB;
+
 class AlatRepository extends BaseRepository
 {
     public function getData($table, $id)
     {
         return BaseRepository::getData($table, $id);
+    }
+
+    public function getToolOnly($table)
+    {
+        return DB::table($table)->whereNull('facilities_id')->get();
     }
 
     public function getDataByRequest($table, $id)

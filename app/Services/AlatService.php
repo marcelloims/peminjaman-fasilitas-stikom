@@ -19,6 +19,11 @@ class AlatService
         return $this->alatRepository->getData($table, $id);
     }
 
+    public function getToolOnly($table)
+    {
+        return $this->alatRepository->getToolOnly($table);
+    }
+
     public function getDataByRequest($table, $id)
     {
         return $this->alatRepository->getDataByRequest($table, $id);
@@ -31,13 +36,15 @@ class AlatService
                 'nama'      => 'required',
                 'kategori'  => 'required',
                 'jenis'     => 'required',
-                'jumlah'    => 'required|min:1'
+                'jumlah'    => 'required|min:1',
+                'gambar'    => 'required'
             ],
             [
                 'nama.required'      => 'Nama tidak boleh kosong',
                 'kategori.required'  => 'Kategori tidak boleh kosong',
                 'jenis.required'     => 'Jenis tidak boleh kosong',
-                'jumlah.required'    => 'Jumlah tidak boleh kosong'
+                'jumlah.required'    => 'Jumlah tidak boleh kosong',
+                'gambar.required'    => 'Gambar tidak boleh kosong'
             ]
         );
 
@@ -48,13 +55,18 @@ class AlatService
             'category'      => $request->kategori,
             'type'          => $request->jenis,
             'qty'           => $request->jumlah,
+            'image'         => $request->gambar,
             'created_by'    => Auth::user()->email,
             'updated_by'    => Auth::user()->email,
             'created_at'    => now(),
             'updated_at'    => now()
         ];
 
-        // dd($data);
+
+        if ($request->hasFile('gambar')) {
+            $request->gambar->move('logo_ukm', $request->file('gambar')->getClientOriginalName());
+            $data['image'] = $request->file('logo')->getClientOriginalName();
+        }
 
         return $this->alatRepository->store($table, $data);
     }
@@ -83,9 +95,17 @@ class AlatService
             'category'      => $request->kategori,
             'type'          => $request->jenis,
             'qty'           => $request->jumlah,
+            'image'         => $request->gambar,
             'updated_by'    => Auth::user()->email,
             'updated_at'    => now()
         ];
+
+        if ($request->hasFile('gambar')) {
+            $request->gambar->move('logo_ukm', $request->file('gambar')->getClientOriginalName());
+            $data['image'] = $request->file('gambar')->getClientOriginalName();
+        } else {
+            unset($data['image']);
+        }
 
         return $this->alatRepository->update($table, $id, $data);
     }

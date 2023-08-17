@@ -20,6 +20,6 @@
         <span class="nav-text">Pengajuan</span>
     </a>
     <ul aria-expanded="false">
-        <li><a href="{{ url('#', []) }}">Peminjaman Aula dan Alat</a></li>
+        <li><a href="{{ url('mahasiswa/pengajuan/alat', []) }}">Peminjaman Alat</a></li>
     </ul>
 </li>

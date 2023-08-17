@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\DB;
+
 class MahasiswaRepository extends BaseRepository
 {
     public function getData($table, $id)
@@ -17,6 +19,11 @@ class MahasiswaRepository extends BaseRepository
     public function getDataByConditionJoin($table, $where)
     {
         return BaseRepository::getDataByConditionJoin($table, $where);
+    }
+
+    public function getChairman($table, $where)
+    {
+        return DB::table($table)->where($where[0])->where($where[1])->orderBy('email', 'asc')->get();
     }
 
     public function store($table, $data)

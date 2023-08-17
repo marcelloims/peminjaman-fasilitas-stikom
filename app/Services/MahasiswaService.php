@@ -24,6 +24,22 @@ class MahasiswaService
         return $this->mahasiswaRepository->getDataByCondition($table, $where);
     }
 
+    public function getChairman($table)
+    {
+        $where = [
+            [
+                ['student_organizations_id', Auth::user()->student_organizations_id],
+            ],
+            [
+                ['status', "Aktif"]
+            ]
+        ];
+
+        // dd($where[0]);
+
+        return $this->mahasiswaRepository->getChairman($table, $where);
+    }
+
     public function getDataByConditionJoin($table, $where)
     {
         return $this->mahasiswaRepository->getDataByConditionJoin($table, $where);
