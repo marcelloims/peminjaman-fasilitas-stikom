@@ -33,6 +33,11 @@ class PengajuanAlatService
         return $this->pengajuanAlatRepository->addToCart($request,$id);
     }
 
+    public function getTotalQuantity()
+    {
+        return $this->pengajuanAlatRepository->getTotalQuantity();
+    }
+
     public function store($table, $request)
     {
         $request->validate(
@@ -79,5 +84,7 @@ class PengajuanAlatService
             'created_at'                => now(),
             'updated_at'                => now()
         ];
+        dd($dataSubmission);
+        return $this->pengajuanAlatRepository->store($dataSubmission);
     }
 }

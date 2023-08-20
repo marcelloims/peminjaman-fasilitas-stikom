@@ -31,6 +31,16 @@ class PengajuanAlatRepository extends BaseRepository
             'name' => $tool->name,
             'price' => 0,
             'quantity' => $request->qty,
+            'attributes'    => ['image'=>$tool->image]
         ]);
+    }
+
+    public function getTotalQuantity(){
+        $cartTotalQuantity = \Cart::getTotalQuantity();
+        return $cartTotalQuantity;
+    }
+
+    public function store($dataSubmission){
+        return BaseRepository::create($table, $data);
     }
 }
