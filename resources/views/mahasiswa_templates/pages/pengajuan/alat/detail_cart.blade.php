@@ -88,6 +88,32 @@
                                             <span class="badge light badge-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                </div>
+                                <div class="col-4">
+                                    <div
+                                        class="form-group
+                                    @error('tanggal_kegiatan_mulai')
+                                        input-danger
+                                    @enderror">
+                                        <label for="">Tanggal Mulai Kegiatan</label>
+                                        <input type="date" name="tanggal_kegiatan_mulai"
+                                            class="datepicker-default form-control" id="datepicker"
+                                            value="{{ old('tanggal_kegiatan_mulai') }}" placeholder="Hari Bulan, Tahun">
+                                        @error('tanggal_kegiatan_mulai')
+                                            <span class="badge light badge-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div
+                                        class="form-group
+                                    @error('jam_mulai')
+                                        input-danger
+                                    @enderror">
+                                        <label for="">Jam Mulai</label>
+                                        <input class="form-control" name="jam_mulai" value="08:00" readonly>
+                                        @error('jam_mulai')
+                                            <span class="badge light badge-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                     <div
                                         class="form-group
                                     @error('tema')
@@ -104,39 +130,13 @@
                                 <div class="col-4">
                                     <div
                                         class="form-group
-                                    @error('tanggal_kegiatan_mulai')
-                                        input-danger
-                                    @enderror">
-                                        <label for="">Tanggal Mulai Kegiatan</label>
-                                        <input name="tanggal_kegiatan_mulai" class="datepicker-default form-control"
-                                            id="datepicker" value="{{ old('tanggal_kegiatan_mulai') }}"
-                                            placeholder="Hari Bulan, Tahun">
-                                        @error('tanggal_kegiatan_mulai')
-                                            <span class="badge light badge-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div
-                                        class="form-group
-                                    @error('jam_mulai')
-                                        input-danger
-                                    @enderror">
-                                        <label for="">Jam Mulai</label>
-                                        <input class="form-control" name="jam_mulai" value="08:00" readonly>
-                                        @error('jam_mulai')
-                                            <span class="badge light badge-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div
-                                        class="form-group
                                     @error('tanggal_kegiatan_selesai')
                                         input-danger
                                     @enderror">
                                         <label for="">Tanggal Selesai Kegiatan</label>
-                                        <input name="tanggal_kegiatan_selesai" class="datepicker-default form-control"
-                                            id="datepicker" value="{{ old('tanggal_kegiatan_selesai') }}"
-                                            placeholder="Hari Bulan, Tahun">
+                                        <input type="date" name="tanggal_kegiatan_selesai"
+                                            class="datepicker-default form-control" id="datepicker"
+                                            value="{{ old('tanggal_kegiatan_selesai') }}" placeholder="Hari Bulan, Tahun">
                                         @error('tanggal_kegiatan_selesai')
                                             <span class="badge light badge-danger">{{ $message }}</span>
                                         @enderror
@@ -158,7 +158,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary light">Simpan</button>
-                            {{-- <button type="button" class="btn btn-danger light" data-dismiss="modal">Tutup</button> --}}
+                            <a href="{{ url('mahasiswa/pengajuan/alat', []) }}" class="btn btn-info light"
+                                data-dismiss="modal">Tambah Alat</a>
                         </div>
                     </form>
                 </div>

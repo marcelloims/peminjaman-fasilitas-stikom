@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Services\AlatService;
 use App\Services\MahasiswaService;
 use App\Services\PengajuanAlatService;
-use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +34,6 @@ class PengajuanAlatController extends Controller
         $data['chairmans']      = $this->mahasiswaService->getChairman('users');
         $data['tools']          = $this->alatService->getToolOnly('tools');
         $data['totalCart']      = $this->pengajuanAlatService->getTotalCart();
-        // dd($data['totalCart']);
 
         return view('mahasiswa_templates.pages.pengajuan.alat.index', $data);
     }
@@ -48,19 +46,19 @@ class PengajuanAlatController extends Controller
 
     public function detailCart()
     {
-        $data['title']  = 'Peminjaman';
-        $data['carts']  = \Cart::getContent();
-        $data['chairmans']      = $this->mahasiswaService->getChairman('users');
-        $data['totalQty'] = $this->pengajuanAlatService->getTotalQuantity();
-        // dd($data['totalQty']);
+        $data['title']      = 'Peminjaman';
+        $data['carts']      = \Cart::getContent();
+        $data['chairmans']  = $this->mahasiswaService->getChairman('users');
+        $data['totalQty']   = $this->pengajuanAlatService->getTotalQuantity();
+
         return view('mahasiswa_templates.pages.pengajuan.alat.detail_cart', $data)->with('message', 'Berhasil ditambahkan');
     }
 
     public function store(Request $request)
     {
-        $data['alat']=$this->pengajuanAlatService->store($request, $this->table);
-        // dd($data['alat']);
-        return redirect('mahasiswa/pengajuan/alat/detail_cart', $data);
+        $data['alat']   = $this->pengajuanAlatService->store($this->table, $request);
+
+        return redirect('mahasiswa/pengajuan/alat')->with('message', "Berhasil disimpan!");
     }
 
     public function subtractCart($id){
