@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\PengajuanAlatRepository;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class PengajuanAlatService
@@ -30,7 +31,7 @@ class PengajuanAlatService
             ]
         );
 
-        return $this->pengajuanAlatRepository->addToCart($request,$id);
+        return $this->pengajuanAlatRepository->addToCart($request, $id);
     }
 
     public function getTotalQuantity()
@@ -49,7 +50,6 @@ class PengajuanAlatService
                 'tanggal_kegiatan_mulai'    => 'required',
                 'jam_mulai'                 => 'required',
                 'tanggal_kegiatan_selesai'  => 'required',
-                'kategori'                  => 'required',
                 'jam_selesai'               => 'required'
             ],
             [
@@ -60,15 +60,13 @@ class PengajuanAlatService
                 'tanggal_kegiatan_mulai.required'    => 'Tanggal Mulai Kegiatan tidak boleh kosong!',
                 'jam_mulai.required'                 => 'Jam Mulai tidak boleh kosong!',
                 'tanggal_kegiatan_selesai.required'  => 'Tanggal Selesai Kegiatan tidak boleh kosong!',
-                'kategori.required'                  => 'Kategori tidak boleh kosong!',
                 'jam_selesai.required'               => 'Jam Selsai tidak boleh kosong!',
             ]
         );
 
-        $dataSubmission = [
+        $submission = [
             'users_id'                  => Auth::user()->id,
             'student_organizations_id'  => Auth::user()->student_organizations_id,
-            'detail_submissions_id'     => null,
             'chairman'                  => $request->ketua_umum,
             'chairman_of_the_commitee'  => $request->ketua_panitia,
             'academic_student_affairs'  => null,
@@ -76,15 +74,31 @@ class PengajuanAlatService
             'student_executive_board'   => null,
             'name_of_activity'          => $request->nama_kegiatan,
             'theme'                     => $request->tema,
-            'date_start'                => $request->tanggal_kegiatan_mulai,
-            'date_end'                  => $request->tanggal_kegiatan_selesai,
-            'category'                  => $request->kategori,
+            'date_start'                => date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " " . $request->jam_mulai,
+            'date_end'                  => date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " " . $request->jam_selesai,
+            'category'                  => 1,
             'created_by'                => Auth::user()->email,
             'updated_by'                => Auth::user()->email,
             'created_at'                => now(),
             'updated_at'                => now()
         ];
-        dd($dataSubmission);
-        return $this->pengajuanAlatRepository->store($dataSubmission);
+
+        // dd($submission);
+        // $carts  = \Cart::getContent();
+        // foreach ($carts as $cart) {
+        //     $detailSubmission = [
+        //         "submissions_id"    =>
+        //         "tools_id"          => $cart->id,
+        //         "qty"               => $cart->quantity,
+        //         "created_by"        => Auth::user()->email,
+        //         "updated_by"        => Auth::user()->email,
+        //         "created_at"        => now(),
+        //         "updated_at"        => now()
+        //     ];
+        // }
+
+
+
+        return $this->pengajuanAlatRepository->store($table, $submission);
     }
 }

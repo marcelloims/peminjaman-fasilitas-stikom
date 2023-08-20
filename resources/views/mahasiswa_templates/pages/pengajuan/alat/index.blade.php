@@ -25,7 +25,7 @@
         </div>
         <div class="col-6 col-sm-6">
             <a href="{{ url('mahasiswa/pengajuan/alat/detail_cart') }}"
-                class="card-title float-right text-white badge-info"><i
+                class="card-title float-right text-white badge-info btn"><i
                     class="
                 flaticon-381-bookmark-1"></i> Daftar Alat : {{ $totalCart }} item</a>
         </div>
@@ -38,27 +38,39 @@
                 <form action="{{ url('mahasiswa/pengajuan/alat/addToCart/' . $tool->id, []) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
-                    <div class="card text-center">
+                    <div class="card">
                         <div class="card-header">
-                            <h6 class="card-title">{{ $tool->name }}</h6>
+                            <span class="card-title" style="font-size: 12px;">{{ $tool->name }}</span>
                         </div>
                         <div class="card-body">
                             <img src="{{ asset('logo_ukm/' . $tool->image) }}" width="150" height="150"
                                 alt="logo-ukm" />
                         </div>
                         <div class="card-footer">
-                            <div
-                                class="form-group
+                            <div class="row">
+                                <div class="col-12">
+                                    <div
+                                        class="form-group
                                 @error('qty')
                                     input-danger
                                 @enderror">
-                                <input type="number" min="1" max="{{ $tool->qty }}" name="qty"
-                                    class="form-control" placeholder="Masukan Jumlah">
-                                @error('qty')
-                                    <span class="badge light badge-danger">{{ $message }}</span>
-                                @enderror
-                                <span>Stok :{{ $tool->qty }}</span>
-                                <button type="submit" class="btn btn-sm btn-primary ml-5 mt-2">Tambah</button>
+                                        <input type="number" min="1" max="{{ $tool->qty }}" name="qty"
+                                            class="form-control" placeholder="Masukan Jumlah">
+                                        @error('qty')
+                                            <span class="badge light badge-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-6 text-center">
+                                    <span>Stok :{{ $tool->qty }}</span>
+                                </div>
+                                <div class="col-6">
+                                    @if ($tool->qty > 0)
+                                        <button type="submit" class="btn btn-sm btn-primary">Tambah</button>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
