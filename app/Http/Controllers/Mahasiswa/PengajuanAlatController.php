@@ -60,4 +60,24 @@ class PengajuanAlatController extends Controller
 
         return redirect('mahasiswa/pengajuan/alat')->with('message', "Berhasil disimpan!");
     }
+
+    public function subtractCart($id){
+        \Cart::update($id, array(
+            'quantity' => -1,
+          ));
+        return redirect ('mahasiswa/pengajuan/alat/detail_cart');
+    }
+
+    public function addedCart($id){
+        \Cart::update($id, array(
+            'quantity' => 1,
+        ));
+        return redirect('mahasiswa/pengajuan/alat/detail_cart');
+    }
+
+    public function deletedCart($id){
+        \Cart::remove($id);
+        // dd($id);
+        return redirect('mahasiswa/pengajuan/alat/detail_cart');
+    }
 }

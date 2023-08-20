@@ -182,6 +182,7 @@
                                     <th>Nama</th>
                                     <th>Gambar</th>
                                     <th>Jumlah</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -191,7 +192,22 @@
                                         <td>{{ $cart->name }}</td>
                                         <td><img src="{{ asset('logo_ukm/' . $cart->attributes->image) }}" width="50"
                                                 height="50" alt="logo-ukm" /></td>
-                                        <td>{{ $cart->quantity }}</td>
+                                        <td>
+                                            <a href="{{ url('mahasiswa/pengajuan/alat/subtract/' . $cart->id) }}"
+                                                class="btn btn-sm btn-success mr-3">
+                                                <i class="flaticon-381-substract-2"></i>
+                                            </a>
+                                            {{ $cart->quantity }}
+                                            <a href="{{ url('mahasiswa/pengajuan/alat/addedCart/' . $cart->id) }}"
+                                                class="btn btn-sm btn-success ml-3">
+                                                <i class="flaticon-381-add-1"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ url('mahasiswa/pengajuan/alat/deletedCart/' . $cart->id) }}"
+                                                class="btn btn-sm btn-danger button-delete">
+                                                <i class="flaticon-381-trash"></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -4,6 +4,8 @@
 <title id="title" data-flashdata="{{ $title }}">ITB STIKOM Bali - {{ $title }}</title>
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/logo-stikom.png') }}">
+<link rel="stylesheet" type="text/css" href="your_website_domain/css_root/flaticon.css">
+
 <!-- Datatable -->
 <link href="{{ asset('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <!-- Custom Stylesheet -->
