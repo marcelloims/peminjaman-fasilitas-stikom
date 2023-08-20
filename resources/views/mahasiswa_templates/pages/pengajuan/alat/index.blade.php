@@ -24,9 +24,10 @@
             <h4 class="card-title">Data Alat-alat</h4>
         </div>
         <div class="col-6 col-sm-6">
-            <span class="card-title float-right text-white badge-info"><i
+            <a href="{{ url('mahasiswa/pengajuan/alat/detail_cart') }}"
+                class="card-title float-right text-white badge-info"><i
                     class="
-                flaticon-381-bookmark-1"></i> Daftar Alat : {{ $totalCart }} item</span>
+                flaticon-381-bookmark-1"></i> Daftar Alat : {{ $totalCart }} item</a>
         </div>
     </div>
 

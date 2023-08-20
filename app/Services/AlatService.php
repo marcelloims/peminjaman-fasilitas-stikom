@@ -65,7 +65,7 @@ class AlatService
 
         if ($request->hasFile('gambar')) {
             $request->gambar->move('logo_ukm', $request->file('gambar')->getClientOriginalName());
-            $data['image'] = $request->file('logo')->getClientOriginalName();
+            $data['image'] = $request->file('gambar')->getClientOriginalName();
         }
 
         return $this->alatRepository->store($table, $data);

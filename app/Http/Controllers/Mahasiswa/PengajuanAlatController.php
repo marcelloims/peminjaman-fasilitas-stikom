@@ -45,4 +45,21 @@ class PengajuanAlatController extends Controller
         $this->pengajuanAlatService->addToCart($request, $id);
         return redirect('mahasiswa/pengajuan/alat')->with('message', 'Berhasil ditambahkan');
     }
+
+    public function detailCart()
+    {
+        $data['title']  = 'Peminjaman';
+        $data['carts']  = \Cart::getContent();
+        $data['chairmans']      = $this->mahasiswaService->getChairman('users');
+        $data['totalQty'] = $this->pengajuanAlatService->getTotalQuantity();
+        // dd($data['totalQty']);
+        return view('mahasiswa_templates.pages.pengajuan.alat.detail_cart', $data)->with('message', 'Berhasil ditambahkan');
+    }
+
+    public function store(Request $request)
+    {
+        $data['alat']=$this->pengajuanAlatService->store($request, $this->table);
+        // dd($data['alat']);
+        return redirect('mahasiswa/pengajuan/alat/detail_cart', $data);
+    }
 }
