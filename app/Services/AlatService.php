@@ -76,13 +76,11 @@ class AlatService
         $request->validate(
             [
                 'nama'      => 'required',
-                'kategori'  => 'required',
                 'jenis'     => 'required',
                 'jumlah'    => 'required|min:1'
             ],
             [
                 'nama.required'      => 'Nama tidak boleh kosong',
-                'kategori.required'  => 'Kategori tidak boleh kosong',
                 'jenis.required'     => 'Jenis tidak boleh kosong',
                 'jumlah.required'    => 'Jumlah tidak boleh kosong'
             ]

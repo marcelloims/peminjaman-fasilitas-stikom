@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tool;
 use App\Services\AlatService;
 use App\Services\MahasiswaService;
 use App\Services\PengajuanAlatService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PengajuanAlatController extends Controller
 {
@@ -41,6 +41,16 @@ class PengajuanAlatController extends Controller
     public function addToCart(Request $request, $id)
     {
         $this->pengajuanAlatService->addToCart($request, $id);
+
+        $tool = $this->alatService->getData('tools', $id);
+
+        $totalQty = $tool->qty - $request->qty;
+        $updateTool = [
+            'qty' => $totalQty
+        ];
+
+        Tool::where('id', $id)->update($updateTool);
+
         return redirect('mahasiswa/pengajuan/alat')->with('message', 'Berhasil ditambahkan');
     }
 
@@ -61,23 +71,56 @@ class PengajuanAlatController extends Controller
         return redirect('mahasiswa/pengajuan/alat')->with('message', "Berhasil disimpan!");
     }
 
-    public function subtractCart($id){
+    public function subtractCart(Request $request, $id)
+    {
+        $cartItem = \Cart::get($id);
+        $cartQuantity = $cartItem->quantity - 1;
+        $attributesStock = $cartItem->attributes->stock - $cartQuantity;
         \Cart::update($id, array(
             'quantity' => -1,
-          ));
-        return redirect ('mahasiswa/pengajuan/alat/detail_cart');
-    }
-
-    public function addedCart($id){
-        \Cart::update($id, array(
-            'quantity' => 1,
+            'attributues' => array('stock' => $attributesStock)
         ));
-        return redirect('mahasiswa/pengajuan/alat/detail_cart');
+
+        $updateTool = ['qty' => $request->stok - $cartItem->quantity];
+
+        Tool::where('id', $id)->update($updateTool);
+
+        return redirect('mahasiswa/pengajuan/alat/detailCart');
     }
 
-    public function deletedCart($id){
+    public function addedCart(Request $request, $id)
+    {
+        $cartItem = \Cart::get($id);
+        $cartQuantity = $cartItem->quantity + 1;
+        $attributesStock = $cartItem->attributes->stock - $cartQuantity;
+        \Cart::update($id, array(
+            'quantity' => +1,
+            'attributues' => array('stock' => $attributesStock)
+        ));
+
+        $updateTool = ['qty' => $request->stok - $cartItem->quantity];
+
+        Tool::where('id', $id)->update($updateTool);
+
+        return redirect('mahasiswa/pengajuan/alat/detailCart');
+    }
+
+    public function deletedCart(Request $request, $id)
+    {
         \Cart::remove($id);
-        // dd($id);
-        return redirect('mahasiswa/pengajuan/alat/detail_cart');
+
+        $updateTool = [
+            'qty' => $request->stok
+        ];
+
+        Tool::where('id', $id)->update($updateTool);
+        return redirect('mahasiswa/pengajuan/alat/detailCart');
+    }
+
+    public function clearCart()
+    {
+        \Cart::clear();
+
+        return redirect('mahasiswa/pengajuan/alat');
     }
 }

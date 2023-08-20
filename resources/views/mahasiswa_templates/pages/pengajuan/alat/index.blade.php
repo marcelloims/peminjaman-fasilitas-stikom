@@ -24,7 +24,7 @@
             <h4 class="card-title">Data Alat-alat</h4>
         </div>
         <div class="col-6 col-sm-6">
-            <a href="{{ url('mahasiswa/pengajuan/alat/detail_cart') }}"
+            <a href="{{ url('mahasiswa/pengajuan/alat/detailCart') }}"
                 class="card-title float-right text-white badge-info btn"><i
                     class="
                 flaticon-381-bookmark-1"></i> Daftar Alat : {{ $totalCart }} item</a>
@@ -64,7 +64,8 @@
                             </div>
                             <div class="row mt-1">
                                 <div class="col-6 text-center">
-                                    <span>Stok :{{ $tool->qty }}</span>
+                                    <span>Stok : {{ $tool->qty }} <input type="hidden" name="stok"
+                                            value="{{ $tool->qty }}"> </span>
                                 </div>
                                 <div class="col-6">
                                     @if ($tool->qty > 0)

@@ -83,22 +83,6 @@ class PengajuanAlatService
             'updated_at'                => now()
         ];
 
-        // dd($submission);
-        // $carts  = \Cart::getContent();
-        // foreach ($carts as $cart) {
-        //     $detailSubmission = [
-        //         "submissions_id"    =>
-        //         "tools_id"          => $cart->id,
-        //         "qty"               => $cart->quantity,
-        //         "created_by"        => Auth::user()->email,
-        //         "updated_by"        => Auth::user()->email,
-        //         "created_at"        => now(),
-        //         "updated_at"        => now()
-        //     ];
-        // }
-
-
-
         return $this->pengajuanAlatRepository->store($table, $submission);
     }
 }

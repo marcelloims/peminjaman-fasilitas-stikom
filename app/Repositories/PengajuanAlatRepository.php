@@ -24,14 +24,16 @@ class PengajuanAlatRepository extends BaseRepository
     public function addToCart($request, $id)
     {
         $tool   = $this->alatService->getData('tools', $id);
-        $userID = Auth::user()->id;
 
         \Cart::add([
             'id' => $tool->id,
             'name' => $tool->name,
             'price' => 0,
             'quantity' => $request->qty,
-            'attributes'    => ['image' => $tool->image]
+            'attributes'    => [
+                'image' => $tool->image,
+                'stock' => $request->stok,
+            ]
         ]);
     }
 
@@ -61,9 +63,10 @@ class PengajuanAlatRepository extends BaseRepository
 
             BaseRepository::create('detail_submissions', $detailSubmission);
 
-            $tools = Tool::where('id', $cart->id)->first();
+            // $tool = Tool::where('id', $cart->id)->first();
+            // dd($tool);
 
-            Tool::where('id', $cart->id)->update(['qty' => $tools->qty - $cart->quantity]);
+            // Tool::where('id', $cart->id)->update(['qty' => $tool->qty]);
         }
         \Cart::clear();
         return;

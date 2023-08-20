@@ -107,11 +107,12 @@ Route::group(['middleware' => ['CheckLogin:3']], function () {
             Route::group(['prefix' => 'alat'], function () {
                 Route::get('/', [PengajuanAlatController::class, 'index']);
                 Route::post('/addToCart/{id}', [PengajuanAlatController::class, 'addToCart']);
-                Route::get('/detail_cart', [PengajuanAlatController::class, 'detailCart']);
-                Route::get('/subtract/{id}', [PengajuanAlatController::class, 'subtractCart']);
-                Route::get('/addedCart/{id}', [PengajuanAlatController::class,'addedCart']);
-                Route::get('deletedCart/{id}', [PengajuanAlatController::class, 'deletedCart']);
+                Route::get('/detailCart', [PengajuanAlatController::class, 'detailCart']);
+                Route::post('/subtract/{id}', [PengajuanAlatController::class, 'subtractCart']);
+                Route::post('/addedCart/{id}', [PengajuanAlatController::class, 'addedCart']);
+                Route::post('deletedCart/{id}', [PengajuanAlatController::class, 'deletedCart']);
                 Route::post('/save', [PengajuanAlatController::class, 'store']);
+                Route::get('/clearCart', [PengajuanAlatController::class, 'clearCart']);
             });
         });
     });
