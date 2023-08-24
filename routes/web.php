@@ -12,6 +12,7 @@ use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboardCont
 use App\Http\Controllers\Mahasiswa\MahasiswaController as MahasiswaMahasiswaController;
 use App\Http\Controllers\Mahasiswa\OrganisasiMahasiswaController as MahasiswaOrganisasiMahasiswaController;
 use App\Http\Controllers\Mahasiswa\PengajuanAlatController;
+use App\Http\Controllers\Mahasiswa\PersetujuanAlatController;
 use App\Http\Controllers\Sarpras\AlatController;
 use App\Http\Controllers\Sarpras\DashboardController;
 use App\Http\Controllers\Sarpras\FasilitasController;
@@ -113,6 +114,12 @@ Route::group(['middleware' => ['CheckLogin:3']], function () {
                 Route::post('deletedCart/{id}', [PengajuanAlatController::class, 'deletedCart']);
                 Route::post('/save', [PengajuanAlatController::class, 'store']);
                 Route::get('/clearCart', [PengajuanAlatController::class, 'clearCart']);
+            });
+        });
+        Route::group(['prefix' => 'persetujuan'], function () {
+            Route::group(['prefix' => 'alat'], function () {
+                Route::get('/', [PersetujuanAlatController::class, 'index']);
+                Route::get('/detail/{id}', [PersetujuanAlatController::class, 'show']);
             });
         });
     });
