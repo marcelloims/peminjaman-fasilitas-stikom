@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Services;
+
+use App\Repositories\PersetujuanAlatRepository;
+use Illuminate\Support\Facades\Auth;
+
+class PersetujuanAlatService
+{
+    private $persetujuanAlatRepository;
+
+    public function __construct(PersetujuanAlatRepository $repository)
+    {
+        $this->persetujuanAlatRepository = $repository;
+    }
+
+    public function getData($table)
+    {
+        $id = ['users_id' => Auth::user()->id];
+        return $this->persetujuanAlatRepository->getData($table, $id);
+    }
+
+    public function joinDetailSubmissions($table, $id)
+    {
+        return $this->persetujuanAlatRepository->joinDetailSubmissions($table, $id);
+    }
+}

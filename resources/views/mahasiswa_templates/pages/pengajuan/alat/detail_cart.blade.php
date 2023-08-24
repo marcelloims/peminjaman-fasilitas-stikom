@@ -49,7 +49,7 @@
                                                     height="50" alt="logo-ukm" /></td>
                                             <td>
                                                 <div class="row justify-content-center">
-                                                    <div class="col-1 mt-2">
+                                                    <div class="col-2 mt-2">
                                                         {{ $cart->quantity }}
                                                     </div>
                                                     <div class="col-1 mr-3">

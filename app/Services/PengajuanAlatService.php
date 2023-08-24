@@ -77,6 +77,7 @@ class PengajuanAlatService
             'date_start'                => date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " " . $request->jam_mulai,
             'date_end'                  => date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " " . $request->jam_selesai,
             'category'                  => 1,
+            'status'                    => 'Tertunda',
             'created_by'                => Auth::user()->email,
             'updated_by'                => Auth::user()->email,
             'created_at'                => now(),

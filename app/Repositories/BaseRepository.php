@@ -20,6 +20,11 @@ class BaseRepository
         return DB::table($table)->whereNull('deleted_at')->get();
     }
 
+    public function getWhereData($table, $id)
+    {
+        return DB::table($table)->where($id)->where('category', 1)->get();
+    }
+
     public function getDataByCondition($table, $where)
     {
         return DB::table($table)->where($where)->get();
