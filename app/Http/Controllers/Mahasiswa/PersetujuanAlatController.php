@@ -55,13 +55,15 @@ class PersetujuanAlatController extends controller
 
     public function show($id)
     {
-        $data['title']                    = 'Persetujuan Peminjaman Alat';
-        $data['detailSubmissions']        = $this->persetujuanAlatService->joinDetailSubmissions($this->table, $id);
-        $data['chairman']                 = User::where('id', $data['detailSubmissions']->chairman)->first();
-        $data['chairman_of_the_commitee'] = User::where('id', $data['detailSubmissions']->chairman_of_the_commitee)->first();
-        $createdAt                        = explode("-", date('D-d-M-Y', strtotime($data['detailSubmissions']->created_at)));
-        $startActivity                    = explode("-", date('D-d-M-Y', strtotime($data['detailSubmissions']->date_start)));
-        $endActivity                      = explode("-", date('D-d-M-Y', strtotime($data['detailSubmissions']->date_end)));
+        $data['title']                      = 'Persetujuan Peminjaman Alat';
+        $data['detailSubmissions']          = $this->persetujuanAlatService->joinDetailSubmissions($this->table, $id);
+        $data['chairman']                   = User::where('id', $data['detailSubmissions']->chairman)->first();
+        $data['chairman_of_the_commitee']   = User::where('id', $data['detailSubmissions']->chairman_of_the_commitee)->first();
+        $createdAt                          = explode("-", date('D-d-M-Y', strtotime($data['detailSubmissions']->created_at)));
+        $startActivity                      = explode("-", date('D-d-M-Y', strtotime($data['detailSubmissions']->date_start)));
+        $endActivity                        = explode("-", date('D-d-M-Y', strtotime($data['detailSubmissions']->date_end)));
+        $data['bem']                        = User::where('role', 2)->first();
+        $data['akademik']                   = User::where('role', 4)->first();
 
         $getMonthCreatedAt      = null;
         $getdayStartActivity    = null;
@@ -111,40 +113,6 @@ class PersetujuanAlatController extends controller
         $data['endMonthActivity']     = $getMonthEndActivity;
         $data['endYearActivity']      = $endActivity[3];
 
-
-        //created nomor surat
-        // $referenceNumber = Submission::max('referenceNumber');
-        // $letterMonth = date('m');
-
-        // if ($letterMonth == '01') {
-        //     $letterMonth = "I";
-        // } elseif ($letterMonth == '02') {
-        //     $letterMonth = "II";
-        // } elseif ($letterMonth == '03') {
-        //     $letterMonth = "III";
-        // } elseif ($letterMonth == '04') {
-        //     $letterMonth = "IV";
-        // } elseif ($letterMonth == '05') {
-        //     $letterMonth = "V";
-        // } elseif ($letterMonth == '06') {
-        //     $letterMonth = "VI";
-        // } elseif ($letterMonth == '07') {
-        //     $letterMonth = "VII";
-        // } elseif ($letterMonth == '08') {
-        //     $letterMonth = "VIII";
-        // } elseif ($letterMonth == '09') {
-        //     $letterMonth = "IX";
-        // } elseif ($letterMonth == '10') {
-        //     $letterMonth = "X";
-        // } elseif ($letterMonth == '11') {
-        //     $letterMonth = "XI";
-        // } elseif ($letterMonth == '12') {
-        //     $letterMonth = "XII";
-        // }
-
-        // $number =  substr($referenceNumber, 0, 3);
-        // $data['referenceNumber']   = ((int)$number + 1 . '/' . $data['detailSubmissions']->name . '/BEM.ITBSTIKOM' . '/' . $letterMonth . '/' . date("Y"));
-        // dd($data);
         return view('mahasiswa_templates.pages.persetujuan.alat.detailPersetujuan', $data);
     }
 }
