@@ -8,6 +8,10 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Bem\DashboardController as BemDashboardController;
 use App\Http\Controllers\Bem\MahasiswaController as BemMahasiswaController;
 use App\Http\Controllers\Bem\OrganisasiMahasiswaController as BemOrganisasiMahasiswaController;
+use App\Http\Controllers\Kemahasiswaan\DashboardController as KemahasiswaanDashboardController;
+use App\Http\Controllers\Kemahasiswaan\FasilitasController as KemahasiswaanFasilitasController;
+use App\Http\Controllers\Kemahasiswaan\MahasiswaController as KemahasiswaanMahasiswaController;
+use App\Http\Controllers\Kemahasiswaan\OrganisasiMahasiswaController as KemahasiswaanOrganisasiMahasiswaController;
 use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboardController;
 use App\Http\Controllers\Mahasiswa\MahasiswaController as MahasiswaMahasiswaController;
 use App\Http\Controllers\Mahasiswa\OrganisasiMahasiswaController as MahasiswaOrganisasiMahasiswaController;
@@ -153,6 +157,29 @@ Route::group(['middleware' => ['CheckLogin:4']], function () {
             Route::post('update/{id}', [AkademikFasilitasController::class, 'update']);
             Route::post('fasilitas-update/{id}', [AkademikFasilitasController::class, 'update_tool']);
             Route::get('softdelete/{id}', [AkademikFasilitasController::class, 'softDelete']);
+        });
+    });
+});
+
+Route::group(['middleware' => ['CheckLogin:5']], function () {
+    Route::group(['prefix' => 'kemahasiswaan'], function () {
+        Route::get('dashboard', [KemahasiswaanDashboardController::class, 'index']);
+
+        Route::group(['prefix' => 'organisasi-mahasiswa'], function () {
+            Route::get('/', [KemahasiswaanOrganisasiMahasiswaController::class, 'index']);
+            Route::post('save', [KemahasiswaanOrganisasiMahasiswaController::class, 'store']);
+            Route::get('edit/{id}', [KemahasiswaanOrganisasiMahasiswaController::class, 'edit']);
+            Route::post('update/{id}', [KemahasiswaanOrganisasiMahasiswaController::class, 'update']);
+            Route::get('softdelete/{id}', [KemahasiswaanOrganisasiMahasiswaController::class, 'softDelete']);
+        });
+
+        Route::group(['prefix' => 'mahasiswa'], function () {
+            Route::get('/', [KemahasiswaanMahasiswaController::class, 'index']);
+            Route::get('detail/{id}', [KemahasiswaanMahasiswaController::class, 'show']);
+        });
+        Route::group(['prefix' => 'fasilitas'], function () {
+            Route::get('/', [KemahasiswaanFasilitasController::class, 'index']);
+            Route::get('detail/{id}', [KemahasiswaanFasilitasController::class, 'show']);
         });
     });
 });

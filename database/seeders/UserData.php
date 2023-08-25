@@ -45,6 +45,16 @@ class UserData extends Seeder
                 'role'                      => 4,
                 'created_by'                => 'admin@mailinator.com',
                 'updated_by'                => 'admin@mailinator.com'
+            ],
+            [
+                'name'                      => 'I G.N. Wikranta Arsa, S.Kom., M.Csd',
+                'telephone'                 => '14045',
+                'email'                     => 'koor_kemahasiswaan@mailinator.com',
+                'category'                  => 'Koor. Bagian Kemahasiswaan',
+                'password'                  => bcrypt('password'),
+                'role'                      => 5,
+                'created_by'                => 'admin@mailinator.com',
+                'updated_by'                => 'admin@mailinator.com'
             ]
         ];
         foreach ($users as $user)

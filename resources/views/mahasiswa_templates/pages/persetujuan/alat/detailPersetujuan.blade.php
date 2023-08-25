@@ -208,12 +208,12 @@
                     <div class="col-4">Ketua BEM</div>
                 </div>
                 <div class="row text-center mt-3 mb-3">
+                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $akademik->signature) }}" width="50"
+                            height="50" alt="logo-ukm" /></div>
                     <div class="col-4"><img src="{{ asset('logo_ukm/' . $chairman_of_the_commitee->signature) }}"
                             width="50" height="50" alt="logo-ukm" /></div>
-                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $chairman_of_the_commitee->signature) }}"
-                            width="50" height="50" alt="logo-ukm" /></div>
-                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $chairman_of_the_commitee->signature) }}"
-                            width="50" height="50" alt="logo-ukm" /></div>
+                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $bem->signature) }}" width="50"
+                            height="50" alt="logo-ukm" /></div>
                 </div>
                 <div class="row text-center mt-3 mb-3">
                     <div class="col-4">{{ $akademik->name }}</div>

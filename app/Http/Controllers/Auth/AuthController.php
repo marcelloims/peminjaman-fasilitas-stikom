@@ -48,6 +48,8 @@ class AuthController extends Controller
                 return redirect()->intended('mahasiswa/dashboard');
             } elseif ($user->role == 4) {
                 return redirect()->intended('akademik_kemahasiswaan/dashboard');
+            } elseif ($user->role == 5) {
+                return redirect()->intended('kemahasiswaan/dashboard');
             }
         }
 
