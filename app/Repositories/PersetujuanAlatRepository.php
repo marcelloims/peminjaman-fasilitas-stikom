@@ -28,4 +28,16 @@ class PersetujuanAlatRepository extends BaseRepository
             )
             ->first();
     }
+
+    public function joinDetailSubmissionsAndTools($id)
+    {
+        return DB::table('submissions')
+            ->join('detail_submissions', 'submissions.id', '=', 'detail_submissions.submissions_id')
+            ->join('tools', 'detail_submissions.tools_id', '=', 'tools.id')
+            ->where('submissions.id', $id)
+            ->select(
+                'tools.name',
+                'detail_submissions.qty'
+            )->get();
+    }
 }

@@ -1,36 +1,3 @@
-{{-- @extends('mahasiswa_templates.index')
-@section('container')
-    @if ($errors->all())
-        <div class="alert alert-danger solid alert-dismissible fade show">
-            <svg viewBox="0 0 24 24" width="24 " height="24" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" class="mr-2">
-                <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2">
-                </polygon>
-                <line x1="15" y1="9" x2="9" y2="15"></line>
-                <line x1="9" y1="9" x2="15" y2="15"></line>
-            </svg>
-            <strong>Kesalahan!</strong> Data data tidak valid! Silahkan liat form pengisian.
-            <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i
-                        class="mdi mdi-close"></i></span>
-            </button>
-        </div>
-    @endif
-    @if ($message = Session::get('message'))
-        <div class="sweetalert sweet-success" id="flash-data" data-flashdata="{{ $message }}">
-        </div>
-    @endif
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Data {{ $title }}</h4>
-                </div>
-
-            </div>
-        </div>
-    </div>
-@endsection --}}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,25 +9,22 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <table align="center">
-                    <tr>
-                        <td>
-                            <img src="{{ asset('logo_ukm/logo-stikom.png') }}" width="100" height="100"
-                                alt="logo-stikom" class="mr-6" />
-                        </td>
-                        <td align="center" class="mt-2">
-                            <h2>INSTITUT TEKNOLOGI DAN BISNIS</h2>
-                            <h1>(ITB) STIKOM BALI</h1>
-                            <h1>{{ $detailSubmissions->name }}</h1>
-
-                        </td>
-                        <td>
-                            <img src="{{ asset('logo_ukm/' . $detailSubmissions->logoSubmissions) }}" align='right'
-                                class="ml-3" width="100" height="100" alt="logo-ukm" />
-                        </td>
-                    </tr>
-                </table>
-                <hr>
+                <div class="row">
+                    <div class="col-2">
+                        <img src="{{ asset('logo_ukm/logo-stikom.png') }}" width="150" height="150" alt="logo-stikom"
+                            class="mr-6" />
+                    </div>
+                    <div class="col-8 text-center">
+                        <h2>INSTITUT TEKNOLOGI DAN BISNIS</h2>
+                        <h1>(ITB) STIKOM BALI</h1>
+                        <h1>{{ $detailSubmissions->name }}</h1>
+                    </div>
+                    <div class="col-2">
+                        <img src="{{ asset('logo_ukm/' . $detailSubmissions->logoSubmissions) }}" align='right'
+                            class="ml-3" width="150" height="150" alt="logo-ukm" />
+                    </div>
+                </div>
+                <hr style="border: 4px solid rgb(165, 165, 165);">
                 <div class="row">
                     <div class="col-12" align='right'>
                         <h4 style="font-size:18px">Denpasar, {{ $dateCreatedAt }}
@@ -77,7 +41,7 @@
                 </div>
                 <div class="row">
                     <div class="col-8 mt-1">
-                        <h4 style="font-size:18px  line-height:5px">Lampiran &nbsp;&nbsp;&nbsp;: ... Lembar
+                        <h4 style="font-size:18px  line-height:5px">Lampiran &nbsp;&nbsp;&nbsp;: 1 Lembar
                         </h4>
                     </div>
                 </div>
@@ -161,7 +125,7 @@
                     </div>
                 </div>
                 <div class="row" align="center">
-                    <div class="col-12 mt-3">
+                    <div class="col-12 mt-1">
                         <h6>Panitia Pelaksana</h6>
                         <h4>"{{ $detailSubmissions->name_of_activity }}"</h4>
                         <h4>ITB STIKOM Bali</h4>
@@ -178,7 +142,7 @@
                     <div class="col-4"></div>
                     <div class="col-4">{{ $chairman_of_the_commitee->category }}</div>
                 </div>
-                <div class="row text-center mt-3 mb-3">
+                <div class="row text-center">
                     <div class="col-4"><img src="{{ asset('logo_ukm/' . $chairman_of_the_commitee->signature) }}"
                             width="50" height="50" alt="logo-ukm" /></div>
                     <div class="col-4"></div>
@@ -191,7 +155,7 @@
                     <div class="col-4">{{ $chairman_of_the_commitee->name }}</div>
                 </div>
                 <div class="row text-center">
-                    <div class="col-12 mt-5 mb-5">
+                    <div class="col-12">
                         <h6>Diketahui Oleh,</h6>
                     </div>
                 </div>
@@ -210,18 +174,18 @@
                 <div class="row text-center mt-3 mb-3">
                     <div class="col-4"><img src="{{ asset('logo_ukm/' . $akademik->signature) }}" width="50"
                             height="50" alt="logo-ukm" /></div>
-                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $chairman_of_the_commitee->signature) }}"
-                            width="50" height="50" alt="logo-ukm" /></div>
+                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $kemahasiswaan->signature) }}" width="50"
+                            height="50" alt="logo-ukm" /></div>
                     <div class="col-4"><img src="{{ asset('logo_ukm/' . $bem->signature) }}" width="50"
                             height="50" alt="logo-ukm" /></div>
                 </div>
                 <div class="row text-center mt-3 mb-3">
                     <div class="col-4">{{ $akademik->name }}</div>
-                    <div class="col-4">I G.N. Wikranta Arsa, S.Kom., M.Csd</div>
+                    <div class="col-4">{{ $kemahasiswaan->name }}</div>
                     <div class="col-4">{{ $bem->name }}</div>
                 </div>
                 <div class="row" align="left">
-                    <div class="col-12 mt-3">
+                    <div class="col-12">
                         <ol>
                             <li>1. Direktur Sumber Daya ITB STIKOM Bali</li>
                             <li>2. Bagian Sarana dan Prasarana ITB STIKOM Bali</li>
@@ -229,7 +193,58 @@
                         </ol>
                     </div>
                 </div>
-                <hr>
+                <hr style="border: 2px solid rgb(165, 165, 165);">
+                <div class="row" align='center'>
+                    <div class="col-12">
+                        <h5>
+                            Kampus I : Jl. Raya Puputan No. 86 Renon, Denpasar – Bali Telp. (0361)244445(Hunting) Fax.
+                            (0361)264773
+                        </h5>
+                        <h5 class="mt-2">http://www.stikom-bali.ac.id Email : info@stikom-bali.ac.id</h5>
+                        <h5 class="mt-2">{{ $chairman_of_the_commitee->category }} :
+                            {{ $chairman_of_the_commitee->name }}
+                            ({{ $chairman_of_the_commitee->telephone }})
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="{{ asset('logo_ukm/logo-stikom.png') }}" width="150" height="150"
+                            alt="logo-stikom" class="mr-6" />
+                    </div>
+                    <div class="col-8 text-center">
+                        <h2>INSTITUT TEKNOLOGI DAN BISNIS</h2>
+                        <h1>(ITB) STIKOM BALI</h1>
+                        <h1>{{ $detailSubmissions->name }}</h1>
+                    </div>
+                    <div class="col-2">
+                        <img src="{{ asset('logo_ukm/' . $detailSubmissions->logoSubmissions) }}" align='right'
+                            class="ml-3" width="150" height="150" alt="logo-ukm" />
+                    </div>
+                </div>
+                <hr style="border: 4px solid rgb(165, 165, 165);">
+                <div class="row text-black" style="height:1200px;">
+                    <div class="col-12 ml-4">
+                        Daftar Alat:
+                        <div class="col-12 ml-5">
+                            <table>
+                                @foreach ($tools as $item)
+                                    <tr>
+                                        <td width="20px">{{ $loop->iteration }}.</td>
+                                        <td width="150px">{{ $item->name }}</td>
+                                        <td width="20px">:</td>
+                                        <td>{{ $item->qty }} buah</td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border: 2px solid rgb(165, 165, 165);">
                 <div class="row" align='center'>
                     <div class="col-12">
                         <h5>

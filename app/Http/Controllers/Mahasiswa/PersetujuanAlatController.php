@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\DetailSubmissions;
-use App\Models\Submission;
 use App\Models\User;
 use App\Services\PersetujuanAlatService;
 use Illuminate\Http\Request;
@@ -57,6 +56,7 @@ class PersetujuanAlatController extends controller
     {
         $data['title']                      = 'Persetujuan Peminjaman Alat';
         $data['detailSubmissions']          = $this->persetujuanAlatService->joinDetailSubmissions($this->table, $id);
+        $data['tools']                      = $this->persetujuanAlatService->joinDetailSubmissionsAndTools($id);
         $data['chairman']                   = User::where('id', $data['detailSubmissions']->chairman)->first();
         $data['chairman_of_the_commitee']   = User::where('id', $data['detailSubmissions']->chairman_of_the_commitee)->first();
         $createdAt                          = explode("-", date('D-d-M-Y', strtotime($data['detailSubmissions']->created_at)));
@@ -64,6 +64,7 @@ class PersetujuanAlatController extends controller
         $endActivity                        = explode("-", date('D-d-M-Y', strtotime($data['detailSubmissions']->date_end)));
         $data['bem']                        = User::where('role', 2)->first();
         $data['akademik']                   = User::where('role', 4)->first();
+        $data['kemahasiswaan']              = User::where('role', 5)->first();
 
         $getMonthCreatedAt      = null;
         $getdayStartActivity    = null;

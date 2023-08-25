@@ -24,4 +24,9 @@ class PersetujuanAlatService
     {
         return $this->persetujuanAlatRepository->joinDetailSubmissions($table, $id);
     }
+
+    public function joinDetailSubmissionsAndTools($id)
+    {
+        return $this->persetujuanAlatRepository->joinDetailSubmissionsAndTools($id);
+    }
 }
