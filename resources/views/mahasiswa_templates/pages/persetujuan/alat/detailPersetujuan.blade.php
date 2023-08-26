@@ -5,7 +5,7 @@
     @include('mahasiswa_templates.header')
 </head>
 
-<body>
+<body style="color: #000000 !important; font-family: 'Times New Roman', Times, serif">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -15,9 +15,9 @@
                             class="mr-6" />
                     </div>
                     <div class="col-8 text-center">
-                        <h2>INSTITUT TEKNOLOGI DAN BISNIS</h2>
-                        <h1>(ITB) STIKOM BALI</h1>
-                        <h1>{{ $detailSubmissions->name }}</h1>
+                        <p style="font-size: 30px; font-weight: bold; height:30px">INSTITUT TEKNOLOGI DAN BISNIS</p>
+                        <p style="font-size: 30px; font-weight: bold; height:30px">(ITB) STIKOM BALI</p>
+                        <p style="font-size: 30px; font-weight: bold; height:30px">{{ $detailSubmissions->name }}</p>
                     </div>
                     <div class="col-2">
                         <img src="{{ asset('logo_ukm/' . $detailSubmissions->logoSubmissions) }}" align='right'
@@ -27,55 +27,65 @@
                 <hr style="border: 4px solid rgb(165, 165, 165);">
                 <div class="row">
                     <div class="col-12" align='right'>
-                        <h4 style="font-size:18px">Denpasar, {{ $dateCreatedAt }}
-                        </h4>
+                        <p style="height:15px">Denpasar, {{ $dateCreatedAt }}
+                        </p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8">
-                        <h4 style="font-size:18px line-height:5px;">Nomor
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-
-                        </h4>
+                    <div class="col-1">
+                        <p style="height:15px">Nomor</p>
+                    </div>
+                    <p style="height:15px">:</p>
+                    <div class="col-10 float-left">
+                        <p style="height:15px">{{ $detailSubmissions->code }}</p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8 mt-1">
-                        <h4 style="font-size:18px  line-height:5px">Lampiran &nbsp;&nbsp;&nbsp;: 1 Lembar
-                        </h4>
+                    <div class="col-1">
+                        <p style="height:15px">Lampiran</p>
+                    </div>
+                    <p style="height:15px">:</p>
+                    <div class="col-10 float-left">
+                        <p style="height:15px">1 Lembar</p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8 mt-1">
-                        <h4 style="font-size:18px line-height:5px; ">Perihal
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-                            <u>Peminjaman Alat</u>
-                        </h4>
+                    <div class="col-1">
+                        <p style="height:15px">Perihal</p>
+                    </div>
+                    <p style="height:15px">:</p>
+                    <div class="col-10 float-left">
+                        <p style="height:15px"><u>Peminjaman Alat</u></p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-8 mt-5">
-                        <h4 style="font-size:18px; ">Yth.</h4>
-                        <h4 style="font-size:18px;">Wakil Rektor II ITB STIKOM Bali</h4>
-                        <h4><u>Dr. Ni Luh Sri Putrinadi, S.E., MM.Kom</u></h4>
-                        <h4>Di tempat</h4>
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <p style="height:5px">Yth.</p>
+                        <strong>
+                            <p style="height:5px">Wakil Rektor II ITB STIKOM Bali</p>
+                            <p style="height:5px"><u>Dr. Ni Luh Sri Putrinadi, S.E., MM.Kom</u></p>
+                        </strong>
+                        <p style="height:5px">Di tempat</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 mt-5">
-                        <h4 style="font-size:18px; ">Dengan hormat,</h4>
-                        <p class="text-justify">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dalam
-                            rangka melaksanakan Program Kerja
-                            {{ $detailSubmissions->name }} ITB STIKOM Bali
-                            periode 2023,
-                            maka kami akan mengadakan kegiatan Nama Kegiatan ITB STIKOM Bali dengan tema
-                            @if ($startDayActivity == $endDayActivity)
-                                “{{ $detailSubmissions->theme }}” yang akan dilaksakan pada:
+                        <p style="height:15px">Dengan hormat,</p>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <p class="text-justify" style="height:15px;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dalam
+                            rangka
+                            melaksanakan Program Kerja
+                            {{ $detailSubmissions->name }}
+                            ITB STIKOM Bali periode 2023, maka kami akan mengadakan kegiatan
+                            <strong>{{ $detailSubmissions->name_of_activity }}</strong> ITB STIKOM
+                            Bali
+                            dengan tema <strong>“{{ $detailSubmissions->theme }}”</strong> yang akan
+                            dilaksakan pada: @if ($startDayActivity == $endDayActivity)
                                 {{ $endDayActivity }}, {{ $endDateActivity }} {{ $endMonthActivity }}
                                 {{ $endYearActivity }}
                             @else
-                                “{{ $detailSubmissions->theme }}” yang akan dilaksakan pada:
                                 &nbsp; {{ $startDayActivity }} - {{ $endDayActivity }} ,
                                 {{ $startDateActivity }} - {{ $endDateActivity }} {{ $endMonthActivity }}
                                 {{ $endYearActivity }}
@@ -84,18 +94,18 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 mt-2">
-                        <p class="text-justify">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sehubung
-                            dengan itu, maka kami mohon peminjaman alat
-                            (Terlampir) untuk tujuan peminjaman kegiatan tersebut pada:
+                    <div class="col-12 mt-5">
+                        <p class="text-justify" style="height:15px;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sehubung
+                            dengan itu, maka kami mohon peminjaman alat (Terlampir) untuk tujuan
+                            peminjaman kegiatan tersebut pada:
                         </p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
-                        <p class="text-justify ml-5">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hari,
+                    <div class="col-12 mt-3">
+                        <p class="text-justify" style="height:15px;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hari,
                             tanggal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: @if ($startDayActivity == $endDayActivity)
                                 {{ $endDayActivity }}, {{ $endDateActivity }} {{ $endMonthActivity }}
                                 {{ $endYearActivity }}
@@ -106,15 +116,15 @@
                             @endif
                             <br />
                         </p>
-                        <p class="text-justify ml-5">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waktu
+                        <p class="text-justify ml-5" style="height:15px;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waktu
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
                             {{ date('H:i', strtotime($detailSubmissions->date_start)) }} -
                             {{ date('H:i', strtotime($detailSubmissions->date_end)) }} WITA
                         </p>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                     <div class="col-12">
                         <p class="text-justify ml-2">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -124,12 +134,14 @@
                         </p>
                     </div>
                 </div>
-                <div class="row" align="center">
-                    <div class="col-12 mt-1">
-                        <h6>Panitia Pelaksana</h6>
-                        <h4>"{{ $detailSubmissions->name_of_activity }}"</h4>
-                        <h4>ITB STIKOM Bali</h4>
-                        <h4>{{ $endYearActivity }}</h4>
+                <div class="row mt-1">
+                    <div class="col-12 text-center">
+                        <p style="height:5px;">Panitia Pelaksana</p>
+                        <strong>
+                            <p style="height:5px;">"{{ $detailSubmissions->name_of_activity }}"</p>
+                            <p style="height:5px;">ITB STIKOM Bali</p>
+                            <p style="height:5px;">{{ $endYearActivity }}</p>
+                        </strong>
                     </div>
                 </div>
                 <div class="row text-center">
@@ -144,10 +156,10 @@
                 </div>
                 <div class="row text-center">
                     <div class="col-4"><img src="{{ asset('logo_ukm/' . $chairman_of_the_commitee->signature) }}"
-                            width="50" height="50" alt="logo-ukm" /></div>
+                            width="100" height="100" alt="logo-ukm" /></div>
                     <div class="col-4"></div>
                     <div class="col-4"><img src="{{ asset('logo_ukm/' . $chairman_of_the_commitee->signature) }}"
-                            width="50" height="50" alt="logo-ukm" /></div>
+                            width="100" height="100" alt="logo-ukm" /></div>
                 </div>
                 <div class="row text-center">
                     <div class="col-4">{{ $chairman->name }}</div>
@@ -172,12 +184,12 @@
                     <div class="col-4">Ketua BEM</div>
                 </div>
                 <div class="row text-center mt-3 mb-3">
-                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $akademik->signature) }}" width="50"
-                            height="50" alt="logo-ukm" /></div>
-                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $kemahasiswaan->signature) }}" width="50"
-                            height="50" alt="logo-ukm" /></div>
-                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $bem->signature) }}" width="50"
-                            height="50" alt="logo-ukm" /></div>
+                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $akademik->signature) }}" width="100"
+                            height="100" alt="logo-ukm" /></div>
+                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $kemahasiswaan->signature) }}"
+                            width="100" height="100" alt="logo-ukm" /></div>
+                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $bem->signature) }}" width="100"
+                            height="100" alt="logo-ukm" /></div>
                 </div>
                 <div class="row text-center mt-3 mb-3">
                     <div class="col-4">{{ $akademik->name }}</div>
@@ -196,15 +208,16 @@
                 <hr style="border: 2px solid rgb(165, 165, 165);">
                 <div class="row" align='center'>
                     <div class="col-12">
-                        <h5>
+                        <p style="height: 5px;">
                             Kampus I : Jl. Raya Puputan No. 86 Renon, Denpasar – Bali Telp. (0361)244445(Hunting) Fax.
                             (0361)264773
-                        </h5>
-                        <h5 class="mt-2">http://www.stikom-bali.ac.id Email : info@stikom-bali.ac.id</h5>
-                        <h5 class="mt-2">{{ $chairman_of_the_commitee->category }} :
+                        </p>
+                        <p style="height: 5px; color: #65c9f4;" class="mt-2">http://www.stikom-bali.ac.id Email :
+                            info@stikom-bali.ac.id</p>
+                        <p style="height: 5px;" class="mt-2">{{ $chairman_of_the_commitee->category }} :
                             {{ $chairman_of_the_commitee->name }}
                             ({{ $chairman_of_the_commitee->telephone }})
-                        </h5>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -217,9 +230,9 @@
                             alt="logo-stikom" class="mr-6" />
                     </div>
                     <div class="col-8 text-center">
-                        <h2>INSTITUT TEKNOLOGI DAN BISNIS</h2>
-                        <h1>(ITB) STIKOM BALI</h1>
-                        <h1>{{ $detailSubmissions->name }}</h1>
+                        <p style="font-size: 30px; font-weight: bold; height:30px">INSTITUT TEKNOLOGI DAN BISNIS</p>
+                        <p style="font-size: 30px; font-weight: bold; height:30px">(ITB) STIKOM BALI</p>
+                        <p style="font-size: 30px; font-weight: bold; height:30px">{{ $detailSubmissions->name }}</p>
                     </div>
                     <div class="col-2">
                         <img src="{{ asset('logo_ukm/' . $detailSubmissions->logoSubmissions) }}" align='right'
@@ -247,20 +260,24 @@
                 <hr style="border: 2px solid rgb(165, 165, 165);">
                 <div class="row" align='center'>
                     <div class="col-12">
-                        <h5>
+                        <p style="height: 5px;">
                             Kampus I : Jl. Raya Puputan No. 86 Renon, Denpasar – Bali Telp. (0361)244445(Hunting) Fax.
                             (0361)264773
-                        </h5>
-                        <h5 class="mt-2">http://www.stikom-bali.ac.id Email : info@stikom-bali.ac.id</h5>
-                        <h5 class="mt-2">{{ $chairman_of_the_commitee->category }} :
+                        </p>
+                        <p style="height: 5px; color: #65c9f4;" class="mt-2">http://www.stikom-bali.ac.id Email :
+                            info@stikom-bali.ac.id</p>
+                        <p style="height: 5px;" class="mt-2">{{ $chairman_of_the_commitee->category }} :
                             {{ $chairman_of_the_commitee->name }}
                             ({{ $chairman_of_the_commitee->telephone }})
-                        </h5>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        // window.print()
+    </script>
 </body>
 
 </html>

@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Submission;
+use App\Models\User;
 use App\Repositories\PengajuanAlatRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +66,40 @@ class PengajuanAlatService
             ]
         );
 
+        $submissionId   = Submission::max('id') + 1;
+        $userUKM        = User::join('student_organizations', 'users.student_organizations_id', '=', 'student_organizations.id')
+            ->where('users.id', Auth::user()->id)
+            ->select('student_organizations.name')
+            ->first();
+
+        $dateNow = explode("-", date('M-Y'));
+        $month = [
+            'Jan' => 'I',
+            'Feb' => 'II',
+            'Mar' => 'II',
+            'Apr' => 'IV',
+            'May' => 'V',
+            'Jun' => 'VI',
+            'Jul' => 'VII',
+            'Aug' => 'VIII',
+            'Sep' => 'IX',
+            'Oct' => 'X',
+            'Nov' => 'XI',
+            'Dec' => 'XII'
+        ];
+
+        $getMonthRoman = null;
+
+        foreach ($month as $key => $value) {
+            if ($key == $dateNow[0]) {
+                $getMonthRoman = $value;
+            }
+        }
+
+        $code = $submissionId . "/" . $userUKM->name . "/" . "BEM ITBSTIKOM Bali" . "/" . $getMonthRoman . "/" . $dateNow[1];
+
         $submission = [
+            'code'                      => $code,
             'users_id'                  => Auth::user()->id,
             'student_organizations_id'  => Auth::user()->student_organizations_id,
             'chairman'                  => $request->ketua_umum,
@@ -77,6 +112,9 @@ class PengajuanAlatService
             'date_start'                => date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " " . $request->jam_mulai,
             'date_end'                  => date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " " . $request->jam_selesai,
             'category'                  => 1,
+            'assign_2'                  => null,
+            'assign_4'                  => null,
+            'assign_5'                  => null,
             'status'                    => 'Tertunda',
             'created_by'                => Auth::user()->email,
             'updated_by'                => Auth::user()->email,
