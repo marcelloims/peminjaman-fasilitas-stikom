@@ -29,6 +29,11 @@ class PersetujuanAlatRepository extends BaseRepository
             ->first();
     }
 
+    public function joinDetailSubmissionsGetData($table)
+    {
+        return DB::table($table)->get();
+    }
+
     public function joinDetailSubmissionsAndTools($id)
     {
         return DB::table('submissions')
