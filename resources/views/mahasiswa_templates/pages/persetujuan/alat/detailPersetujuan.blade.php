@@ -166,9 +166,9 @@
                     <div class="col-4"></div>
                     <div class="col-4">{{ $chairman_of_the_commitee->name }}</div>
                 </div>
-                <div class="row text-center">
+                <div class="row text-center mt-1">
                     <div class="col-12">
-                        <h6>Diketahui Oleh,</h6>
+                        <p>Diketahui Oleh,</p>
                     </div>
                 </div>
                 <div class="row text-center">
