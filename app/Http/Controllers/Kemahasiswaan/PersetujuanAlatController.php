@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Bem;
+namespace App\Http\Controllers\Kemahasiswaan;
 
 use App\Http\Controllers\Controller;
 use App\Models\Submission;
@@ -48,8 +48,7 @@ class PersetujuanAlatController extends controller
         $data['title']          = 'Persetujuan Peminjaman Alat';
         $data['submissions']    = $this->persetujuanAlatService->joinDetailSubmissionsGetData($this->table);
 
-        // dd($data);
-        return view('bem_templates.pages.persetujuan.alat.index', $data);
+        return view('kemahasiswaan_templates.pages.persetujuan.alat.index', $data);
     }
 
     public function show($id)
@@ -114,20 +113,20 @@ class PersetujuanAlatController extends controller
         $data['endMonthActivity']     = $getMonthEndActivity;
         $data['endYearActivity']      = $endActivity[3];
 
-        return view('bem_templates.pages.persetujuan.alat.detailPersetujuan', $data);
+        return view('kemahasiswaan_templates.pages.persetujuan.alat.detailPersetujuan', $data);
     }
 
     public function approve($id)
     {
-        Submission::where('id', $id)->update(['assign_2' => 'Disetujui']);
+        Submission::where('id', $id)->update(['assign_5' => 'Disetujui']);
 
-        return redirect('bem/persetujuan/alat')->with('message', 'Telah disetujui');
+        return redirect('kemahasiswaan/persetujuan/alat')->with('message', 'Telah disetujui');
     }
 
     public function reject($id)
     {
-        Submission::where('id', $id)->update(['assign_2' => 'Ditolak']);
+        Submission::where('id', $id)->update(['assign_5' => 'Ditolak']);
 
-        return redirect('bem/persetujuan/alat')->with('message', 'Telah ditolak');
+        return redirect('kemahasiswaan/persetujuan/alat')->with('message', 'Telah ditolak');
     }
 }

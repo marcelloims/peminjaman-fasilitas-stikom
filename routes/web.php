@@ -13,6 +13,7 @@ use App\Http\Controllers\Kemahasiswaan\DashboardController as KemahasiswaanDashb
 use App\Http\Controllers\Kemahasiswaan\FasilitasController as KemahasiswaanFasilitasController;
 use App\Http\Controllers\Kemahasiswaan\MahasiswaController as KemahasiswaanMahasiswaController;
 use App\Http\Controllers\Kemahasiswaan\OrganisasiMahasiswaController as KemahasiswaanOrganisasiMahasiswaController;
+use App\Http\Controllers\Kemahasiswaan\PersetujuanAlatController as KemahasiswaanPersetujuanAlatController;
 use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboardController;
 use App\Http\Controllers\Mahasiswa\MahasiswaController as MahasiswaMahasiswaController;
 use App\Http\Controllers\Mahasiswa\OrganisasiMahasiswaController as MahasiswaOrganisasiMahasiswaController;
@@ -168,6 +169,15 @@ Route::group(['middleware' => ['CheckLogin:4']], function () {
             Route::post('fasilitas-update/{id}', [AkademikFasilitasController::class, 'update_tool']);
             Route::get('softdelete/{id}', [AkademikFasilitasController::class, 'softDelete']);
         });
+
+        Route::group(['prefix' => 'persetujuan'], function () {
+            Route::group(['prefix' => 'alat'], function () {
+                Route::get('/', [::class, 'index']);
+                Route::get('/detail/{id}', [::class, 'show']);
+                Route::get('/approve/{id}', [::class, 'approve']);
+                Route::get('/reject/{id}', [::class, 'reject']);
+            });
+        });
     });
 });
 
@@ -190,6 +200,15 @@ Route::group(['middleware' => ['CheckLogin:5']], function () {
         Route::group(['prefix' => 'fasilitas'], function () {
             Route::get('/', [KemahasiswaanFasilitasController::class, 'index']);
             Route::get('detail/{id}', [KemahasiswaanFasilitasController::class, 'show']);
+        });
+
+        Route::group(['prefix' => 'persetujuan'], function () {
+            Route::group(['prefix' => 'alat'], function () {
+                Route::get('/', [KemahasiswaanPersetujuanAlatController::class, 'index']);
+                Route::get('/detail/{id}', [KemahasiswaanPersetujuanAlatController::class, 'show']);
+                Route::get('/approve/{id}', [KemahasiswaanPersetujuanAlatController::class, 'approve']);
+                Route::get('/reject/{id}', [KemahasiswaanPersetujuanAlatController::class, 'reject']);
+            });
         });
     });
 });
