@@ -1,4 +1,4 @@
-@extends('kemahasiswaan_templates.index')
+@extends('akademik_kemahasiswaan_templates.index')
 @section('container')
     @if ($errors->all())
         <div class="alert alert-danger solid alert-dismissible fade show">
@@ -49,21 +49,21 @@
                                         <td align="center">{{ date('d F Y H:i:s', strtotime($submission->created_at)) }}
                                         </td>
                                         <td align="center">
-                                            @if (!$submission->assign_5 && $submission->assign_2 == 'Disetujui')
+                                            @if ($submission->assign_5 == 'Disetujui' && $submission->assign_2 == 'Disetujui' && !$submission->assign_4)
                                                 <span class="badge light badge-secondary">Tertunda</span></span>
-                                            @elseif ($submission->assign_5 == 'Disetujui')
-                                                <span class="badge light badge-success">{{ $submission->assign_5 }}</span>
+                                            @elseif ($submission->assign_4 != 'Ditolak')
+                                                <span class="badge light badge-success">{{ $submission->status }}</span>
                                             @elseif ($submission->status == 'Ditolak')
                                                 <span class="badge light badge-danger">{{ $submission->status }}</span>
                                             @endif
                                         </td>
                                         <td align="center">
-                                            <a href="{{ url('kemahasiswaan/persetujuan/alat/detail/' . $submission->id) }}"
+                                            <a href="{{ url('akademik_kemahasiswaan/persetujuan/alat/detail/' . $submission->id) }}"
                                                 class="btn btn-sm btn-info mt-1"><i class="flaticon-381-list"></i></a>
-                                            @if (!$submission->assign_5 && $submission->assign_2 == 'Disetujui')
-                                                <a href="{{ url('kemahasiswaan/persetujuan/alat/approve/' . $submission->id) }}"
+                                            @if (!$submission->assign_4 && $submission->assign_2 == 'Disetujui' && $submission->assign_5 == 'Disetujui')
+                                                <a href="{{ url('akademik_kemahasiswaan/persetujuan/alat/approve/' . $submission->id) }}"
                                                     class="btn btn-sm btn-success mt-1">Setujuh</a>
-                                                <a href="{{ url('kemahasiswaan/persetujuan/alat/reject/' . $submission->id) }}"
+                                                <a href="{{ url('akademik_kemahasiswaan/persetujuan/alat/reject/' . $submission->id) }}"
                                                     class="btn btn-sm btn-danger mt-1">Tolak</a>
                                             @endif
                                         </td>

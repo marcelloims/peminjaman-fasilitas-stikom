@@ -125,7 +125,7 @@ class PersetujuanAlatController extends controller
 
     public function reject($id)
     {
-        Submission::where('id', $id)->update(['assign_5' => 'Ditolak']);
+        Submission::where('id', $id)->update(['assign_5' => 'Ditolak', 'status' => 'Ditolak']);
 
         return redirect('kemahasiswaan/persetujuan/alat')->with('message', 'Telah ditolak');
     }

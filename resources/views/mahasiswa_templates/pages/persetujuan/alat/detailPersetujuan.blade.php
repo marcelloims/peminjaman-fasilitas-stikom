@@ -185,19 +185,19 @@
                 </div>
                 <div class="row text-center mt-3 mb-3">
                     <div class="col-4">
-                        @if ($detailSubmissions->assign_4)
+                        @if ($detailSubmissions->assign_4 == 'Disetujui')
                             <img src="{{ asset('logo_ukm/' . $akademik->signature) }}" width="100" height="100"
                                 alt="logo-ukm" />
                         @endif
                     </div>
                     <div class="col-4">
-                        @if ($detailSubmissions->assign_5)
+                        @if ($detailSubmissions->assign_5 == 'Disetujui')
                             <img src="{{ asset('logo_ukm/' . $kemahasiswaan->signature) }}" width="100"
                                 height="100" alt="logo-ukm" />
                         @endif
                     </div>
                     <div class="col-4">
-                        @if ($detailSubmissions->assign_2)
+                        @if ($detailSubmissions->assign_2 == 'Disetujui')
                             <img src="{{ asset('logo_ukm/' . $bem->signature) }}" width="100" height="100"
                                 alt="logo-ukm" />
                         @endif

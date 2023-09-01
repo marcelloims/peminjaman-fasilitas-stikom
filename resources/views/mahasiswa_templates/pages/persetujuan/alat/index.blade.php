@@ -47,7 +47,15 @@
                                         <td>{{ $submission->theme }}</td>
                                         <td>{{ date('d F Y H:i:s', strtotime($submission->date_start)) }}</td>
                                         <td>{{ date('d F Y H:i:s', strtotime($submission->date_end)) }}</td>
-                                        <td><span class="badge light badge-secondary">{{ $submission->status }}</span></td>
+                                        <td>
+                                            @if (!$submission->status)
+                                                <span class="badge light badge-secondary">Tertunda</span>
+                                            @elseif ($submission->status == 'Ditolak')
+                                                <span class="badge light badge-danger">{{ $submission->status }}</span>
+                                            @else
+                                                <span class="badge light badge-success">{{ $submission->status }}</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="{{ url('mahasiswa/persetujuan/alat/detail/' . $submission->id) }}"
                                                 class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a>
