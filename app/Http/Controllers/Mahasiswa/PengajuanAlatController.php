@@ -73,9 +73,9 @@ class PengajuanAlatController extends Controller
 
     public function subtractCart(Request $request, $id)
     {
-        $cartItem = \Cart::get($id);
-        $cartQuantity = $cartItem->quantity - 1;
-        $attributesStock = $cartItem->attributes->stock - $cartQuantity;
+        $cartItem           = \Cart::get($id);
+        $cartQuantity       = $cartItem->quantity - 1;
+        $attributesStock    = $cartItem->attributes->stock - $cartQuantity;
         \Cart::update($id, array(
             'quantity' => -1,
             'attributues' => array('stock' => $attributesStock)
@@ -90,12 +90,12 @@ class PengajuanAlatController extends Controller
 
     public function addedCart(Request $request, $id)
     {
-        $cartItem = \Cart::get($id);
-        $cartQuantity = $cartItem->quantity + 1;
-        $attributesStock = $cartItem->attributes->stock - $cartQuantity;
+        $cartItem           = \Cart::get($id);
+        $cartQuantity       = $cartItem->quantity + 1;
+        $attributesStock    = $cartItem->attributes->stock - $cartQuantity;
         \Cart::update($id, array(
-            'quantity' => +1,
-            'attributues' => array('stock' => $attributesStock)
+            'quantity'      => +1,
+            'attributues'   => array('stock' => $attributesStock)
         ));
 
         $updateTool = ['qty' => $request->stok - $cartItem->quantity];

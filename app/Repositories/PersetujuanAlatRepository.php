@@ -11,6 +11,11 @@ class PersetujuanAlatRepository extends BaseRepository
         return BaseRepository::getWhereData($table, $id);
     }
 
+    public function getDataSubmission($table, $id)
+    {
+        return DB::table($table)->where('id', $id)->first();
+    }
+
     public function joinDetailSubmissions($table, $id)
     {
         return DB::table($table)
@@ -39,10 +44,12 @@ class PersetujuanAlatRepository extends BaseRepository
         return DB::table('submissions')
             ->join('detail_submissions', 'submissions.id', '=', 'detail_submissions.submissions_id')
             ->join('tools', 'detail_submissions.tools_id', '=', 'tools.id')
+            ->join('returs', 'returs.submissions_id', '=', 'submissions.id')
             ->where('submissions.id', $id)
             ->select(
+                'tools.id',
                 'tools.name',
-                'detail_submissions.qty'
+                'detail_submissions.qty',
             )->get();
     }
 }

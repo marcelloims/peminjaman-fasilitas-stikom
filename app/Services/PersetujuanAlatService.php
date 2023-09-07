@@ -14,6 +14,11 @@ class PersetujuanAlatService
         $this->persetujuanAlatRepository = $repository;
     }
 
+    public function getDataSubmission($table, $id)
+    {
+        return $this->persetujuanAlatRepository->getDataSubmission($table, $id);
+    }
+
     public function getData($table)
     {
         $id = ['users_id' => Auth::user()->id];

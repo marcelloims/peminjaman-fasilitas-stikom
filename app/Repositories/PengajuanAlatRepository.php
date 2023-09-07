@@ -61,6 +61,24 @@ class PengajuanAlatRepository extends BaseRepository
                 "updated_at"        => now()
             ];
 
+            $retur = [
+                "submissions_id"    => $dataSubmission,
+                "tools_id"          => $cart->id,
+                "created_by"        => Auth::user()->email,
+                "updated_by"        => Auth::user()->email,
+                "created_at"        => now(),
+                "updated_at"        => now()
+            ];
+
+            $errorTools = [
+                "submissions_id"    => $dataSubmission,
+                "tools_id"          => $cart->id,
+                "created_by"        => Auth::user()->email,
+                "updated_by"        => Auth::user()->email,
+                "created_at"        => now(),
+                "updated_at"        => now()
+            ];
+
             BaseRepository::create('detail_submissions', $detailSubmission);
 
             // $tool = Tool::where('id', $cart->id)->first();

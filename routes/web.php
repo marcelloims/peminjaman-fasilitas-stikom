@@ -25,6 +25,7 @@ use App\Http\Controllers\Sarpras\DashboardController;
 use App\Http\Controllers\Sarpras\FasilitasController;
 use App\Http\Controllers\Sarpras\MahasiswaController;
 use App\Http\Controllers\sarpras\OrganisasiMahasiswaController;
+use App\Http\Controllers\Sarpras\PersetujuanAlatController as SarprasPersetujuanAlatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,6 +77,15 @@ Route::group(['middleware' => ['CheckLogin:1']], function () {
             Route::get('fasilitas-edit/{id}', [FasilitasController::class, 'edit_tool']);
             Route::post('fasilitas-update/{id}', [FasilitasController::class, 'update_tool']);
             Route::get('fasilitas-softdelete/{id}', [FasilitasController::class, 'softDelete']);
+        });
+
+        Route::group(['prefix' => 'persetujuan'], function () {
+            Route::group(['prefix' => 'alat'], function () {
+                Route::get('/', [SarprasPersetujuanAlatController::class, 'index']);
+                Route::get('/detail/{id}', [SarprasPersetujuanAlatController::class, 'show']);
+                Route::get('/edit/{id}', [SarprasPersetujuanAlatController::class, 'edit']);
+                Route::post('/update/{id}', [SarprasPersetujuanAlatController::class, 'retur']);
+            });
         });
     });
 });
