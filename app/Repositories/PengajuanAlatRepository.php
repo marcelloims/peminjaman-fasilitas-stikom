@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Models\ErrorTool;
+use App\Models\Retur;
 use App\Models\Tool;
 use App\Services\AlatService;
 use Illuminate\Support\Facades\Auth;
@@ -78,6 +80,9 @@ class PengajuanAlatRepository extends BaseRepository
                 "created_at"        => now(),
                 "updated_at"        => now()
             ];
+
+            Retur::insert($retur);
+            ErrorTool::insert($errorTools);
 
             BaseRepository::create('detail_submissions', $detailSubmission);
 
