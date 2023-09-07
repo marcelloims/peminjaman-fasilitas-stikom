@@ -54,38 +54,40 @@
                         @foreach ($tools as $tool)
                             <form action="{{ url('sarpras/persetujuan/alat/update/' . $tool->id, []) }}" method="post">
                                 @csrf
-                                <tr>
-                                    <td align="center">{{ $loop->iteration }}</td>
-                                    <td>{{ $tool->name }}</td>
-                                    <td width="150">
-                                        <input type="hidden" name="submission_id" value="{{ $submission_id }}">
-                                        <input type="number"
-                                            class="form-control
-                                @error('jumlah')
-                                input-danger
-                                @enderror"
-                                            name="jumlah" id="" min="1" max="{{ $tool->qty }}"
-                                            placeholder="jumlah">
-                                        @error('jumlah')
-                                            <span class="badge light badge-danger">{{ $message }}</span>
-                                        @enderror
-                                    </td>
-                                    <td width="150">
-                                        <input type="number"
-                                            class="form-control
+                                @if ($tool->status == 'Dipinjam')
+                                    <tr>
+                                        <td align="center">{{ $loop->iteration }}</td>
+                                        <td>{{ $tool->name }}</td>
+                                        <td width="150">
+                                            <input type="hidden" name="tool_id" value="{{ $tool->tools_id }}">
+                                            <input type="number"
+                                                class="form-control
+                                            @error('jumlah')
+                                            input-danger
+                                            @enderror"
+                                                name="jumlah" id="" min="1" max="{{ $tool->qty }}"
+                                                placeholder="jumlah">
+                                            @error('jumlah')
+                                                <span class="badge light badge-danger">{{ $message }}</span>
+                                            @enderror
+                                        </td>
+                                        <td width="150">
+                                            <input type="number"
+                                                class="form-control
                                 @error('rusak')
                                 input-danger
                                 @enderror"
-                                            name="rusak" id="" min="0" max="{{ $tool->qty }}"
-                                            placeholder="jumlah">
-                                        @error('rusak')
-                                            <span class="badge light badge-danger">{{ $message }}</span>
-                                        @enderror
-                                    </td>
-                                    <td align="center">
-                                        <button class="btn btn-sm btn-success">Unggah</button>
-                                    </td>
-                                </tr>
+                                                name="rusak" id="" min="0" max="{{ $tool->qty }}"
+                                                placeholder="jumlah">
+                                            @error('rusak')
+                                                <span class="badge light badge-danger">{{ $message }}</span>
+                                            @enderror
+                                        </td>
+                                        <td align="center">
+                                            <button class="btn btn-sm btn-success">Unggah</button>
+                                        </td>
+                                    </tr>
+                                @endif
                             </form>
                         @endforeach
                     </table>

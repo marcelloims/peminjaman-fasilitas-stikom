@@ -129,6 +129,7 @@ class PersetujuanAlatController extends controller
         $data['submission']     = $this->persetujuanAlatService->getDataSubmission('submissions', $id);
         $data['submission_id']  = $id;
         $data['tools']          = $this->persetujuanAlatService->joinDetailSubmissionsAndTools($id);
+
         // dd($data);
         return view('sarpras_templates.pages.persetujuan.alat.pengembalianAlat', $data);
     }
@@ -146,36 +147,28 @@ class PersetujuanAlatController extends controller
             ]
         );
 
-        $tool       = Tool::where('id', $id)->first();
+        $tool       = Tool::where('id', $request->tool_id)->first();
         $qtyRetur   = $tool->qty + $request->jumlah;
 
-        Tool::where('id', $id)->update(['qty' => $qtyRetur]);
+        Tool::where('id', $request->tool_id)->update(['qty' => $qtyRetur]);
 
         $dataRetur = [
-            "submissions_id" => $request->submission_id,
-            "tools_id"      => $tool->id,
             "qty"           => $request->jumlah,
-            "status"        => "Sudah dikembalikan",
-            "created_by"    => Auth::user()->email,
+            "status"        => "Kembali",
             "updated_by"    => Auth::user()->email,
-            "created_at"    => now(),
             "updated_at"    => now()
         ];
 
-        Retur::insert($dataRetur);
+        Retur::where('tools_id', $request->tool_id)->update($dataRetur);
 
         $dataError = [
-            "submissions_id" => $request->submission_id,
-            "tools_id"      => $tool->id,
             "qty"           => $request->rusak,
-            "created_by"    => Auth::user()->email,
             "updated_by"    => Auth::user()->email,
-            "created_at"    => now(),
             "updated_at"    => now()
         ];
 
-        ErrorTool::insert($dataError);
+        ErrorTool::where('tools_id', $request->tool_id)->update($dataError);
 
-        return redirect('sarpras/persetujuan/alat/edit/' . $request->submission_id);
+        return redirect('sarpras/persetujuan/alat/edit/' . $id)->with('message', 'Berhasil diperbaharui');;
     }
 }

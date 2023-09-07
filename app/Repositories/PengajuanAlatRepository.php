@@ -66,6 +66,7 @@ class PengajuanAlatRepository extends BaseRepository
             $retur = [
                 "submissions_id"    => $dataSubmission,
                 "tools_id"          => $cart->id,
+                "status"            => "Dipinjam",
                 "created_by"        => Auth::user()->email,
                 "updated_by"        => Auth::user()->email,
                 "created_at"        => now(),
