@@ -21,6 +21,7 @@
     </a>
     <ul aria-expanded="false">
         <li><a href="{{ url('mahasiswa/pengajuan/alat', []) }}">Peminjaman Alat</a></li>
+        <li><a href="{{ url('mahasiswa/pengajuan/aula', []) }}">Peminjaman Aula</a></li>
     </ul>
 </li>
 <li>
@@ -30,5 +31,6 @@
     </a>
     <ul aria-expanded="false">
         <li><a href="{{ url('mahasiswa/persetujuan/alat', []) }}">Peminjaman Alat</a></li>
+        <li><a href="{{ url('mahasiswa/persetujuan/aula', []) }}">Peminjaman Aula</a></li>
     </ul>
 </li>

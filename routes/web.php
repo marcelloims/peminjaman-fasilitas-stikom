@@ -19,6 +19,7 @@ use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboardCont
 use App\Http\Controllers\Mahasiswa\MahasiswaController as MahasiswaMahasiswaController;
 use App\Http\Controllers\Mahasiswa\OrganisasiMahasiswaController as MahasiswaOrganisasiMahasiswaController;
 use App\Http\Controllers\Mahasiswa\PengajuanAlatController;
+use App\Http\Controllers\Mahasiswa\PengajuanAulaController;
 use App\Http\Controllers\Mahasiswa\PersetujuanAlatController;
 use App\Http\Controllers\Sarpras\AlatController;
 use App\Http\Controllers\Sarpras\DashboardController;
@@ -141,7 +142,19 @@ Route::group(['middleware' => ['CheckLogin:3']], function () {
                 Route::post('/save', [PengajuanAlatController::class, 'store']);
                 Route::get('/clearCart', [PengajuanAlatController::class, 'clearCart']);
             });
+
+            Route::group(['prefix' => 'aula'], function () {
+                Route::get('/', [PengajuanAulaController::class, 'index']);
+                Route::post('/addToCart/{id}', [PengajuanAulaController::class, 'addToCart']);
+                Route::get('/detailCart', [PengajuanAulaController::class, 'detailCart']);
+                Route::post('/subtract/{id}', [PengajuanAulaController::class, 'subtractCart']);
+                Route::post('/addedCart/{id}', [PengajuanAulaController::class, 'addedCart']);
+                Route::post('deletedCart/{id}', [PengajuanAulaController::class, 'deletedCart']);
+                Route::post('/save', [PengajuanAulaController::class, 'store']);
+                Route::get('/clearCart', [PengajuanAulaController::class, 'clearCart']);
+            });
         });
+
         Route::group(['prefix' => 'persetujuan'], function () {
             Route::group(['prefix' => 'alat'], function () {
                 Route::get('/', [PersetujuanAlatController::class, 'index']);
