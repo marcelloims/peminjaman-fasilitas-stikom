@@ -48,7 +48,7 @@
                                         <td>{{ date('d F Y H:i:s', strtotime($submission->date_start)) }}</td>
                                         <td>{{ date('d F Y H:i:s', strtotime($submission->date_end)) }}</td>
                                         <td>
-                                            @if (!$submission->status)
+                                            @if ($submission->status == 'Tertunda')
                                                 <span class="badge light badge-secondary">Tertunda</span>
                                             @elseif ($submission->status == 'Ditolak')
                                                 <span class="badge light badge-danger">{{ $submission->status }}</span>

@@ -142,6 +142,18 @@
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                <div
+                                    class="form-group
+                                    @error('gambar')
+                                        input-danger
+                                    @enderror">
+                                    <label for="">Gambar</label>
+                                    <input type="file" name="gambar" class="form-control input-default"
+                                        value="{{ old('gambar') }}">
+                                    @error('gambar')
+                                        <span class="badge light badge-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary light">Simpan</button>
@@ -171,6 +183,7 @@
                                     <th>Kategori</th>
                                     <th>Jenis</th>
                                     <th>Jumlah</th>
+                                    <th>Gambar</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -183,6 +196,10 @@
                                         <td>{{ $tool->category }}</td>
                                         <td>{{ $tool->type }}</td>
                                         <td>{{ $tool->qty }}</td>
+                                        <td class="text-center">
+                                            <img src="{{ asset('logo_ukm/' . $tool->image) }}" width="50"
+                                                height="50" alt="logo-ukm" />
+                                        </td>
                                         <td class="text-center">
                                             <a href="{{ url('sarpras/fasilitas/fasilitas-edit/' . $tool->id) }}"
                                                 class="btn btn-sm btn-warning"><i class="flaticon-381-edit-1"></i></a>

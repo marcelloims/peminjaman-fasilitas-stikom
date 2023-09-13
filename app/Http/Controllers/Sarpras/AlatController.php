@@ -21,7 +21,7 @@ class AlatController extends Controller
     public function index($id = null)
     {
         $data['title']  = 'Alat-alat';
-        $data['datas']  = $this->alatService->getData($this->table, $id);
+        $data['datas']  = $this->alatService->getDataToolsOnly($this->table, $id);
         $kode           = substr($data['datas']->max('code'), 5);
         $data['kode']   = (int)$kode + 1;
 

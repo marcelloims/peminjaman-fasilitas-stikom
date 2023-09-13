@@ -19,6 +19,12 @@ class AlatService
         return $this->alatRepository->getData($table, $id);
     }
 
+    public function getDataToolsOnly($table, $id)
+    {
+        return $this->alatRepository->getData($table, $id)->where('facilities_id', null);
+    }
+
+
     public function getToolOnly($table)
     {
         return $this->alatRepository->getToolOnly($table);
