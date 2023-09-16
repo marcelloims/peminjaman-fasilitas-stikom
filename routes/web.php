@@ -21,6 +21,7 @@ use App\Http\Controllers\Mahasiswa\OrganisasiMahasiswaController as MahasiswaOrg
 use App\Http\Controllers\Mahasiswa\PengajuanAlatController;
 use App\Http\Controllers\Mahasiswa\PengajuanAulaController;
 use App\Http\Controllers\Mahasiswa\PersetujuanAlatController;
+use App\Http\Controllers\Mahasiswa\PersetujuanAulaController;
 use App\Http\Controllers\Sarpras\AlatController;
 use App\Http\Controllers\Sarpras\DashboardController;
 use App\Http\Controllers\Sarpras\FasilitasController;
@@ -159,6 +160,11 @@ Route::group(['middleware' => ['CheckLogin:3']], function () {
             Route::group(['prefix' => 'alat'], function () {
                 Route::get('/', [PersetujuanAlatController::class, 'index']);
                 Route::get('/detail/{id}', [PersetujuanAlatController::class, 'show']);
+            });
+
+            Route::group(['prefix' => 'aula'], function () {
+                Route::get('/', [PersetujuanAulaController::class, 'index']);
+                Route::get('/detail/{id}', [PersetujuanAulaController::class, 'show']);
             });
         });
     });
