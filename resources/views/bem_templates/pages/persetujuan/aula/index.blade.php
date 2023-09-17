@@ -58,12 +58,12 @@
                                             @endif
                                         </td>
                                         <td align="center">
-                                            <a href="{{ url('bem/persetujuan/alat/detail/' . $submission->id) }}"
+                                            <a href="{{ url('bem/persetujuan/aula/detail/' . $submission->id) }}"
                                                 class="btn btn-sm btn-info mt-1"><i class="flaticon-381-list"></i></a>
                                             @if (!$submission->assign_2)
-                                                <a href="{{ url('bem/persetujuan/alat/approve/' . $submission->id) }}"
+                                                <a href="{{ url('bem/persetujuan/aula/approve/' . $submission->id) }}"
                                                     class="btn btn-sm btn-success mt-1">Setuju</a>
-                                                <a href="{{ url('bem/persetujuan/alat/reject/' . $submission->id) }}"
+                                                <a href="{{ url('bem/persetujuan/aula/reject/' . $submission->id) }}"
                                                     class="btn btn-sm btn-danger mt-1">Tolak</a>
                                             @endif
                                         </td>

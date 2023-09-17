@@ -36,7 +36,7 @@ class PersetujuanAlatRepository extends BaseRepository
 
     public function joinDetailSubmissionsGetData($table)
     {
-        return DB::table($table)->get();
+        return DB::table($table)->where('category', 1)->get();
     }
 
     public function joinDetailSubmissionsAndTools($id)

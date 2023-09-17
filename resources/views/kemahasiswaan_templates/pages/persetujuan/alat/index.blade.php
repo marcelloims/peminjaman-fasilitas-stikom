@@ -62,7 +62,7 @@
                                                 class="btn btn-sm btn-info mt-1"><i class="flaticon-381-list"></i></a>
                                             @if (!$submission->assign_5 && $submission->assign_2 == 'Disetujui')
                                                 <a href="{{ url('kemahasiswaan/persetujuan/alat/approve/' . $submission->id) }}"
-                                                    class="btn btn-sm btn-success mt-1">Setujuh</a>
+                                                    class="btn btn-sm btn-success mt-1">Setuju</a>
                                                 <a href="{{ url('kemahasiswaan/persetujuan/alat/reject/' . $submission->id) }}"
                                                     class="btn btn-sm btn-danger mt-1">Tolak</a>
                                             @endif
