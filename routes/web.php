@@ -16,6 +16,7 @@ use App\Http\Controllers\Kemahasiswaan\FasilitasController as KemahasiswaanFasil
 use App\Http\Controllers\Kemahasiswaan\MahasiswaController as KemahasiswaanMahasiswaController;
 use App\Http\Controllers\Kemahasiswaan\OrganisasiMahasiswaController as KemahasiswaanOrganisasiMahasiswaController;
 use App\Http\Controllers\Kemahasiswaan\PersetujuanAlatController as KemahasiswaanPersetujuanAlatController;
+use App\Http\Controllers\Kemahasiswaan\PersetujuanAulaController as KemahasiswaanPersetujuanAulaController;
 use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboardController;
 use App\Http\Controllers\Mahasiswa\MahasiswaController as MahasiswaMahasiswaController;
 use App\Http\Controllers\Mahasiswa\OrganisasiMahasiswaController as MahasiswaOrganisasiMahasiswaController;
@@ -245,6 +246,12 @@ Route::group(['middleware' => ['CheckLogin:5']], function () {
                 Route::get('/detail/{id}', [KemahasiswaanPersetujuanAlatController::class, 'show']);
                 Route::get('/approve/{id}', [KemahasiswaanPersetujuanAlatController::class, 'approve']);
                 Route::get('/reject/{id}', [KemahasiswaanPersetujuanAlatController::class, 'reject']);
+            });
+            Route::group(['prefix' => 'aula'], function () {
+                Route::get('/', [KemahasiswaanPersetujuanAulaController::class, 'index']);
+                Route::get('/detail/{id}', [KemahasiswaanPersetujuanAulaController::class, 'show']);
+                Route::get('/approve/{id}', [KemahasiswaanPersetujuanAulaController::class, 'approve']);
+                Route::get('/reject/{id}', [KemahasiswaanPersetujuanAulaController::class, 'reject']);
             });
         });
     });
