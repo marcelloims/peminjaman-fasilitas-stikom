@@ -5,6 +5,7 @@ use App\Http\Controllers\Akademik\FasilitasController as AkademikFasilitasContro
 use App\Http\Controllers\Akademik\MahasiswaController as AkademikMahasiswaController;
 use App\Http\Controllers\Akademik\OrganisasiMahasiswaController as AkademikOrganisasiMahasiswaController;
 use App\Http\Controllers\Akademik\PersetujuanAlatController as AkademikPersetujuanAlatController;
+use App\Http\Controllers\Akademik\PersetujuanAulaController as AkademikPersetujuanAulaController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Bem\DashboardController as BemDashboardController;
 use App\Http\Controllers\Bem\MahasiswaController as BemMahasiswaController;
@@ -214,6 +215,12 @@ Route::group(['middleware' => ['CheckLogin:4']], function () {
                 Route::get('/detail/{id}', [AkademikPersetujuanAlatController::class, 'show']);
                 Route::get('/approve/{id}', [AkademikPersetujuanAlatController::class, 'approve']);
                 Route::get('/reject/{id}', [AkademikPersetujuanAlatController::class, 'reject']);
+            });
+            Route::group(['prefix' => 'aula'], function () {
+                Route::get('/', [AkademikPersetujuanAulaController::class, 'index']);
+                Route::get('/detail/{id}', [AkademikPersetujuanAulaController::class, 'show']);
+                Route::get('/approve/{id}', [AkademikPersetujuanAulaController::class, 'approve']);
+                Route::get('/reject/{id}', [AkademikPersetujuanAulaController::class, 'reject']);
             });
         });
     });
