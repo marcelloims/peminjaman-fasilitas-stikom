@@ -134,6 +134,6 @@ class PengajuanAlatRepository extends BaseRepository
             BaseRepository::create('detail_submissions', $detailSubmission);
         }
         \Cart::clear();
-        return;
+        return "Berhasil disimpan";
     }
 }
