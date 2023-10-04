@@ -8,6 +8,7 @@ use App\Models\Tool;
 use App\Services\AlatService;
 use App\Services\MahasiswaService;
 use App\Services\PengajuanAlatService;
+use App\Services\PengajuanAulaService;
 use Illuminate\Http\Request;
 
 class PengajuanAulaController extends Controller
@@ -17,7 +18,7 @@ class PengajuanAulaController extends Controller
     private $table;
 
     public function __construct(
-        PengajuanAlatService $service,
+        PengajuanAulaService $service,
         MahasiswaService $mahasiswa,
         AlatService $alat
     ) {
@@ -52,13 +53,14 @@ class PengajuanAulaController extends Controller
         }
         if (
             (!empty($dateStart) && strtotime($dateStart) < strtotime($dataSubmission->date_end)) &&
-            (strtotime($dateEnd) < strtotime($dataSubmission->date_start))
+            (strtotime($dateEnd) < strtotime($dataSubmission->date_start) && strtotime($dateStart) <= strtotime(date("Y-m-d H:m:s")))
         ) {
             $error = "sukses";
         } else {
             $error = "Maaf, Tanggal ini sudah dipakai silahkan lihat terlebih dahulu Data Daftar Peminjaman Aula";
         }
-        $data = $this->pengajuanService->storeAula($this->table, $request);
+
+        $data = "Tes";
 
         return redirect('mahasiswa/pengajuan/aula')->with([
             'message' => $data,

@@ -153,6 +153,22 @@
                                             <span class="badge light badge-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                    <div
+                                        class="form-group
+                                @error('kelas')
+                                    input-danger
+                                @enderror">
+                                        <label for="">Ruang Kelas</label>
+                                        <select name="kelas" id="" class="form-control">
+                                            <option selected disabled>--Pilih--</option>
+                                            @foreach ($classes as $class)
+                                                <option value="{{ $class->id }}">{{ $class->code }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('kelas')
+                                            <span class="badge light badge-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>

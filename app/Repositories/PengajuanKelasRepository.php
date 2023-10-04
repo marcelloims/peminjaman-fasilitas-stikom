@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PengajuanKelasRepository extends BaseRepository
 {
-    public function storeAula($table, $submission)
+    public function storeKelas($table, $submission)
     {
         BaseRepository::create($table, $submission);
 

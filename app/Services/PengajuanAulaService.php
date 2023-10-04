@@ -8,7 +8,7 @@ use App\Repositories\PengajuanKelasRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class PengajuanKelasService
+class PengajuanAulaService
 {
     private $pengajuanKelasRepository;
 
@@ -17,7 +17,7 @@ class PengajuanKelasService
         $this->pengajuanKelasRepository = $repository;
     }
 
-    public function storeKelas($table, $request)
+    public function storeAula($table, $request)
     {
         $request->validate(
             [

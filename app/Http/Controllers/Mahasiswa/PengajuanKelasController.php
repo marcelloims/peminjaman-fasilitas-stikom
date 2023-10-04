@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Facility;
 use App\Services\MahasiswaService;
 use App\Services\PengajuanKelasService;
 use Illuminate\Http\Request;
@@ -27,13 +28,14 @@ class PengajuanKelasController extends Controller
     {
         $data['title']          = 'Pengajuan Peminjaman Kelas';
         $data['chairmans']      = $this->mahasiswaService->getChairman('users');
+        $data['classes']        = Facility::where('code', "!=", "aula")->get();
 
         return view('mahasiswa_templates.pages.pengajuan.kelas.index', $data);
     }
 
     public function store(Request $request)
     {
-        $this->pengajuanService->storeAula($this->table, $request);
+        $this->pengajuanService->storeKelas($this->table, $request);
 
         return redirect('mahasiswa/pengajuan/kelas')->with('message', "Berhasil disimpan!");
     }
