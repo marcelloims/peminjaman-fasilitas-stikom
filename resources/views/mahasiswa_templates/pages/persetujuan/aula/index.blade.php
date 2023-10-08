@@ -57,7 +57,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ url('mahasiswa/persetujuan/alat/detail/' . $submission->id) }}"
+                                            <a href="{{ url('mahasiswa/persetujuan/aula/detail/' . $submission->id) }}"
                                                 class="btn btn-sm btn-info"><i class="flaticon-381-list"></i></a>
                                         </td>
                                     </tr>

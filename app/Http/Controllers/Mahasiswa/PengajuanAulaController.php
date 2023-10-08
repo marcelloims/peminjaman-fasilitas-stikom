@@ -4,10 +4,7 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Submission;
-use App\Models\Tool;
-use App\Services\AlatService;
 use App\Services\MahasiswaService;
-use App\Services\PengajuanAlatService;
 use App\Services\PengajuanAulaService;
 use Illuminate\Http\Request;
 
@@ -19,8 +16,7 @@ class PengajuanAulaController extends Controller
 
     public function __construct(
         PengajuanAulaService $service,
-        MahasiswaService $mahasiswa,
-        AlatService $alat
+        MahasiswaService $mahasiswa
     ) {
         date_default_timezone_set('Asia/Singapore');
         $this->table = "submissions";
@@ -33,38 +29,59 @@ class PengajuanAulaController extends Controller
         $data['title']          = 'Pengajuan Peminjaman Aula';
         $data['chairmans']      = $this->mahasiswaService->getChairman('users');
         $data['submissions']    = Submission::where('category', 2)->get();
-
         return view('mahasiswa_templates.pages.pengajuan.aula.index', $data);
     }
 
     public function store(Request $request)
     {
-        $dateStart  = date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " " . $request->jam_mulai . ":00";
-        $dateEnd    = date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " " . $request->jam_selesai . ":00";
         $dataSubmission = Submission::where('category', 2)
-            ->orWhere('date_start', [$dateStart])
-            ->orWhere('date_end', [$dateEnd])
+            ->where('date_start', '>=', date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " 08:00:00")
+            ->orWhere('date_end', '<=', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
+            ->orWhere('date_start', '<', date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " 08:00:00")
+            ->Where('date_end', '>', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
             ->first();
 
-        if (!empty($dateStart) && strtotime($dateStart) > strtotime($dateEnd)) {
-            $error = "Maaf, Tanggal anda salah";
-        } elseif (!empty($dateStart) && strtotime($dateStart) <= strtotime(date("Y-m-d H:m:s"))) {
-            $error = "Maaf, Tanggal sudah lewat";
-        }
-        if (
-            (!empty($dateStart) && strtotime($dateStart) < strtotime($dataSubmission->date_end)) &&
-            (strtotime($dateEnd) < strtotime($dataSubmission->date_start) && strtotime($dateStart) <= strtotime(date("Y-m-d H:m:s")))
-        ) {
-            $error = "sukses";
+        // dd($dataSubmission);
+
+        $error = "";
+        $message = "";
+
+        if ($dataSubmission == null) {
+            $message = $this->pengajuanService->storeAula($this->table, $request);
         } else {
-            $error = "Maaf, Tanggal ini sudah dipakai silahkan lihat terlebih dahulu Data Daftar Peminjaman Aula";
+
+            $startRequest   = date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai));
+            $endRequest     = date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai));
+            $startExist     = substr($dataSubmission->date_start, 0, 10);
+            $endExist       = substr($dataSubmission->date_end, 0, 10);
+            $dateNow        = strtotime(date("Y-m-d"));
+
+            if (empty($startRequest) || empty($endRequest)) {
+                $error = "Tanggal Mulai atau Tanggal Selesai tidak boleh kosong!";
+                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
+            } elseif ($startRequest > $endRequest) {
+                $error = "Tanggal Salah!";
+                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
+            } elseif ($startRequest <= $dateNow && $endRequest <= $dateNow) {
+                $error = "Tanggal sudah lewat!";
+                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
+            } elseif (
+                ($startRequest == $startExist || $endRequest == $endExist) ||
+                ($startRequest < $startExist && $endRequest >= $startExist) ||
+                ($startRequest >= $startExist && $startRequest == $endExist) ||
+                ($startRequest >= $startExist && $endRequest <= $endExist) ||
+                ($startRequest > $startExist && $endRequest < $endExist) ||
+                ($startRequest > $startExist && $startRequest < $endExist)
+            ) {
+                $error = "Tanggal sudah dipakai kegiatan lain! Silahkan lihat daftar peminjaman di bawah";
+                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
+            } else {
+                $message = $this->pengajuanService->storeAula($this->table, $request);
+            }
         }
 
-        $data = "Tes";
 
-        return redirect('mahasiswa/pengajuan/aula')->with([
-            'message' => $data,
-            'error'   => $error,
-        ]);
+
+        return redirect('mahasiswa/pengajuan/aula')->with('message', $message);
     }
 }

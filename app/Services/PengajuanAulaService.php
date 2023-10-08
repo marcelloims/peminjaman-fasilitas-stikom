@@ -4,17 +4,16 @@ namespace App\Services;
 
 use App\Models\Submission;
 use App\Models\User;
-use App\Repositories\PengajuanKelasRepository;
-use Carbon\Carbon;
+use App\Repositories\PengajuanAulaRepository;
 use Illuminate\Support\Facades\Auth;
 
 class PengajuanAulaService
 {
-    private $pengajuanKelasRepository;
+    private $pengajuanAulaRepository;
 
-    public function __construct(PengajuanKelasRepository $repository)
+    public function __construct(PengajuanAulaRepository $repository)
     {
-        $this->pengajuanKelasRepository = $repository;
+        $this->pengajuanAulaRepository = $repository;
     }
 
     public function storeAula($table, $request)
@@ -28,8 +27,7 @@ class PengajuanAulaService
                 'tanggal_kegiatan_mulai'    => 'required',
                 'jam_mulai'                 => 'required',
                 'tanggal_kegiatan_selesai'  => 'required',
-                'jam_selesai'               => 'required',
-                'kelas'                     => 'required'
+                'jam_selesai'               => 'required'
             ],
             [
                 'ketua_umum.required'                => 'Ketua Umum tidak boleh kosong!',
@@ -39,8 +37,7 @@ class PengajuanAulaService
                 'tanggal_kegiatan_mulai.required'    => 'Tanggal Mulai Kegiatan tidak boleh kosong!',
                 'jam_mulai.required'                 => 'Jam Mulai tidak boleh kosong!',
                 'tanggal_kegiatan_selesai.required'  => 'Tanggal Selesai Kegiatan tidak boleh kosong!',
-                'jam_selesai.required'               => 'Jam Selsai tidak boleh kosong!',
-                'kelas.required'                     => 'Kelas tidak boleh kosong!',
+                'jam_selesai.required'               => 'Jam Selsai tidak boleh kosong!'
             ]
         );
 
@@ -86,7 +83,7 @@ class PengajuanAulaService
             'theme'                     => $request->tema,
             'date_start'                => date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " " . $request->jam_mulai,
             'date_end'                  => date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " " . $request->jam_selesai,
-            'category'                  => $request->kelas,
+            'category'                  => 2,
             'assign_2'                  => null,
             'assign_4'                  => null,
             'assign_5'                  => null,
@@ -97,6 +94,6 @@ class PengajuanAulaService
             'updated_at'                => now()
         ];
 
-        return $this->pengajuanKelasRepository->storeKelas($table, $submission);
+        return $this->pengajuanAulaRepository->storeAula($table, $submission);
     }
 }
