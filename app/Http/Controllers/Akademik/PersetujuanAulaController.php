@@ -55,7 +55,11 @@ class PersetujuanAulaController extends controller
     {
         $data['title']                      = 'Persetujuan Peminjaman Aula';
         $data['detailSubmissions']          = $this->persetujuanAulaService->joinDetailSubmissions($this->table, $id);
-        $data['tools']                      = $this->persetujuanAulaService->joinDetailSubmissionsAndTools($id);
+        $data['tools']                      = Submission::join('detail_submissions', 'submissions.id', '=', 'detail_submissions.submissions_id')
+            ->join('tools', 'detail_submissions.tools_id', '=', 'tools.id')
+            ->where('detail_submissions.submissions_id', $id)
+            ->select('tools.name', 'detail_submissions.qty')
+            ->get();
         $data['chairman']                   = User::where('id', $data['detailSubmissions']->chairman)->first();
         $data['chairman_of_the_commitee']   = User::where('id', $data['detailSubmissions']->chairman_of_the_commitee)->first();
         $createdAt                          = explode("-", date('D-d-M-Y', strtotime($data['detailSubmissions']->created_at)));
@@ -133,6 +137,6 @@ class PersetujuanAulaController extends controller
             'status' => 'Ditolak'
         ]);
 
-        return redirect('akademik_kemahasiswaan/persetujuan/Aula')->with('message', 'Telah ditolak');
+        return redirect('akademik_kemahasiswaan/persetujuan/aula')->with('message', 'Telah ditolak');
     }
 }

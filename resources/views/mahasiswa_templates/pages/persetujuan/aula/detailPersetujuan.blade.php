@@ -234,6 +234,58 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="{{ asset('logo_ukm/logo-stikom.png') }}" width="150" height="150"
+                            alt="logo-stikom" class="mr-6" />
+                    </div>
+                    <div class="col-8 text-center">
+                        <p style="font-size: 30px; font-weight: bold; height:30px">INSTITUT TEKNOLOGI DAN BISNIS</p>
+                        <p style="font-size: 30px; font-weight: bold; height:30px">(ITB) STIKOM BALI</p>
+                        <p style="font-size: 30px; font-weight: bold; height:30px">{{ $detailSubmissions->name }}</p>
+                    </div>
+                    <div class="col-2">
+                        <img src="{{ asset('logo_ukm/' . $detailSubmissions->logoSubmissions) }}" align='right'
+                            class="ml-3" width="150" height="150" alt="logo-ukm" />
+                    </div>
+                </div>
+                <hr style="border: 4px solid rgb(165, 165, 165);">
+                <div class="row text-black" style="height:1200px;">
+                    <div class="col-12 ml-4">
+                        Daftar Alat:
+                        <div class="col-12 ml-5">
+                            <table>
+                                @foreach ($tools as $item)
+                                    <tr>
+                                        <td width="20px">{{ $loop->iteration }}.</td>
+                                        <td width="150px">{{ $item->name }}</td>
+                                        <td width="20px">:</td>
+                                        <td>{{ $item->qty }} buah</td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border: 2px solid rgb(165, 165, 165);">
+                <div class="row" align='center'>
+                    <div class="col-12">
+                        <p style="height: 5px;">
+                            Kampus I : Jl. Raya Puputan No. 86 Renon, Denpasar – Bali Telp. (0361)244445(Hunting) Fax.
+                            (0361)264773
+                        </p>
+                        <p style="height: 5px; color: #65c9f4;" class="mt-2">http://www.stikom-bali.ac.id Email :
+                            info@stikom-bali.ac.id</p>
+                        <p style="height: 5px;" class="mt-2">{{ $chairman_of_the_commitee->category }} :
+                            {{ $chairman_of_the_commitee->name }}
+                            ({{ $chairman_of_the_commitee->telephone }})
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
         window.print()
