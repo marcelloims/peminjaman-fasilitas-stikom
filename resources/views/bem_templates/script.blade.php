@@ -13,7 +13,7 @@
 <script>
     $(document).ready(function() {
         $.ajax({
-            url: 'http://127.0.0.1:8000/kemahasiswaan/ukm',
+            url: 'http://127.0.0.1:8000/bem/ukm',
             type: 'GET',
             dataType: 'json',
             success: function(data) {

@@ -31,6 +31,7 @@
                             <thead>
                                 <tr align="center">
                                     <th class="text-center">No</th>
+                                    <th>Kode</th>
                                     <th>UKM</th>
                                     <th>Tanggal Pengajuan</th>
                                     <th>Status</th>
@@ -41,6 +42,7 @@
                                 @foreach ($submissions as $submission)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $submission->code }}</td>
                                         <td>
                                             <?php
                                             $code = explode('/', $submission->code);
@@ -49,9 +51,9 @@
                                         <td align="center">{{ date('d F Y H:i:s', strtotime($submission->created_at)) }}
                                         </td>
                                         <td align="center">
-                                            @if ($submission->assign_5 == 'Disetujui' && $submission->assign_2 == 'Disetujui' && !$submission->assign_4)
+                                            @if ($submission->status == 'Tertunda')
                                                 <span class="badge light badge-secondary">Tertunda</span></span>
-                                            @elseif ($submission->assign_4 != 'Ditolak')
+                                            @elseif ($submission->status == 'Disetujuhi')
                                                 <span class="badge light badge-success">{{ $submission->status }}</span>
                                             @elseif ($submission->status == 'Ditolak')
                                                 <span class="badge light badge-danger">{{ $submission->status }}</span>
