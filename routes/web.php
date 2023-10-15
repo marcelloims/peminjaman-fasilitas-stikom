@@ -58,6 +58,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::group(['middleware' => ['CheckLogin:1']], function () {
     Route::group(['prefix' => 'sarpras'], function () {
         Route::get('dashboard', [DashboardController::class, 'index']);
+        Route::get('ukm', [DashboardController::class, 'ukm']);
 
         Route::group(['prefix' => 'organisasi-mahasiswa'], function () {
             Route::get('/', [OrganisasiMahasiswaController::class, 'index']);
@@ -99,6 +100,7 @@ Route::group(['middleware' => ['CheckLogin:1']], function () {
 Route::group(['middleware' => ['CheckLogin:2']], function () {
     Route::group(['prefix' => 'bem'], function () {
         Route::get('dashboard', [BemDashboardController::class, 'index']);
+        Route::get('ukm', [BemDashboardController::class, 'ukm']);
 
         Route::group(['prefix' => 'organisasi-mahasiswa'], function () {
             Route::get('/', [BemOrganisasiMahasiswaController::class, 'index']);
@@ -132,6 +134,7 @@ Route::group(['middleware' => ['CheckLogin:2']], function () {
 Route::group(['middleware' => ['CheckLogin:3']], function () {
     Route::group(['prefix' => 'mahasiswa'], function () {
         Route::get('dashboard', [MahasiswaDashboardController::class, 'index']);
+        Route::get('ukm', [MahasiswaDashboardController::class, 'ukm']);
 
         Route::group(['prefix' => 'organisasi-mahasiswa'], function () {
             Route::get('/', [MahasiswaOrganisasiMahasiswaController::class, 'index']);
@@ -183,6 +186,7 @@ Route::group(['middleware' => ['CheckLogin:3']], function () {
 Route::group(['middleware' => ['CheckLogin:4']], function () {
     Route::group(['prefix' => 'akademik_kemahasiswaan'], function () {
         Route::get('dashboard', [AkademikDashboardController::class, 'index']);
+        Route::get('ukm', [AkademikDashboardController::class, 'ukm']);
 
         Route::group(['prefix' => 'organisasi-mahasiswa'], function () {
             Route::get('/', [AkademikOrganisasiMahasiswaController::class, 'index']);
@@ -230,6 +234,7 @@ Route::group(['middleware' => ['CheckLogin:4']], function () {
 Route::group(['middleware' => ['CheckLogin:5']], function () {
     Route::group(['prefix' => 'kemahasiswaan'], function () {
         Route::get('dashboard', [KemahasiswaanDashboardController::class, 'index']);
+        Route::get('ukm', [KemahasiswaanDashboardController::class, 'ukm']);
 
         Route::group(['prefix' => 'organisasi-mahasiswa'], function () {
             Route::get('/', [KemahasiswaanOrganisasiMahasiswaController::class, 'index']);

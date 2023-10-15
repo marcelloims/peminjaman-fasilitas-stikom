@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sarpras;
 
 use App\Http\Controllers\Controller;
+use App\Models\StudentOrganization;
 use App\Services\DashboardService;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,25 @@ class DashboardController extends Controller
     public function index()
     {
         $data['title'] = 'Dashboard';
+        $data['ukms']   = StudentOrganization::with('submissions')->get();
 
         return view('sarpras_templates.pages.dashboard', $data);
+    }
+
+    public function ukm()
+    {
+        $data = StudentOrganization::with('submissions')->get();
+
+        $ukm = [];
+
+
+        foreach ($data as $item) {
+            $ukm[] = [
+                'name'  => $item->name,
+                'total' => $item->submissions->count()
+            ];
+        }
+
+        echo json_encode($ukm);
     }
 }

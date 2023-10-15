@@ -11,4 +11,9 @@ class Submission extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
+
+    public function studentOrganizations()
+    {
+        return $this->belongsTo(studentOrganizations::class, 'student_organizations_id', 'id');
+    }
 }
