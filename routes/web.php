@@ -46,9 +46,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [AuthController::class, 'index']);
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'index')->name('login');
