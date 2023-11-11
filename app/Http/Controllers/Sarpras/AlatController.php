@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sarpras;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tool;
 use App\Services\AlatService;
 use Illuminate\Http\Request;
 

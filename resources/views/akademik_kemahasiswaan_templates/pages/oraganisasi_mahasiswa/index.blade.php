@@ -105,7 +105,7 @@
                                     <th>Nama</th>
                                     <th class="text-center">logo</th>
                                     <th class="text-center">Status</th>
-                                    <th class="text-center">Aksi</th>
+                                    {{-- <th class="text-center">Aksi</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -124,13 +124,13 @@
                                                 <span class="badge light badge-danger">{{ $ukm->status }}</span>
                                             @endif
                                         </td>
-                                        <td class="text-center">
+                                        {{-- <td class="text-center">
                                             <a href="{{ url('akademik_kemahasiswaan/organisasi-mahasiswa/edit/' . $ukm->id, []) }}"
                                                 class="btn btn-sm btn-warning"><i class="flaticon-381-edit-1"></i></a>
                                             <a href="{{ url('akademik_kemahasiswaan/organisasi-mahasiswa/softdelete/' . $ukm->id) }}"
                                                 class="btn btn-sm btn-danger button-delete"><i
                                                     class="flaticon-381-trash"></i></a>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>

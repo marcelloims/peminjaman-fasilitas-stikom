@@ -23,7 +23,7 @@
     </a>
     <ul aria-expanded="false">
         <li><a href="{{ url('sarpras/persetujuan/alat', []) }}">Peminjaman Alat</a></li>
-        <li><a href="{{ url('sarpras/persetujuan/aula', []) }}">Peminjaman Kelas</a></li>
+        <li><a href="{{ url('sarpras/persetujuan/aula', []) }}">Peminjaman Aula</a></li>
     </ul>
 </li>
 <li>

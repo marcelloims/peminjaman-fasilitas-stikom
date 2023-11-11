@@ -69,7 +69,7 @@
                                     @enderror">
                                     <label for="">Email</label>
                                     <input type="text" name="email" class="form-control input-default"
-                                        placeholder="Masukan email" value="{{ old('email') }}">
+                                        placeholder="nim_singkatan@mailinator.com" value="{{ old('email') }}">
                                     @error('email')
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror

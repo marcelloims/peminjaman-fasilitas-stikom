@@ -86,7 +86,7 @@
                                     @enderror">
                                     <label for="">Kode</label>
                                     <input type="text" name="kode" class="form-control input-default"
-                                        placeholder="Masukan kode" value="#BRG-{{ $kode }}" readonly>
+                                        placeholder="Masukan kode" value="#BRG-AL-{{ $kode }}" readonly>
                                     <input type="hidden" name="fasilitas_id" class="form-control input-default"
                                         value="{{ $fasilitas->id }}" readonly>
                                     @error('kode')

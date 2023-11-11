@@ -53,6 +53,18 @@
                                 </div>
                                 <div
                                     class="form-group
+                                    @error('singkatan')
+                                        input-danger
+                                    @enderror">
+                                    <label for="">Singkatan</label>
+                                    <input type="text" name="singkatan" class="form-control input-default"
+                                        placeholder="Masukan singkatan" value="{{ old('singkatan') }}">
+                                    @error('singkatan')
+                                        <span class="badge light badge-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div
+                                    class="form-group
                                     @error('logo')
                                         input-danger
                                     @enderror">
@@ -114,8 +126,8 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $ukm->name }}</td>
                                         <td class="text-center">
-                                            <img src="{{ asset('logo_ukm/' . $ukm->logo) }}" width="50" height="50"
-                                                alt="logo-ukm" />
+                                            <img src="{{ asset('logo_ukm/' . $ukm->logo) }}" width="50"
+                                                height="50" alt="logo-ukm" />
                                         </td>
                                         <td class="text-center">
                                             @if ($ukm->status == 'Aktif')

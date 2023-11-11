@@ -24,11 +24,13 @@ class OrganisasiMahasiswaService
         $request->validate(
             [
                 'nama'      => 'required',
-                'logo'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'singkatan' => 'required',
+                'logo'      => 'required|image|mimes:jpeg,png,jpg,gif,svg',
                 'status'    => 'required'
             ],
             [
                 'nama.required'      => 'Nama tidak boleh kosong',
+                'singkatan.required' => 'Singkatan tidak boleh kosong',
                 'logo.required'      => 'Logo tidak boleh kosong',
                 'status.required'    => 'Status tidak boleh kosong',
             ]
@@ -36,6 +38,7 @@ class OrganisasiMahasiswaService
 
         $data = [
             'name'          => $request->nama,
+            'nickname'      => $request->singkatan,
             'logo'          => $request->file('logo')->getClientOriginalName(),
             'status'        => $request->status,
             'created_by'    => Auth::user()->email,

@@ -44,8 +44,8 @@ class FasilitasController extends Controller
         $data['tools']      = $this->alatService->getDataByRequest('tools', $id);
         $data['title']      = 'Fasilitas';
         $data['fasilitas']  = $this->fasilitasService->getData($this->table, $id);
-        $tools              = $this->alatService->getData('tools', $id = null);
-        $kode               = substr($tools->max('code'), 5);
+        $tools              = Tool::where('code', 'like', '%#BRG-AL-%')->get();
+        $kode               = substr($tools->max('code'), 8);
         $data['kode']       = (int)$kode + 1;
 
         return view('sarpras_templates.pages.fasilitas.detail', $data);
