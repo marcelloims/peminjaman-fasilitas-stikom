@@ -138,8 +138,7 @@ class PersetujuanAulaController extends controller
             )
             ->where('detail_submissions.submissions_id', $id)
             ->get();
-
-        return view('sarpras_templates.pages.persetujuan.aula.pengembalianAlat', $data);
+        return view('sarpras_templates.pages.persetujuan.aula.pengembalianAula', $data);
     }
 
     public function retur(Request $request, $id)

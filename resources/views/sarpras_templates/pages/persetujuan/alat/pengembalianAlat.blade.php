@@ -90,6 +90,11 @@
                                 @endif
                             </form>
                         @endforeach
+                        @if ($tool->status != 'Dipinjam')
+                            <tr class="text-center">
+                                <td colspan="5" class="text-success">Barang Sudah Dikembalikan</td>
+                            </tr>
+                        @endif
                     </table>
                     <hr>
                 </div>

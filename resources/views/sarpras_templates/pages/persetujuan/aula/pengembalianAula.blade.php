@@ -52,7 +52,8 @@
                             <th>Aksi</th>
                         </tr>
                         @foreach ($tools as $tool)
-                            <form action="{{ url('sarpras/persetujuan/aula/update/' . $tool->id, []) }}" method="post">
+                            <form action="{{ url('sarpras/persetujuan/aula/update/' . $tool->submissions_id, []) }}"
+                                method="post">
                                 @csrf
                                 @if ($tool->status == 'Dipinjam')
                                     <tr>
@@ -84,12 +85,17 @@
                                             @enderror
                                         </td>
                                         <td align="center">
-                                            <button class="btn btn-sm btn-success">Unggah</button>
+                                            <button type="submit" class="btn btn-sm btn-success">Unggah</button>
                                         </td>
                                     </tr>
                                 @endif
                             </form>
                         @endforeach
+                        @if ($tool->status != 'Dipinjam')
+                            <tr class="text-center">
+                                <td colspan="5" class="text-success">Barang Sudah Dikembalikan</td>
+                            </tr>
+                        @endif
                     </table>
                     <hr>
                 </div>

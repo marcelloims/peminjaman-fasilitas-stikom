@@ -53,12 +53,10 @@
                                         <td align="center">
                                             @if ($submission->status == 'Tertunda')
                                                 <span class="badge light badge-secondary">Tertunda</span></span>
-                                            @elseif ($submission->status == 'Disetujuhi')
+                                            @elseif ($submission->status == 'Disetujui')
                                                 <span class="badge light badge-success">{{ $submission->status }}</span>
                                             @elseif ($submission->status == 'Ditolak')
                                                 <span class="badge light badge-danger">{{ $submission->status }}</span>
-                                            @else
-                                                <span class="badge light badge-success">Selesai</span>
                                             @endif
                                         </td>
                                         <td align="center">
