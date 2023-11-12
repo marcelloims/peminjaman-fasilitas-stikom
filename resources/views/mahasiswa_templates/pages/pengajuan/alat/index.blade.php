@@ -40,10 +40,17 @@
                     @csrf
                     <div class="card">
                         <div class="card-header">
-                            <span class="card-title" style="font-size: 12px;">{{ $tool->name }}</span>
+                            <span class="card-title" style="font-size: 14px; position: absolute;">{{ $tool->name }}</span>
                         </div>
                         <div class="card-body">
-                            <img src="{{ asset('logo_ukm/' . $tool->image) }}" width="150" height="150"
+                            <img src="{{ asset('logo_ukm/' . $tool->image) }}"
+                                style="
+                                border: 1px solid #ddd;
+                                border-radius: 4px;
+                                padding: 5px;
+                                width: 200px;
+                                height: 200px;
+                            "
                                 alt="logo-ukm" />
                         </div>
                         <div class="card-footer">

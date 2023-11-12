@@ -22,7 +22,7 @@
     <ul aria-expanded="false">
         <li><a href="{{ url('mahasiswa/pengajuan/alat', []) }}">Peminjaman Alat</a></li>
         <li><a href="{{ url('mahasiswa/pengajuan/aula', []) }}">Peminjaman Aula</a></li>
-        <li><a href="{{ url('mahasiswa/pengajuan/kelas', []) }}">Peminjaman Kelas</a></li>
+        {{-- <li><a href="{{ url('mahasiswa/pengajuan/kelas', []) }}">Peminjaman Kelas</a></li> --}}
     </ul>
 </li>
 <li>

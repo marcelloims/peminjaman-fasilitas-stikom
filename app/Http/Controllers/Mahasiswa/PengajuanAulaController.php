@@ -54,7 +54,9 @@ class PengajuanAulaController extends Controller
             $endRequest     = date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai));
             $startExist     = substr($dataSubmission->date_start, 0, 10);
             $endExist       = substr($dataSubmission->date_end, 0, 10);
-            $dateNow        = strtotime(date("Y-m-d"));
+            $dateNow        = date("Y-m-d");
+
+            // dd($startRequest, $dateNow);
 
             if (empty($startRequest) || empty($endRequest)) {
                 $error = "Tanggal Mulai atau Tanggal Selesai tidak boleh kosong!";

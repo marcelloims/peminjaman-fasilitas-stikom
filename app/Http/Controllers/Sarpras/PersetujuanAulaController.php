@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sarpras;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailSubmissions;
 use App\Models\ErrorTool;
 use App\Models\Retur;
 use App\Models\Submission;
@@ -126,21 +127,18 @@ class PersetujuanAulaController extends controller
     public function edit($id)
     {
         $data['title']          = 'Pengembalian Aula';
-        $data['submission']     = Submission::where('id', $id)->first();
-        $data['tools']          = Submission::join('detail_submissions', 'submissions.id', '=', 'detail_submissions.submissions_id')
-            ->join('tools', 'detail_submissions.tools_id', '=', 'tools.id')
-            ->join('returs', 'submissions.id', '=', 'returs.submissions_id')
-            ->where('detail_submissions.submissions_id', $id)
+        $data['tools']          = DetailSubmissions::join('tools', 'detail_submissions.tools_id', '=', 'tools.id')
+            ->join('returs', 'returs.tools_id', '=', 'detail_submissions.tools_id')
             ->select(
-                'submissions.id',
+                'detail_submissions.submissions_id as submissions_id',
                 'tools.id as tool_id',
                 'tools.name',
                 'detail_submissions.qty',
-                'returs.status  as status'
+                'returs.status'
             )
+            ->where('detail_submissions.submissions_id', $id)
             ->get();
 
-        // dd($data);
         return view('sarpras_templates.pages.persetujuan.aula.pengembalianAlat', $data);
     }
 
