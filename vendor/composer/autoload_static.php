@@ -581,6 +581,7 @@ class ComposerStaticInit43e5a585371e7bb3f8da7f86bf7dbe36
         'App\\Http\\Controllers\\Sarpras\\MahasiswaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Sarpras/MahasiswaController.php',
         'App\\Http\\Controllers\\Sarpras\\OrganisasiMahasiswaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Sarpras/OrganisasiMahasiswaController.php',
         'App\\Http\\Controllers\\Sarpras\\PersetujuanAlatController' => __DIR__ . '/../..' . '/app/Http/Controllers/Sarpras/PersetujuanAlatController.php',
+        'App\\Http\\Controllers\\Sarpras\\PersetujuanAulaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Sarpras/PersetujuanAulaController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckLogin' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckLogin.php',

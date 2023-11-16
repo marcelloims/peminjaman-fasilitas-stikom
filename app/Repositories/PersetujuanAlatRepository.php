@@ -41,16 +41,18 @@ class PersetujuanAlatRepository extends BaseRepository
 
     public function joinDetailSubmissionsAndTools($id)
     {
-        return DB::table('detail_submissions')
+        return DB::table('submissions')
+            ->join('detail_submissions', 'detail_submissions.submissions_id', '=', 'submissions.id')
             ->join('tools', 'detail_submissions.tools_id', '=', 'tools.id')
-            ->join('returs', 'returs.tools_id', '=', 'tools.id')
-            ->where('detail_submissions.submissions_id', $id)
+            ->join('returs', 'tools.id', '=', 'returs.tools_id')
+            ->where('submissions.id', $id)
+            ->where('returs.submissions_id', $id)
             ->select(
-                'detail_submissions.submissions_id as id',
+                'submissions.id as id',
                 'detail_submissions.tools_id as tools_id',
-                'tools.name as name',
                 'detail_submissions.qty as qty',
-                'returs.status  as status'
+                'tools.name as name',
+                'returs.status as status'
             )
             ->get();
     }

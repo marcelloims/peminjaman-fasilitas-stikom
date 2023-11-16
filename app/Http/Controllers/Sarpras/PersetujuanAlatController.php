@@ -126,10 +126,7 @@ class PersetujuanAlatController extends controller
     public function edit($id)
     {
         $data['title']          = 'Pengembalian Alat';
-        $data['submission']     = $this->persetujuanAlatService->getDataSubmission('submissions', $id);
-        $data['submission_id']  = $id;
         $data['tools']          = $this->persetujuanAlatService->joinDetailSubmissionsAndTools($id);
-
         // dd($data);
         return view('sarpras_templates.pages.persetujuan.alat.pengembalianAlat', $data);
     }

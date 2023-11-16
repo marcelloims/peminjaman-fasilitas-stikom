@@ -16,4 +16,14 @@ class Submission extends Model
     {
         return $this->belongsTo(studentOrganizations::class, 'student_organizations_id', 'id');
     }
+
+    public function detailSubmission()
+    {
+        return $this->hasMany(DetailSubmissions::class, 'submissions_id', 'id');
+    }
+
+    public function retur()
+    {
+        return $this->hasMany(Retur::class, 'submissions_id', 'id');
+    }
 }

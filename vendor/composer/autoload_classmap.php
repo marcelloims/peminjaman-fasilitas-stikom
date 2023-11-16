@@ -41,6 +41,7 @@ return array(
     'App\\Http\\Controllers\\Sarpras\\MahasiswaController' => $baseDir . '/app/Http/Controllers/Sarpras/MahasiswaController.php',
     'App\\Http\\Controllers\\Sarpras\\OrganisasiMahasiswaController' => $baseDir . '/app/Http/Controllers/Sarpras/OrganisasiMahasiswaController.php',
     'App\\Http\\Controllers\\Sarpras\\PersetujuanAlatController' => $baseDir . '/app/Http/Controllers/Sarpras/PersetujuanAlatController.php',
+    'App\\Http\\Controllers\\Sarpras\\PersetujuanAulaController' => $baseDir . '/app/Http/Controllers/Sarpras/PersetujuanAulaController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\CheckLogin' => $baseDir . '/app/Http/Middleware/CheckLogin.php',

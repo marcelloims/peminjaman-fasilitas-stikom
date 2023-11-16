@@ -10,4 +10,9 @@ class Retur extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function submission()
+    {
+        return $this->belongsTo(Submission::class, 'submissions_id', 'id');
+    }
 }
