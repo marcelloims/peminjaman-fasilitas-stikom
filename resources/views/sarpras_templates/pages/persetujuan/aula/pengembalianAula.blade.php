@@ -52,15 +52,14 @@
                             <th>Aksi</th>
                         </tr>
                         @foreach ($tools as $tool)
-                            <form action="{{ url('sarpras/persetujuan/aula/update/' . $tool->submissions_id, []) }}"
-                                method="post">
+                            <form action="{{ url('sarpras/persetujuan/aula/update/' . $tool->id, []) }}" method="post">
                                 @csrf
                                 @if ($tool->status == 'Dipinjam')
                                     <tr>
                                         <td align="center">{{ $loop->iteration }}</td>
                                         <td>{{ $tool->name }}</td>
                                         <td width="150">
-                                            <input type="hidden" name="tool_id" value="{{ $tool->tool_id }}">
+                                            <input type="hidden" name="tool_id" value="{{ $tool->tools_id }}">
                                             <input type="number"
                                                 class="form-control
                                             @error('jumlah')

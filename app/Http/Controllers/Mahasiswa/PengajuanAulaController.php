@@ -36,9 +36,9 @@ class PengajuanAulaController extends Controller
     {
         $dataSubmission = Submission::where('category', 2)
             ->where('date_start', '>=', date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " 08:00:00")
-            ->orWhere('date_end', '<=', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
+            ->where('date_end', '<=', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
             ->orWhere('date_start', '<', date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " 08:00:00")
-            ->Where('date_end', '>', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
+            ->where('date_end', '>', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
             ->first();
 
         // dd($dataSubmission);
@@ -47,7 +47,18 @@ class PengajuanAulaController extends Controller
         $message = "";
 
         if ($dataSubmission == null) {
-            $message = $this->pengajuanService->storeAula($this->table, $request);
+            $startRequest   = date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai));
+            $endRequest     = date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai));
+            $dateNow        = date("Y-m-d");
+            if ($startRequest > $endRequest) {
+                $error = "Tanggal Salah!";
+                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
+            } elseif ($startRequest <= $dateNow && $endRequest <= $dateNow) {
+                $error = "Tanggal sudah lewat!";
+                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
+            } else {
+                $message = $this->pengajuanService->storeAula($this->table, $request);
+            }
         } else {
 
             $startRequest   = date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai));
@@ -56,7 +67,7 @@ class PengajuanAulaController extends Controller
             $endExist       = substr($dataSubmission->date_end, 0, 10);
             $dateNow        = date("Y-m-d");
 
-            // dd($startRequest, $dateNow);
+            // dd($startExist, $startRequest);
 
             if (empty($startRequest) || empty($endRequest)) {
                 $error = "Tanggal Mulai atau Tanggal Selesai tidak boleh kosong!";

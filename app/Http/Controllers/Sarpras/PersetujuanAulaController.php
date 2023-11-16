@@ -127,17 +127,22 @@ class PersetujuanAulaController extends controller
     public function edit($id)
     {
         $data['title']          = 'Pengembalian Aula';
-        $data['tools']          = DetailSubmissions::join('tools', 'detail_submissions.tools_id', '=', 'tools.id')
-            ->join('returs', 'returs.tools_id', '=', 'detail_submissions.tools_id')
+
+        $data['tools']          = DB::table('submissions')
+            ->join('detail_submissions', 'detail_submissions.submissions_id', '=', 'submissions.id')
+            ->join('tools', 'detail_submissions.tools_id', '=', 'tools.id')
+            ->join('returs', 'tools.id', '=', 'returs.tools_id')
+            ->where('submissions.id', $id)
+            ->where('returs.submissions_id', $id)
             ->select(
-                'detail_submissions.submissions_id as submissions_id',
-                'tools.id as tool_id',
-                'tools.name',
-                'detail_submissions.qty',
-                'returs.status'
+                'submissions.id as id',
+                'detail_submissions.tools_id as tools_id',
+                'detail_submissions.qty as qty',
+                'tools.name as name',
+                'returs.status as status'
             )
-            ->where('detail_submissions.submissions_id', $id)
             ->get();
+        // dd($data);
         return view('sarpras_templates.pages.persetujuan.aula.pengembalianAula', $data);
     }
 
