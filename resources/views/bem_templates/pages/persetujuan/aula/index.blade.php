@@ -50,7 +50,7 @@
                                         </td>
                                         <td align="center">
                                             @if (!$submission->assign_2)
-                                                <span class="badge light badge-secondary">{{ $submission->assign_2 }}</span>
+                                                <span class="badge light badge-secondary">Tertunda</span>
                                             @elseif ($submission->assign_2 == 'Disetujui')
                                                 <span class="badge light badge-success">{{ $submission->assign_2 }}</span>
                                             @else
