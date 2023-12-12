@@ -11,7 +11,7 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col-2">
-                        <img src="{{ asset('logo_ukm/logo-stikom.png') }}" width="150" height="150" alt="logo-stikom"
+                        <img src="{{ asset('signature/logo-stikom.png') }}" width="150" height="150" alt="logo-stikom"
                             class="mr-6" />
                     </div>
                     <div class="col-8 text-center">
@@ -20,7 +20,7 @@
                         <p style="font-size: 30px; font-weight: bold; height:30px">{{ $detailSubmissions->name }}</p>
                     </div>
                     <div class="col-2">
-                        <img src="{{ asset('logo_ukm/' . $detailSubmissions->logoSubmissions) }}" align='right'
+                        <img src="{{ asset('signature/' . $detailSubmissions->logoSubmissions) }}" align='right'
                             class="ml-3" width="150" height="150" alt="logo-ukm" />
                     </div>
                 </div>
@@ -155,10 +155,10 @@
                     <div class="col-4">{{ $chairman_of_the_commitee->category }}</div>
                 </div>
                 <div class="row text-center">
-                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $chairman_of_the_commitee->signature) }}"
+                    <div class="col-4"><img src="{{ asset('signature/' . $chairman_of_the_commitee->signature) }}"
                             width="100" height="100" alt="logo-ukm" /></div>
                     <div class="col-4"></div>
-                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $chairman_of_the_commitee->signature) }}"
+                    <div class="col-4"><img src="{{ asset('signature/' . $chairman_of_the_commitee->signature) }}"
                             width="100" height="100" alt="logo-ukm" /></div>
                 </div>
                 <div class="row text-center">
@@ -186,19 +186,19 @@
                 <div class="row text-center mt-3 mb-3">
                     <div class="col-4">
                         @if ($detailSubmissions->assign_4 == 'Disetujui')
-                            <img src="{{ asset('logo_ukm/' . $akademik->signature) }}" width="100" height="100"
+                            <img src="{{ asset('signature/' . $akademik->signature) }}" width="100" height="100"
                                 alt="logo-ukm" />
                         @endif
                     </div>
                     <div class="col-4">
                         @if ($detailSubmissions->assign_5 == 'Disetujui')
-                            <img src="{{ asset('logo_ukm/' . $kemahasiswaan->signature) }}" width="100"
+                            <img src="{{ asset('signature/' . $kemahasiswaan->signature) }}" width="100"
                                 height="100" alt="logo-ukm" />
                         @endif
                     </div>
                     <div class="col-4">
                         @if ($detailSubmissions->assign_2 == 'Disetujui')
-                            <img src="{{ asset('logo_ukm/' . $bem->signature) }}" width="100" height="100"
+                            <img src="{{ asset('signature/' . $bem->signature) }}" width="100" height="100"
                                 alt="logo-ukm" />
                         @endif
                     </div>
@@ -238,7 +238,7 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col-2">
-                        <img src="{{ asset('logo_ukm/logo-stikom.png') }}" width="150" height="150"
+                        <img src="{{ asset('signature/logo-stikom.png') }}" width="150" height="150"
                             alt="logo-stikom" class="mr-6" />
                     </div>
                     <div class="col-8 text-center">
@@ -247,7 +247,7 @@
                         <p style="font-size: 30px; font-weight: bold; height:30px">{{ $detailSubmissions->name }}</p>
                     </div>
                     <div class="col-2">
-                        <img src="{{ asset('logo_ukm/' . $detailSubmissions->logoSubmissions) }}" align='right'
+                        <img src="{{ asset('signature/' . $detailSubmissions->logoSubmissions) }}" align='right'
                             class="ml-3" width="150" height="150" alt="logo-ukm" />
                     </div>
                 </div>
