@@ -33,6 +33,7 @@ use App\Http\Controllers\Sarpras\MahasiswaController;
 use App\Http\Controllers\sarpras\OrganisasiMahasiswaController;
 use App\Http\Controllers\Sarpras\PersetujuanAlatController as SarprasPersetujuanAlatController;
 use App\Http\Controllers\Sarpras\PersetujuanAulaController as SarprasPersetujuanAulaController;
+use App\Http\Controllers\Sarpras\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -97,6 +98,14 @@ Route::group(['middleware' => ['CheckLogin:1']], function () {
                 Route::get('/detail/{id}', [SarprasPersetujuanAulaController::class, 'show']);
                 Route::get('/edit/{id}', [SarprasPersetujuanAulaController::class, 'edit']);
                 Route::post('/update/{id}', [SarprasPersetujuanAulaController::class, 'retur']);
+            });
+        });
+
+        Route::group(['prefix' => 'laporan'], function () {
+            Route::group(['prefix' => 'pengajuan'], function () {
+                Route::get('/', [ReportController::class, 'pengajuan']);
+                Route::post('/search', [ReportController::class, 'data']);
+                Route::post('/print', [ReportController::class, 'print']);
             });
         });
     });
