@@ -32,6 +32,13 @@ class FasilitasController extends Controller
         return view('sarpras_templates.pages.fasilitas.index', $data);
     }
 
+    public function store(Request $request)
+    {
+        $this->fasilitasService->store($this->table, $request);
+
+        return redirect('sarpras/fasilitas')->with('message', 'Berhasil disimpan');
+    }
+
     public function store_tool(Request $request)
     {
         $this->alatService->store('tools', $request);

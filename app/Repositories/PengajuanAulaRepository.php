@@ -15,8 +15,11 @@ class PengajuanAulaRepository extends BaseRepository
 
         $dataSubmission = BaseRepository::getData($table, $id = null)->max('id');
 
+        // dd($dataSubmission);
+
         $tools  = Tool::where('facilities_id', 1)->get();
         foreach ($tools as $tool) {
+            // dd($tool);
             $detailSubmission = [
                 "submissions_id"    => $dataSubmission,
                 "tools_id"          => $tool->id,

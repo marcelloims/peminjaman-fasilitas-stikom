@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Submission;
 use App\Models\Tool;
 use App\Services\AlatService;
 use App\Services\MahasiswaService;
@@ -36,6 +37,73 @@ class PengajuanAlatController extends Controller
         $data['totalCart']      = $this->pengajuanAlatService->getTotalCart();
 
         return view('mahasiswa_templates.pages.pengajuan.alat.index', $data);
+    }
+
+    public function search_date(Request $request)
+    {
+        $dataSubmission = Submission::where('category', 1)
+            ->where('date_start', '>=', date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " 08:00:00")
+            ->where('date_end', '<=', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
+            ->orWhere('date_start', '<', date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " 08:00:00")
+            ->where('date_end', '>', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
+            ->first();
+
+        // dd($dataSubmission);
+
+        $error = "";
+        $message = "";
+
+        if ($dataSubmission == null) {
+            $startRequest   = date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai));
+            $endRequest     = date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai));
+            $dateNow        = date("Y-m-d");
+            if ($startRequest > $endRequest) {
+                $error = "Tanggal Salah!";
+                return redirect('mahasiswa/pengajuan/alat')->with('error', $error);
+            } elseif ($startRequest <= $dateNow || $endRequest <= $dateNow) {
+                $error = "Tanggal sudah lewat!";
+                return redirect('mahasiswa/pengajuan/alat')->with('error', $error);
+            } else {
+                $data['title']          = 'Pengajuan Peminjaman';
+                $data['chairmans']      = $this->mahasiswaService->getChairman('users');
+                $data['tools']          = $this->alatService->getToolOnly('tools');
+                $data['totalCart']      = $this->pengajuanAlatService->getTotalCart();
+                $data['date']           = ['start' => $startRequest, 'end' => $endRequest];
+
+                // dd($data);
+                return view('mahasiswa_templates.pages.pengajuan.alat.search', $data);
+            }
+        } else {
+
+            $startRequest   = date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai));
+            $endRequest     = date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai));
+            $startExist     = substr($dataSubmission->date_start, 0, 10);
+            $endExist       = substr($dataSubmission->date_end, 0, 10);
+            $dateNow        = date("Y-m-d");
+
+            // dd($startExist, $startRequest);
+
+            if (empty($startRequest) || empty($endRequest)) {
+                $error = "Tanggal Mulai atau Tanggal Selesai tidak boleh kosong!";
+                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
+            } elseif ($startRequest > $endRequest) {
+                $error = "Tanggal Salah!";
+                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
+            } elseif ($startRequest <= $dateNow && $endRequest <= $dateNow) {
+                $error = "Tanggal sudah lewat!";
+                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
+            } elseif (
+                ($startRequest == $startExist || $endRequest == $endExist) ||
+                ($startRequest < $startExist && $endRequest >= $startExist) ||
+                ($startRequest >= $startExist && $startRequest == $endExist) ||
+                ($startRequest >= $startExist && $endRequest <= $endExist) ||
+                ($startRequest > $startExist && $endRequest < $endExist) ||
+                ($startRequest > $startExist && $startRequest < $endExist)
+            ) {
+                $error = "Tanggal sudah dipakai kegiatan lain! Silahkan lihat daftar peminjaman di bawah";
+                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
+            }
+        }
     }
 
     public function addToCart(Request $request, $id)

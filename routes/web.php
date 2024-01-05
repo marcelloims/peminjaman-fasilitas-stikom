@@ -79,6 +79,7 @@ Route::group(['middleware' => ['CheckLogin:1']], function () {
 
         Route::group(['prefix' => 'fasilitas'], function () {
             Route::get('/', [FasilitasController::class, 'index']);
+            Route::post('save', [FasilitasController::class, 'store']);
             Route::post('fasilitas-save', [FasilitasController::class, 'store_tool']);
             Route::get('detail/{id}', [FasilitasController::class, 'show']);
             Route::get('fasilitas-edit/{id}', [FasilitasController::class, 'edit_tool']);
@@ -162,6 +163,7 @@ Route::group(['middleware' => ['CheckLogin:3']], function () {
         Route::group(['prefix' => 'pengajuan'], function () {
             Route::group(['prefix' => 'alat'], function () {
                 Route::get('/', [PengajuanAlatController::class, 'index']);
+                Route::post('/search/date', [PengajuanAlatController::class, 'search_date']);
                 Route::post('/addToCart/{id}', [PengajuanAlatController::class, 'addToCart']);
                 Route::get('/detailCart', [PengajuanAlatController::class, 'detailCart']);
                 Route::post('/subtract/{id}', [PengajuanAlatController::class, 'subtractCart']);

@@ -65,7 +65,7 @@
                                             @error('jumlah')
                                             input-danger
                                             @enderror"
-                                                name="jumlah" id="" min="1" max="{{ $tool->qty }}"
+                                                name="jumlah" id="" min="0" max="{{ $tool->qty }}"
                                                 placeholder="jumlah">
                                             @error('jumlah')
                                                 <span class="badge light badge-danger">{{ $message }}</span>
