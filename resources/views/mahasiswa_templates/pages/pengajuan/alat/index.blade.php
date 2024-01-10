@@ -34,6 +34,17 @@
             </button>
         </div>
     @endif
+    <div class="row">
+        <div class="col-6 col-sm-6">
+            <h4 class="card-title">Data Alat-alat</h4>
+        </div>
+        <div class="col-6 col-sm-6">
+            <a href="{{ url('mahasiswa/pengajuan/alat/detailCart') }}"
+                class="card-title float-right text-white badge-info btn"><i
+                    class="
+                flaticon-381-bookmark-1"></i> Daftar Alat : {{ $totalCart }} item</a>
+        </div>
+    </div>
     <form action="{{ url('mahasiswa/pengajuan/alat/search/date', []) }}" method="POST" enctype="multipart/form-data">
     <div class="row">
             @csrf

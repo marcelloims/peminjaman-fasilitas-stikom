@@ -43,10 +43,15 @@ class PengajuanAlatController extends Controller
     {
         $dataSubmission = Submission::where('category', 1)
             ->where('date_start', '>=', date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " 08:00:00")
-            ->where('date_end', '<=', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
-            ->orWhere('date_start', '<', date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " 08:00:00")
-            ->where('date_end', '>', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
+            // ->orWhere('date_end', '<=', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
+            // ->orWhere('date_start', '<', date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " 08:00:00")
+            // ->orWhere('date_end', '>', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
             ->first();
+
+            if (empty($request->tanggal_kegiatan_mulai) || empty($request->tanggal_kegiatan_selesai)) {
+                $error = "Tanggal Mulai atau Tanggal Selesai tidak boleh kosong!";
+                return redirect('mahasiswa/pengajuan/alat')->with('error', $error);
+            } 
 
         // dd($dataSubmission);
 
@@ -57,6 +62,7 @@ class PengajuanAlatController extends Controller
             $startRequest   = date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai));
             $endRequest     = date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai));
             $dateNow        = date("Y-m-d");
+
             if ($startRequest > $endRequest) {
                 $error = "Tanggal Salah!";
                 return redirect('mahasiswa/pengajuan/alat')->with('error', $error);
@@ -81,18 +87,9 @@ class PengajuanAlatController extends Controller
             $endExist       = substr($dataSubmission->date_end, 0, 10);
             $dateNow        = date("Y-m-d");
 
-            // dd($startExist, $startRequest);
+            // dd($startExist, $startRequest, $endExist, $endRequest);
 
-            if (empty($startRequest) || empty($endRequest)) {
-                $error = "Tanggal Mulai atau Tanggal Selesai tidak boleh kosong!";
-                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
-            } elseif ($startRequest > $endRequest) {
-                $error = "Tanggal Salah!";
-                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
-            } elseif ($startRequest <= $dateNow && $endRequest <= $dateNow) {
-                $error = "Tanggal sudah lewat!";
-                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
-            } elseif (
+            if (
                 ($startRequest == $startExist || $endRequest == $endExist) ||
                 ($startRequest < $startExist && $endRequest >= $startExist) ||
                 ($startRequest >= $startExist && $startRequest == $endExist) ||
@@ -101,7 +98,15 @@ class PengajuanAlatController extends Controller
                 ($startRequest > $startExist && $startRequest < $endExist)
             ) {
                 $error = "Tanggal sudah dipakai kegiatan lain! Silahkan lihat daftar peminjaman di bawah";
-                return redirect('mahasiswa/pengajuan/aula')->with('error', $error);
+                return redirect('mahasiswa/pengajuan/alat')->with('error', $error);
+            }else{
+                $data['title']          = 'Pengajuan Peminjaman';
+                $data['chairmans']      = $this->mahasiswaService->getChairman('users');
+                $data['tools']          = $this->alatService->getToolOnly('tools');
+                $data['totalCart']      = $this->pengajuanAlatService->getTotalCart();
+                $data['date']           = ['start' => $startRequest, 'end' => $endRequest];
+
+                return view('mahasiswa_templates.pages.pengajuan.alat.search', $data);
             }
         }
     }
@@ -117,7 +122,7 @@ class PengajuanAlatController extends Controller
             'qty' => $totalQty
         ];
 
-        Tool::where('id', $id)->update($updateTool);
+        // Tool::where('id', $id)->update($updateTool);
 
         return redirect('mahasiswa/pengajuan/alat')->with('message', 'Berhasil ditambahkan');
     }
@@ -182,7 +187,7 @@ class PengajuanAlatController extends Controller
         ];
 
         Tool::where('id', $id)->update($updateTool);
-        return redirect('mahasiswa/pengajuan/alat/detailCart');
+        return redirect('mahasiswa/pengajuan/alat');
     }
 
     public function clearCart()

@@ -49,10 +49,10 @@
                                                     height="50" alt="logo-ukm" /></td>
                                             <td>
                                                 <div class="row justify-content-center">
-                                                    <div class="col-2 mt-2">
+                                                    <div class="col-3 mt-2">
                                                         {{ $cart->quantity }}
                                                     </div>
-                                                    <div class="col-1 mr-3">
+                                                    {{-- <div class="col-1 mr-3">
                                                         @if ($cart->quantity > 1)
                                                             <form
                                                                 action="{{ url('mahasiswa/pengajuan/alat/subtract/' . $cart->id) }}"
@@ -79,7 +79,7 @@
                                                                 </button>
                                                             </form>
                                                         @endif
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </td>
                                             <td>
@@ -237,9 +237,8 @@
                                         input-danger
                                     @enderror">
                                             <label for="">Jam Selesai</label>
-                                            <input class="form-control" name="jam_selesai" id="single-input"
-                                                value="{{ old('jam_selesai') }}"
-                                                placeholder="format: {{ date('H:i') }}">
+                                            <input class="form-control" name="jam_selesai"
+                                                value="18:00" readonly>
                                             @error('jam_selesai')
                                                 <span class="badge light badge-danger">{{ $message }}</span>
                                             @enderror
