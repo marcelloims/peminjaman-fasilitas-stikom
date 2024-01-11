@@ -30,6 +30,11 @@ class AlatService
         return $this->alatRepository->getToolOnly($table);
     }
 
+    public function getToolOnlyById($table, $id)
+    {
+        return $this->alatRepository->getToolOnlyById($table, $id);
+    }
+
     public function getDataByRequest($table, $id)
     {
         return $this->alatRepository->getDataByRequest($table, $id);

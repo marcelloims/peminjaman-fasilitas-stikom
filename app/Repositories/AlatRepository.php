@@ -16,6 +16,16 @@ class AlatRepository extends BaseRepository
         return DB::table($table)->whereNull('facilities_id')->get();
     }
 
+    public function getToolOnlyById($table, $id)
+    {
+        // dd($id);
+        return DB::table($table)
+        ->whereNull('facilities_id')
+        ->whereNotBetween('id', $id)
+        ->get();
+        // dd($data);
+    }
+
     public function getDataByRequest($table, $id)
     {
         return BaseRepository::getDataByRequest($table, $id);

@@ -41,17 +41,25 @@ class PengajuanAlatController extends Controller
 
     public function search_date(Request $request)
     {
-        $dataSubmission = Submission::where('category', 1)
+        $dataSubmission = Submission::with('detailSubmission')
+            ->where('category', 1)
             ->where('date_start', '>=', date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " 08:00:00")
-            // ->orWhere('date_end', '<=', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
-            // ->orWhere('date_start', '<', date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " 08:00:00")
-            // ->orWhere('date_end', '>', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
+            ->where('date_end', '<=', date('Y-m-d', strtotime($request->tanggal_kegiatan_selesai)) . " 18:00:00")
             ->first();
 
-            if (empty($request->tanggal_kegiatan_mulai) || empty($request->tanggal_kegiatan_selesai)) {
-                $error = "Tanggal Mulai atau Tanggal Selesai tidak boleh kosong!";
-                return redirect('mahasiswa/pengajuan/alat')->with('error', $error);
-            } 
+        $id = []; 
+        if ($dataSubmission) {
+            foreach ($dataSubmission->detailSubmission as $key) {
+                $id[] = $key->tools_id;
+            }
+        }
+
+        // dd($dataSubmission);
+
+        if (empty($request->tanggal_kegiatan_mulai) || empty($request->tanggal_kegiatan_selesai)) {
+            $error = "Tanggal Mulai atau Tanggal Selesai tidak boleh kosong!";
+            return redirect('mahasiswa/pengajuan/alat')->with('error', $error);
+        } 
 
         // dd($dataSubmission);
 
@@ -97,8 +105,17 @@ class PengajuanAlatController extends Controller
                 ($startRequest > $startExist && $endRequest < $endExist) ||
                 ($startRequest > $startExist && $startRequest < $endExist)
             ) {
-                $error = "Tanggal sudah dipakai kegiatan lain! Silahkan lihat daftar peminjaman di bawah";
-                return redirect('mahasiswa/pengajuan/alat')->with('error', $error);
+                // $error = "Tanggal sudah dipakai kegiatan lain! Silahkan lihat daftar peminjaman di bawah";
+                // return redirect('mahasiswa/pengajuan/alat')->with('error', $error);
+
+                $data['title']          = 'Pengajuan Peminjaman';
+                $data['chairmans']      = $this->mahasiswaService->getChairman('users');
+                $data['tools']          = $this->alatService->getToolOnlyById('tools', $id);
+                $data['totalCart']      = $this->pengajuanAlatService->getTotalCart();
+                $data['date']           = ['start' => $startRequest, 'end' => $endRequest];
+
+                return view('mahasiswa_templates.pages.pengajuan.alat.search', $data);
+
             }else{
                 $data['title']          = 'Pengajuan Peminjaman';
                 $data['chairmans']      = $this->mahasiswaService->getChairman('users');
