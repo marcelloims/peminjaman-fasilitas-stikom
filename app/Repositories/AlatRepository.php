@@ -20,9 +20,9 @@ class AlatRepository extends BaseRepository
     {
         // dd($id);
         return DB::table($table)
-        ->whereNull('facilities_id')
-        ->whereNotBetween('id', $id)
-        ->get();
+            ->whereNotIn('id',  $id)
+            ->whereNull('facilities_id')
+            ->get();
         // dd($data);
     }
 

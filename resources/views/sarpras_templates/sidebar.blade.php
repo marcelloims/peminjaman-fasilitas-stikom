@@ -32,7 +32,7 @@
         <span class="nav-text">Laporan</span>
     </a>
     <ul aria-expanded="false">
-        <li><a href="{{ url('sarpras/laporan/pengajuan', []) }}">Pengajuan</a></li>
+        <li><a href="{{ url('sarpras/laporan/fasilitas', []) }}">Fasilitas</a></li>
         <li><a href="{{ url('#', []) }}">Alat-Alat</a></li>
         <li><a href="{{ url('#', []) }}">Fasilitas</a></li>
     </ul>

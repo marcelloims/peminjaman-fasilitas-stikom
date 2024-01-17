@@ -20,11 +20,11 @@
             <tbody>
                 @foreach ($data as $item)
                     <tr>
-                        <td align="center">{{$loop->iteration}}</td>
-                        <td>{{$item->code}}</td>
-                        <td align="center">{{$item->name}}</td>
-                        <td align="center">{{date('d-m-Y', strtotime($item->created_at))}}</td>
-                        <td align="center">{{$item->status}}</td>
+                        <td align="center">{{ $loop->iteration }}</td>
+                        <td>{{ $item->code }}</td>
+                        <td align="center">{{ $item->name }}</td>
+                        <td align="center">{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
+                        <td align="center">{{ $item->status }}</td>
                     </tr>
                 @endforeach
             </tbody>

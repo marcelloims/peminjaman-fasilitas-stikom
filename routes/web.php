@@ -103,8 +103,8 @@ Route::group(['middleware' => ['CheckLogin:1']], function () {
         });
 
         Route::group(['prefix' => 'laporan'], function () {
-            Route::group(['prefix' => 'pengajuan'], function () {
-                Route::get('/', [ReportController::class, 'pengajuan']);
+            Route::group(['prefix' => 'fasilitas'], function () {
+                Route::get('/', [ReportController::class, 'fasilitas']);
                 Route::post('/search', [ReportController::class, 'data']);
                 Route::post('/print', [ReportController::class, 'print']);
             });
