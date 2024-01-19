@@ -105,8 +105,13 @@ Route::group(['middleware' => ['CheckLogin:1']], function () {
         Route::group(['prefix' => 'laporan'], function () {
             Route::group(['prefix' => 'fasilitas'], function () {
                 Route::get('/', [ReportController::class, 'fasilitas']);
-                Route::post('/search', [ReportController::class, 'data']);
-                Route::post('/print', [ReportController::class, 'print']);
+                Route::get('/print', [ReportController::class, 'printFasilitas']);
+            });
+
+            Route::group(['prefix' => 'peminjaman'], function () {
+                Route::get('/', [ReportController::class, 'peminjaman']);
+                Route::get('/filter', [ReportController::class, 'filterPeminjaman']);
+                Route::get('/print', [ReportController::class, 'printPeminjaman']);
             });
         });
     });

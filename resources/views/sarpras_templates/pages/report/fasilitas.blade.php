@@ -5,23 +5,9 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Data {{ $title }}</h4>
+                    <a href="{{ url('/sarpras/laporan/fasilitas/print', []) }}" class="btn btn-primary">print</a>
                 </div>
                 <div class="card-body">
-                    {{-- <form action="{{ url('sarpras/laporan/fasilitas/search', []) }}" method="POST" class="mb-3">
-                        @csrf
-                        <div class="row">
-                            <div class="col-4">
-                                <input type="date" name="dateStart" class="form-control" value="">
-                            </div>
-                            <div class="col-4">
-                                <input type="date" name="dateEnd" class="form-control" value="">
-                            </div>
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary"><i class="flaticon-381-search"></i>
-                                    Cari</button>
-                            </div>
-                        </div>
-                    </form> --}}
                     <table id="" class="table table-bordered">
                         <thead>
                             <tr align="center">
@@ -41,7 +27,13 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->qty }}</td>
-                                    <td>{{ !$item->error_qty ? '-' : $item->error_qty }}</td>
+                                    @if (count($item->errorTools) < 0)
+                                        @foreach ($item->errorTools as $key)
+                                            <td>{{ !$key->error_qty ? '-' : $key->error_qty }}</td>
+                                        @endforeach
+                                    @else
+                                        <td>-</td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

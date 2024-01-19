@@ -33,7 +33,7 @@
     </a>
     <ul aria-expanded="false">
         <li><a href="{{ url('sarpras/laporan/fasilitas', []) }}">Fasilitas</a></li>
-        <li><a href="{{ url('#', []) }}">Alat-Alat</a></li>
-        <li><a href="{{ url('#', []) }}">Fasilitas</a></li>
+        <li><a href="{{ url('sarpras/laporan/peminjaman', []) }}">Peminjaman</a></li>
+        {{-- <li><a href="{{ url('#', []) }}">Fasilitas</a></li> --}}
     </ul>
 </li>

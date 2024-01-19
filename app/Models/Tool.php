@@ -10,4 +10,9 @@ class Tool extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function errorTools()
+    {
+        return $this->hasMany(ErrorTool::class, 'tools_id', 'id');
+    }
 }
