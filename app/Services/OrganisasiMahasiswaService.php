@@ -48,7 +48,7 @@ class OrganisasiMahasiswaService
         ];
 
         if ($request->hasFile('logo')) {
-            $request->logo->move('logo_ukm', $request->file('logo')->getClientOriginalName());
+            $request->logo->move('upload', $request->file('logo')->getClientOriginalName());
         }
 
         return $this->organisasiMahasiswaRepository->store($table, $data);

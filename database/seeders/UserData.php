@@ -22,6 +22,7 @@ class UserData extends Seeder
                 'email'                     => 'sarpras@mailinator.com',
                 'category'                  => 'Sarpras',
                 'password'                  => bcrypt('password'),
+                'signature'                 => 'logo-stikom.png',
                 'role'                      => 1,
                 'created_by'                => 'admin@mailinator.com',
                 'updated_by'                => 'admin@mailinator.com'
@@ -32,6 +33,7 @@ class UserData extends Seeder
                 'email'                     => 'bem@mailinator.com',
                 'category'                  => 'BEM',
                 'password'                  => bcrypt('password'),
+                'signature'                 => 'logo-stikom.png',
                 'role'                      => 2,
                 'created_by'                => 'admin@mailinator.com',
                 'updated_by'                => 'admin@mailinator.com'
@@ -42,6 +44,7 @@ class UserData extends Seeder
                 'email'                     => 'akademik_kemahasiswaan@mailinator.com',
                 'category'                  => 'Akademik dan Kemahasiswaan',
                 'password'                  => bcrypt('password'),
+                'signature'                 => 'logo-stikom.png',
                 'role'                      => 4,
                 'created_by'                => 'admin@mailinator.com',
                 'updated_by'                => 'admin@mailinator.com'
@@ -52,6 +55,7 @@ class UserData extends Seeder
                 'email'                     => 'koor_kemahasiswaan@mailinator.com',
                 'category'                  => 'Koor. Bagian Kemahasiswaan',
                 'password'                  => bcrypt('password'),
+                'signature'                 => 'logo-stikom.png',
                 'role'                      => 5,
                 'created_by'                => 'admin@mailinator.com',
                 'updated_by'                => 'admin@mailinator.com'

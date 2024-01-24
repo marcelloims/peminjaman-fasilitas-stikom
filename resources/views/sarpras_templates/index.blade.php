@@ -98,4 +98,13 @@
 
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+<script>
+    $("#datepicker").datepicker( {
+    format: " yyyy", // Notice the Extra space at the beginning
+    viewMode: "years", 
+    minViewMode: "years"
+});
+</script>
+
 </html>

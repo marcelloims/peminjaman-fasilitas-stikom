@@ -37,4 +37,14 @@ class ReportController extends Controller
         $data['title']  = "Laporan Peminjaman";
         return view('sarpras_templates/pages/report/peminjaman', $data);
     }
+
+    public function filterPeminjaman(Request $request)
+    {
+        // dd($request->tahun);
+        $data['title']  = "Laporan Peminjaman";
+        $data['tahun']  = $request->tahun;
+        $data['data']   = Submission::where('date_start', 'like', $request->tahun."%")->get();
+        // dd($data);
+        return view('sarpras_templates/pages/report/peminjaman_data', $data);
+    }
 }

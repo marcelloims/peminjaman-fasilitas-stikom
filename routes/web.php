@@ -110,7 +110,7 @@ Route::group(['middleware' => ['CheckLogin:1']], function () {
 
             Route::group(['prefix' => 'peminjaman'], function () {
                 Route::get('/', [ReportController::class, 'peminjaman']);
-                Route::get('/filter', [ReportController::class, 'filterPeminjaman']);
+                Route::post('/filter', [ReportController::class, 'filterPeminjaman']);
                 Route::get('/print', [ReportController::class, 'printPeminjaman']);
             });
         });
