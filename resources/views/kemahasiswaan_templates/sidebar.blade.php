@@ -12,7 +12,7 @@
     <ul aria-expanded="false">
         <li><a href="{{ url('kemahasiswaan/organisasi-mahasiswa', []) }}">Organisasi Mahasiswa</a></li>
         <li><a href="{{ url('kemahasiswaan/mahasiswa', []) }}">Mahasiswa</a></li>
-        <li><a href="{{ url('kemahasiswaan/fasilitas', []) }}">Fasilitas</a></li>
+        {{-- <li><a href="{{ url('kemahasiswaan/fasilitas', []) }}">Fasilitas</a></li> --}}
     </ul>
 </li>
 <li>

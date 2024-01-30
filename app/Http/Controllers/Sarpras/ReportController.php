@@ -40,11 +40,54 @@ class ReportController extends Controller
 
     public function filterPeminjaman(Request $request)
     {
-        // dd($request->tahun);
         $data['title']  = "Laporan Peminjaman";
         $data['tahun']  = $request->tahun;
-        $data['data']   = Submission::where('date_start', 'like', $request->tahun."%")->get();
+
+        $data['data']   = Submission::select(DB::raw('count(*) as total, SUBSTRING(date_start,6,2) as bulan'))
+        ->where("date_start", "like", $request->tahun . "%")->groupBy('date_start')->get();
+        // dd($data    );
+        $data['month']  = [
+            "01" => "Januari",
+            "02" => "Februari",
+            "03" => "Maret",
+            "04" => "April",
+            "05" => "Mei",
+            "06" => "Juni",
+            "07" => "Juli",
+            "08" => "Agustus",
+            "09" => "September",
+            "10" => "Oktober",
+            "11" => "November",
+            "12" => "Desember"
+        ];
+        
         // dd($data);
         return view('sarpras_templates/pages/report/peminjaman_data', $data);
+    }
+
+    public function printPeminjaman(Request $request)
+    {
+        $data['title']  = "Laporan Peminjaman";
+        $data['tahun']  = $request->tahun;
+
+        $data['data']   = Submission::select(DB::raw('count(*) as total, SUBSTRING(date_start,6,2) as bulan'))
+        ->where("date_start", "like", $request->tahun . "%")->groupBy('date_start')->get();
+
+        $data['month']  = [
+            "01" => "Januari",
+            "02" => "Februari",
+            "03" => "Maret",
+            "04" => "April",
+            "05" => "Mei",
+            "06" => "Juni",
+            "07" => "Juli",
+            "08" => "Agustus",
+            "09" => "September",
+            "10" => "Oktober",
+            "11" => "November",
+            "12" => "Desember"
+        ];
+
+        return view('sarpras_templates/pages/report/print_peminjaman', $data);
     }
 }
