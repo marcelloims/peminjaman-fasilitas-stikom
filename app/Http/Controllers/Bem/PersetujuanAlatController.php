@@ -130,4 +130,69 @@ class PersetujuanAlatController extends controller
 
         return redirect('bem/persetujuan/alat')->with('message', 'Telah ditolak');
     }
+
+    public function scan($id)
+    {
+        $data['title']                      = 'Persetujuan Peminjaman Alat';
+        $data['detailSubmissions']          = $this->persetujuanAlatService->joinDetailSubmissions($this->table, $id);
+        $data['tools']                      = $this->persetujuanAlatService->joinDetailSubmissionsAndTools($id);
+        $data['chairman']                   = User::where('id', $data['detailSubmissions']->chairman)->first();
+        $data['chairman_of_the_commitee']   = User::where('id', $data['detailSubmissions']->chairman_of_the_commitee)->first();
+        $createdAt                          = explode("-", date('D-d-M-Y', strtotime($data['detailSubmissions']->created_at)));
+        $startActivity                      = explode("-", date('D-d-M-Y', strtotime($data['detailSubmissions']->date_start)));
+        $endActivity                        = explode("-", date('D-d-M-Y', strtotime($data['detailSubmissions']->date_end)));
+        $data['bem']                        = User::where('role', 2)->first();
+        $data['akademik']                   = User::where('role', 4)->first();
+        $data['kemahasiswaan']              = User::where('role', 5)->first();
+
+        $getMonthCreatedAt      = null;
+        $getdayStartActivity    = null;
+        $getMonthStartActivity  = null;
+        $getdayEndActivity      = null;
+        $getMonthEndActivity    = null;
+
+        foreach ($this->month as $key => $value) {
+            if ($key == $createdAt[2]) {
+                $getMonthCreatedAt = $value;
+            }
+        }
+
+        foreach ($this->days as $key => $value) {
+            if ($key == $startActivity[0]) {
+                $getdayStartActivity = $value;
+            }
+        }
+
+        foreach ($this->month as $key => $value) {
+            if ($key == $startActivity[2]) {
+                $getMonthStartActivity = $value;
+            }
+        }
+
+        foreach ($this->days as $key => $value) {
+            if ($key == $endActivity[0]) {
+                $getdayEndActivity = $value;
+            }
+        }
+
+        foreach ($this->month as $key => $value) {
+            if ($key == $endActivity[2]) {
+                $getMonthEndActivity = $value;
+            }
+        }
+
+        $data['dateCreatedAt']          = $createdAt[1] . " " . $getMonthCreatedAt . " " . $createdAt[3];
+
+        $data['startDayActivity']       = $getdayStartActivity;
+        $data['startDateActivity']      = $startActivity[1];
+        $data['startMonthActivity']     = $getMonthStartActivity;
+        $data['startYearActivity']      = $startActivity[3];
+
+        $data['endDayActivity']       = $getdayEndActivity;
+        $data['endDateActivity']      = $endActivity[1];
+        $data['endMonthActivity']     = $getMonthEndActivity;
+        $data['endYearActivity']      = $endActivity[3];
+
+        return view('bem_templates.pages.persetujuan.alat.detailPersetujuanAsli', $data);
+    }
 }

@@ -140,6 +140,7 @@ Route::group(['middleware' => ['CheckLogin:2']], function () {
                 Route::get('/detail/{id}', [BemPersetujuanAlatController::class, 'show']);
                 Route::get('/approve/{id}', [BemPersetujuanAlatController::class, 'approve']);
                 Route::get('/reject/{id}', [BemPersetujuanAlatController::class, 'reject']);
+                Route::get('/scan/{id}', [BemPersetujuanAlatController::class, 'scan']);
             });
             Route::group(['prefix' => 'aula'], function () {
                 Route::get('/', [BemPersetujuanAulaController::class, 'index']);
