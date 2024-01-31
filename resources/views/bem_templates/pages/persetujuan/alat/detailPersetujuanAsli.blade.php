@@ -156,7 +156,7 @@
                 </div>
                 <div class="row text-center mt-3">
                     <div class="col-4">
-                        {!! DNS2D::getBarcodeSVG("$chairman_of_the_commitee->signature", 'QRCODE') !!}
+                        {!! DNS2D::getBarcodeSVG("$chairman->signature", 'QRCODE') !!}
                         {{-- <img src="{{ asset('signature/' . $chairman_of_the_commitee->signature) }}" width="100"
                             height="100" alt="logo-ukm" /> --}}
                     </div>

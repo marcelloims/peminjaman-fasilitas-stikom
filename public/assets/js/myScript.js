@@ -1,4 +1,5 @@
 let flashData = $("#flash-data").data("flashdata");
+let flashDataError = $("#flash-data-error").data("flashdata");
 let title = $("#title").data("flashdata");
 console.log(flashData, title);
 
@@ -7,6 +8,14 @@ if (flashData) {
         title: "Data " + title,
         text: flashData,
         type: "success",
+    });
+}
+
+if (flashDataError) {
+    Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: flashDataError,
     });
 }
 

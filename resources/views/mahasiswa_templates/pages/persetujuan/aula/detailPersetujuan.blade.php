@@ -155,11 +155,9 @@
                     <div class="col-4">{{ $chairman_of_the_commitee->category }}</div>
                 </div>
                 <div class="row text-center">
-                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $chairman_of_the_commitee->signature) }}"
-                            width="100" height="100" alt="logo-ukm" /></div>
+                    <div class="col-4">{!! DNS2D::getBarcodeSVG(asset('signature/' . $chairman->signature), 'QRCODE') !!}</div>
                     <div class="col-4"></div>
-                    <div class="col-4"><img src="{{ asset('logo_ukm/' . $chairman_of_the_commitee->signature) }}"
-                            width="100" height="100" alt="logo-ukm" /></div>
+                    <div class="col-4">{!! DNS2D::getBarcodeSVG(asset('signature/' . $chairman_of_the_commitee->signature), 'QRCODE') !!}</div>
                 </div>
                 <div class="row text-center">
                     <div class="col-4">{{ $chairman->name }}</div>
@@ -186,20 +184,17 @@
                 <div class="row text-center mt-3 mb-3">
                     <div class="col-4">
                         @if ($detailSubmissions->assign_4 == 'Disetujui')
-                            <img src="{{ asset('logo_ukm/' . $akademik->signature) }}" width="100" height="100"
-                                alt="logo-ukm" />
+                            {!! DNS2D::getBarcodeSVG(asset('signature/' . $akademik->signature), 'QRCODE') !!}
                         @endif
                     </div>
                     <div class="col-4">
                         @if ($detailSubmissions->assign_5 == 'Disetujui')
-                            <img src="{{ asset('logo_ukm/' . $kemahasiswaan->signature) }}" width="100"
-                                height="100" alt="logo-ukm" />
+                            {!! DNS2D::getBarcodeSVG(asset('signature/' . $kemahasiswaan->signature), 'QRCODE') !!}
                         @endif
                     </div>
                     <div class="col-4">
                         @if ($detailSubmissions->assign_2 == 'Disetujui')
-                            <img src="{{ asset('logo_ukm/' . $bem->signature) }}" width="100" height="100"
-                                alt="logo-ukm" />
+                            {!! DNS2D::getBarcodeSVG(asset('signature/' . $bem->signature), 'QRCODE') !!}
                         @endif
                     </div>
                 </div>

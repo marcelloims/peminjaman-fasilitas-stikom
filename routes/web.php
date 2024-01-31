@@ -21,6 +21,7 @@ use App\Http\Controllers\Kemahasiswaan\PersetujuanAulaController as Kemahasiswaa
 use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboardController;
 use App\Http\Controllers\Mahasiswa\MahasiswaController as MahasiswaMahasiswaController;
 use App\Http\Controllers\Mahasiswa\OrganisasiMahasiswaController as MahasiswaOrganisasiMahasiswaController;
+use App\Http\Controllers\Mahasiswa\PasswordController;
 use App\Http\Controllers\Mahasiswa\PengajuanAlatController;
 use App\Http\Controllers\Mahasiswa\PengajuanAulaController;
 use App\Http\Controllers\Mahasiswa\PengajuanKelasController;
@@ -202,6 +203,9 @@ Route::group(['middleware' => ['CheckLogin:3']], function () {
                 Route::get('/detail/{id}', [PersetujuanAulaController::class, 'show']);
             });
         });
+
+        Route::get('/ubahpassword/{id}', [PasswordController::class, 'index']);
+        Route::post('/updatepassword', [PasswordController::class, 'updatePassword']);
     });
 });
 
