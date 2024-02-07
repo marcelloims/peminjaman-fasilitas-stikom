@@ -25,7 +25,7 @@ class OrganisasiMahasiswaService
             [
                 'nama'      => 'required',
                 'singkatan' => 'required',
-                'logo'      => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'logo'      => 'required',
                 'status'    => 'required'
             ],
             [
