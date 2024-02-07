@@ -21,14 +21,27 @@ class ReportController extends Controller
     public function fasilitas()
     {
         $data['title']  = "Laporan Kondisi Fasilitas";
-        $data['data']   = Tool::with('errorTools')->get();
+        $data['data']   = Tool::with([
+            'errorTools' => function ($query) {
+                $query->select([
+                    'tools_id', app('db')->raw('sum(qty) as qty')
+                ])->groupBy('tools_id');
+            }
+        ])->get();
+        // dd($data);
         return view('sarpras_templates/pages/report/fasilitas', $data);
     }
 
     public function printFasilitas()
     {
         $data['title']  = "Laporan Pengajuan";
-        $data['data']   =  Tool::with('errorTools')->get();
+        $data['data']   = Tool::with([
+            'errorTools' => function ($query) {
+                $query->select([
+                    'tools_id', app('db')->raw('sum(qty) as qty')
+                ])->groupBy('tools_id');
+            }
+        ])->get();
         return view('sarpras_templates/pages/report/print_fasilitas', $data);
     }
 
@@ -44,7 +57,7 @@ class ReportController extends Controller
         $data['tahun']  = $request->tahun;
 
         $data['data']   = Submission::select(DB::raw('count(*) as total, SUBSTRING(date_start,6,2) as bulan'))
-        ->where("date_start", "like", $request->tahun . "%")->groupBy('date_start')->get();
+            ->where("date_start", "like", $request->tahun . "%")->groupBy('date_start')->get();
         // dd($data    );
         $data['month']  = [
             "01" => "Januari",
@@ -60,7 +73,7 @@ class ReportController extends Controller
             "11" => "November",
             "12" => "Desember"
         ];
-        
+
         // dd($data);
         return view('sarpras_templates/pages/report/peminjaman_data', $data);
     }
@@ -71,7 +84,7 @@ class ReportController extends Controller
         $data['tahun']  = $request->tahun;
 
         $data['data']   = Submission::select(DB::raw('count(*) as total, SUBSTRING(date_start,6,2) as bulan'))
-        ->where("date_start", "like", $request->tahun . "%")->groupBy('date_start')->get();
+            ->where("date_start", "like", $request->tahun . "%")->groupBy('date_start')->get();
 
         $data['month']  = [
             "01" => "Januari",

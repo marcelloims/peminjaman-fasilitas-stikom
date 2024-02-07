@@ -14,6 +14,7 @@
                     </th>
                     <th rowspan="2" style="vertical-align: middle;" width="420px">Nama Barang</th>
                     <th align="center" colspan="2">Jumlah</th>
+                    <th rowspan="2" style="vertical-align: middle;" width="420px">Total Barang</th>
                 </tr>
                 <tr align="center">
                     <th width="300px">Baik</th>
@@ -23,10 +24,17 @@
             <tbody>
                 @foreach ($data as $item)
                     <tr>
-                        <td align="center">{{ $loop->iteration }}</td>
+                        <td class="text-center">{{ $loop->iteration }}</td>
                         <td>{{ $item->name }}</td>
-                        <td align="center">{{ $item->qty }}</td>
-                        <td align="center">{{ !$item->error_qty ? '-' : $item->error_qty }}</td>
+                        <td class="text-center">{{ $item->qty }}</td>
+                        @if (count($item->errorTools) > 0)
+                            @foreach ($item->errorTools as $key)
+                                <td class="text-center">{{ $key->qty }}</td>
+                            @endforeach
+                        @else
+                            <td class="text-center">{{ $key->qty = 0 }}</td>
+                        @endif
+                        <td class="text-center">{{ $item->qty - $key->qty }}</td>
                     </tr>
                 @endforeach
             </tbody>

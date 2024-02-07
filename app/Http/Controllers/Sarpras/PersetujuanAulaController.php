@@ -161,7 +161,7 @@ class PersetujuanAulaController extends controller
 
         $qtyRetur   = $request->jumlah;
 
-        Tool::where('id', $request->tool_id)->update(['qty' => $qtyRetur]);
+        // Tool::where('id', $request->tool_id)->update(['qty' => $qtyRetur]);
 
         $dataRetur = [
             "qty"           => $request->jumlah,
