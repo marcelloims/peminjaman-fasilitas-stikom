@@ -66,6 +66,7 @@ class PengajuanAlatRepository extends BaseRepository
             $retur = [
                 "submissions_id"    => $dataSubmission,
                 "tools_id"          => $cart->id,
+                "qty"               => 0,
                 "status"            => "Dipinjam",
                 "created_by"        => Auth::user()->email,
                 "updated_by"        => Auth::user()->email,
@@ -76,6 +77,7 @@ class PengajuanAlatRepository extends BaseRepository
             $errorTools = [
                 "submissions_id"    => $dataSubmission,
                 "tools_id"          => $cart->id,
+                "qty"               => 0,
                 "created_by"        => Auth::user()->email,
                 "updated_by"        => Auth::user()->email,
                 "created_at"        => now(),

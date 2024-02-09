@@ -59,6 +59,34 @@ class PersetujuanAulaController extends controller
         return view('sarpras_templates.pages.persetujuan.aula.index', $data);
     }
 
+    public function reset($id)
+    {
+        $data['title']      = "Ubah Jadwal";
+        $data['submission'] = Submission::where('id', $id)->first();
+        return view('sarpras_templates.pages.persetujuan.aula.reset', $data);
+    }
+
+    public function reset_update(Request $request)
+    {
+        // dd($request->all());
+
+        $request->validate([
+            'tanggal_kegiatan_mulai'    => 'required',
+            'tanggal_kegiatan_selesai'  => 'required',
+        ], [
+            'tanggal_kegiatan_mulai.required' => "Tanggal Mulai Tidak Boleh Kosong",
+            'tanggal_kegiatan_mulai.required' => "Tanggal Selesai Tidak Boleh Kosong"
+        ]);
+
+        $data = [
+            "date_start"    => $request->tanggal_kegiatan_mulai . " " . $request->jam_mulai,
+            "date_end"    => $request->tanggal_kegiatan_selesai . " " . $request->jam_selesai
+        ];
+
+        Submission::where('id', $request->id)->update($data);
+        return redirect('sarpras/persetujuan/aula/');
+    }
+
     public function show($id)
     {
         $data['title']                      = 'Persetujuan Peminjaman Alat';

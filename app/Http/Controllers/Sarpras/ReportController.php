@@ -56,9 +56,9 @@ class ReportController extends Controller
         $data['title']  = "Laporan Peminjaman";
         $data['tahun']  = $request->tahun;
 
-        $data['data']   = Submission::select(DB::raw('count(*) as total, SUBSTRING(date_start,6,2) as bulan'))
-            ->where("date_start", "like", $request->tahun . "%")->groupBy('date_start')->get();
-        // dd($data    );
+        $data['data']   = Submission::select(DB::raw('count(date_start) as total, SUBSTRING(date_start,6,2) as bulan'))
+            ->where("date_start", "like", $request->tahun . "%")->groupBy('bulan')->get();
+        // dd($data);
         $data['month']  = [
             "01" => "Januari",
             "02" => "Februari",

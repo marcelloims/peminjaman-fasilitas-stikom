@@ -67,6 +67,8 @@
                                                     class="btn btn-sm btn-success mt-1"><i
                                                         class="flaticon-381-edit-1"></i></a>
                                             @endif
+                                            <a href="{{ url('sarpras/persetujuan/aula/reset/' . $submission->id) }}"
+                                                class="btn btn-sm btn-warning mt-1"><i class="flaticon-381-pin"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

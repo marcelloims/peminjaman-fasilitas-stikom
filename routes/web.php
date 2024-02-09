@@ -98,6 +98,8 @@ Route::group(['middleware' => ['CheckLogin:1']], function () {
             Route::group(['prefix' => 'aula'], function () {
                 Route::get('/', [SarprasPersetujuanAulaController::class, 'index']);
                 Route::get('/detail/{id}', [SarprasPersetujuanAulaController::class, 'show']);
+                Route::get('/reset/{id}', [SarprasPersetujuanAulaController::class, 'reset']);
+                Route::post('/reset-update', [SarprasPersetujuanAulaController::class, 'reset_update']);
                 Route::get('/edit/{id}', [SarprasPersetujuanAulaController::class, 'edit']);
                 Route::post('/update/{id}', [SarprasPersetujuanAulaController::class, 'retur']);
             });
