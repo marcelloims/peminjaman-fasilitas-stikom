@@ -126,18 +126,7 @@
                                         input-danger
                                     @enderror">
                                             <label for="">Ketua Umum</label>
-                                            <select name="ketua_umum" class="form-control">
-                                                <option disabled selected>-- Pilih Ketua Umum --</option>
-                                                @foreach ($chairmans as $chairman)
-                                                    <?php
-                                                    $nim = explode('_', $chairman->email);
-                                                    ?>
-                                                    <option value="{{ $chairman->id }}"
-                                                        {{ old('ketua_umum') == $chairman->id ? 'selected' : '' }}>
-                                                        {{ $nim[0] }} -
-                                                        {{ $chairman->name }}</option>
-                                                @endforeach
-                                            </select>
+                                            <input name="ketua_umum" class="form-control" placeholder="Nama ketua umum">
                                             @error('ketua_umum')
                                                 <span class="badge light badge-danger">{{ $message }}</span>
                                             @enderror
@@ -148,18 +137,8 @@
                                         input-danger
                                     @enderror">
                                             <label for="">Ketua Panitia</label>
-                                            <select name="ketua_panitia" class="form-control">
-                                                <option disabled selected>-- Pilih Ketua Panitia --</option>
-                                                @foreach ($chairmans as $chairman)
-                                                    <?php
-                                                    $nim = explode('_', $chairman->email);
-                                                    ?>
-                                                    <option value="{{ $chairman->id }}"
-                                                        {{ old('ketua_panitia') == $chairman->id ? 'selected' : '' }}>
-                                                        {{ $nim[0] }} -
-                                                        {{ $chairman->name }}</option>
-                                                @endforeach
-                                            </select>
+                                            <input name="ketua_panitia" class="form-control"
+                                                placeholder="Nama Ketua Panitia">
                                             @error('ketua_panitia')
                                                 <span class="badge light badge-danger">{{ $message }}</span>
                                             @enderror
@@ -237,8 +216,35 @@
                                         input-danger
                                     @enderror">
                                             <label for="">Jam Selesai</label>
-                                            <input class="form-control" name="jam_selesai"
-                                                value="18:00" readonly>
+                                            <input class="form-control" name="jam_selesai" value="18:00" readonly>
+                                            @error('jam_selesai')
+                                                <span class="badge light badge-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div
+                                            class="form-group
+                                            @error('ttd_1')
+                                                input-danger
+                                            @enderror">
+                                            <label for="">TTD Ketua Umum</label>
+                                            <input type="file" class="form-control" name="ttd_1">
+                                            @error('jam_selesai')
+                                                <span class="badge light badge-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div
+                                            class="form-group
+                                        @error('ttd_1')
+                                            input-danger
+                                        @enderror">
+                                            <label for="">TTD Ketua Panitia</label>
+                                            <input type="file" class="form-control" name="ttd_2">
                                             @error('jam_selesai')
                                                 <span class="badge light badge-danger">{{ $message }}</span>
                                             @enderror

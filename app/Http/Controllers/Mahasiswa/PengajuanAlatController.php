@@ -153,8 +153,8 @@ class PengajuanAlatController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $data['alat']   = $this->pengajuanAlatService->store($this->table, $request);
-        // dd($data);
         return redirect('mahasiswa/pengajuan/alat')->with('message', "Berhasil disimpan!");
     }
 

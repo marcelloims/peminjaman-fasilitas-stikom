@@ -91,30 +91,14 @@
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div
-                                    class="form-group
-                                    @error('ttd')
-                                        input-danger
-                                    @enderror">
-                                    <label for="">Tanda Tangan</label>
-                                    <input type="file" name="ttd" class="form-control input-default"
-                                        placeholder="Masukan ttd" value="{{ old('ttd') }}">
-                                    @error('ttd')
-                                        <span class="badge light badge-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
                                 <div class="form-group">
                                     <label for="">Kategori</label>
-                                    <select name="kategori"
+                                    <input name="kategori"
                                         class="form-control input-default
                                         @error('kategori')
                                             input-danger
-                                        @enderror">
-                                        ">
-                                        <option disabled selected>Pilih kategori</option>
-                                        <option value="Ketua Umum">Ketua Umum</option>
-                                        <option value="Ketua Panitia">Ketua Panitia</option>
-                                    </select>
+                                        @enderror"
+                                        value="Sekretaris" readonly>
                                     @error('kategori')
                                         <span class="badge light badge-danger">{{ $message }}</span>
                                     @enderror

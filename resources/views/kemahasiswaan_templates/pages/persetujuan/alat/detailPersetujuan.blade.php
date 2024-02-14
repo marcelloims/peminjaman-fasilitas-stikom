@@ -150,19 +150,19 @@
                     <div class="col-4">Dibuat Oleh</div>
                 </div>
                 <div class="row text-center">
-                    <div class="col-4">{{ $chairman->category }}</div>
+                    <div class="col-4">Ketua Umum</div>
                     <div class="col-4"></div>
-                    <div class="col-4">{{ $chairman_of_the_commitee->category }}</div>
+                    <div class="col-4">Ketua Panitia</div>
                 </div>
                 <div class="row text-center">
-                    <div class="col-4">{!! DNS2D::getBarcodeSVG(asset('signature/' . $chairman->signature), 'QRCODE') !!}</div>
+                    <div class="col-4">{!! DNS2D::getBarcodeSVG(asset('signature/' . $detailSubmissions->ttd_1), 'QRCODE') !!}</div>
                     <div class="col-4"></div>
-                    <div class="col-4">{!! DNS2D::getBarcodeSVG(asset('signature/' . $chairman_of_the_commitee->signature), 'QRCODE') !!}</div>
+                    <div class="col-4">{!! DNS2D::getBarcodeSVG(asset('signature/' . $detailSubmissions->ttd_2), 'QRCODE') !!}</div>
                 </div>
                 <div class="row text-center">
-                    <div class="col-4">{{ $chairman->name }}</div>
+                    <div class="col-4">{{ $detailSubmissions->chairman }}</div>
                     <div class="col-4"></div>
-                    <div class="col-4">{{ $chairman_of_the_commitee->name }}</div>
+                    <div class="col-4">{{ $detailSubmissions->chairman_of_the_commitee }}</div>
                 </div>
                 <div class="row text-center mt-1">
                     <div class="col-12">
@@ -221,9 +221,9 @@
                         </p>
                         <p style="height: 5px; color: #65c9f4;" class="mt-2">http://www.stikom-bali.ac.id Email :
                             info@stikom-bali.ac.id</p>
-                        <p style="height: 5px;" class="mt-2">{{ $chairman_of_the_commitee->category }} :
-                            {{ $chairman_of_the_commitee->name }}
-                            ({{ $chairman_of_the_commitee->telephone }})
+                        <p style="height: 5px;" class="mt-2">Ketua Panitia :
+                            {{ $detailSubmissions->chairman_of_the_commitee }}
+                            {{-- ({{ $chairman_of_the_commitee->telephone }}) --}}
                         </p>
                     </div>
                 </div>
@@ -273,9 +273,9 @@
                         </p>
                         <p style="height: 5px; color: #65c9f4;" class="mt-2">http://www.stikom-bali.ac.id Email :
                             info@stikom-bali.ac.id</p>
-                        <p style="height: 5px;" class="mt-2">{{ $chairman_of_the_commitee->category }} :
-                            {{ $chairman_of_the_commitee->name }}
-                            ({{ $chairman_of_the_commitee->telephone }})
+                        <p style="height: 5px;" class="mt-2">Ketua Panitia :
+                            {{ $detailSubmissions->chairman_of_the_commitee }}
+                            {{-- ({{ $chairman_of_the_commitee->telephone }}) --}}
                         </p>
                     </div>
                 </div>

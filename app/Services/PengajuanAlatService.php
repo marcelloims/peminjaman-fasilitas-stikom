@@ -103,7 +103,9 @@ class PengajuanAlatService
             'users_id'                  => Auth::user()->id,
             'student_organizations_id'  => Auth::user()->student_organizations_id,
             'chairman'                  => $request->ketua_umum,
+            'ttd_1'                     => $request->ttd_1,
             'chairman_of_the_commitee'  => $request->ketua_panitia,
+            'ttd_2'                     => $request->ttd_2,
             'name_of_activity'          => $request->nama_kegiatan,
             'theme'                     => $request->tema,
             'date_start'                => date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " " . $request->jam_mulai,
@@ -118,6 +120,16 @@ class PengajuanAlatService
             'created_at'                => now(),
             'updated_at'                => now()
         ];
+
+        if ($request->hasFile('ttd_1')) {
+            $request->ttd_1->move('signature', $request->file('ttd_1')->getClientOriginalName());
+            $submission['ttd_1'] = $request->file('ttd_1')->getClientOriginalName();
+        }
+
+        if ($request->hasFile('ttd_2')) {
+            $request->ttd_2->move('signature', $request->file('ttd_2')->getClientOriginalName());
+            $submission['ttd_2'] = $request->file('ttd_2')->getClientOriginalName();
+        }
 
         return $this->pengajuanAlatRepository->store($table, $submission);
     }

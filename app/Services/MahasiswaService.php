@@ -53,7 +53,6 @@ class MahasiswaService
                 'telepon'       => 'required',
                 'email'         => 'required|email',
                 'organisasi'    => 'required',
-                'ttd'           => 'required',
                 'kategori'      => 'required',
                 'status'        => 'required'
             ],
