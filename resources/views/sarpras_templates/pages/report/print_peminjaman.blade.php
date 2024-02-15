@@ -7,6 +7,8 @@
 
 <body style="color: #000000 !important; font-family: 'Times New Roman', Times, serif">
     <div class="container">
+        <?php date_default_timezone_set('Asia/Singapore'); ?>
+        <h4>Tanggal Laporan : {{ date('d-m-Y') }}</h4>
         <table id="" class="table table-bordered" style="">
             <thead>
                 <tr align="center">
@@ -22,7 +24,7 @@
                         <td>
                             @foreach ($month as $key => $value)
                                 @if ($key == $item->bulan)
-                                    {{ $value; }}
+                                    {{ $value }}
                                 @endif
                             @endforeach
                         </td>
