@@ -27,7 +27,9 @@ class PengajuanAulaService
                 'tanggal_kegiatan_mulai'    => 'required',
                 'jam_mulai'                 => 'required',
                 'tanggal_kegiatan_selesai'  => 'required',
-                'jam_selesai'               => 'required'
+                'jam_selesai'               => 'required',
+                'ttd_1'                     => 'required',
+                'ttd_2'                     => 'required',
             ],
             [
                 'ketua_umum.required'                => 'Ketua Umum tidak boleh kosong!',
@@ -37,7 +39,9 @@ class PengajuanAulaService
                 'tanggal_kegiatan_mulai.required'    => 'Tanggal Mulai Kegiatan tidak boleh kosong!',
                 'jam_mulai.required'                 => 'Jam Mulai tidak boleh kosong!',
                 'tanggal_kegiatan_selesai.required'  => 'Tanggal Selesai Kegiatan tidak boleh kosong!',
-                'jam_selesai.required'               => 'Jam Selsai tidak boleh kosong!'
+                'jam_selesai.required'               => 'Jam Selsai tidak boleh kosong!',
+                'ttd_1.required'                     => 'TTD Ketua Umum Tidak Boleh Kosong!',
+                'ttd_2.required'                     => 'TTD Ketua Panitia Tidak Boleh Kosong!'
             ]
         );
 
@@ -78,7 +82,9 @@ class PengajuanAulaService
             'users_id'                  => Auth::user()->id,
             'student_organizations_id'  => Auth::user()->student_organizations_id,
             'chairman'                  => $request->ketua_umum,
+            'ttd_1'                     => $request->ttd_1,
             'chairman_of_the_commitee'  => $request->ketua_panitia,
+            'ttd_2'                     => $request->ttd_2,
             'name_of_activity'          => $request->nama_kegiatan,
             'theme'                     => $request->tema,
             'date_start'                => date('Y-m-d', strtotime($request->tanggal_kegiatan_mulai)) . " " . $request->jam_mulai,
@@ -93,6 +99,16 @@ class PengajuanAulaService
             'created_at'                => now(),
             'updated_at'                => now()
         ];
+
+        if ($request->hasFile('ttd_1')) {
+            $request->ttd_1->move('signature', $request->file('ttd_1')->getClientOriginalName());
+            $submission['ttd_1'] = $request->file('ttd_1')->getClientOriginalName();
+        }
+
+        if ($request->hasFile('ttd_2')) {
+            $request->ttd_2->move('signature', $request->file('ttd_2')->getClientOriginalName());
+            $submission['ttd_2'] = $request->file('ttd_2')->getClientOriginalName();
+        }
 
         return $this->pengajuanAulaRepository->storeAula($table, $submission);
     }

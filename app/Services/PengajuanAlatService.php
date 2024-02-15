@@ -52,7 +52,9 @@ class PengajuanAlatService
                 'tanggal_kegiatan_mulai'    => 'required',
                 'jam_mulai'                 => 'required',
                 'tanggal_kegiatan_selesai'  => 'required',
-                'jam_selesai'               => 'required'
+                'jam_selesai'               => 'required',
+                'ttd_1'                     => 'required',
+                'ttd_2'                     => 'required',
             ],
             [
                 'ketua_umum.required'                => 'Ketua Umum tidak boleh kosong!',
