@@ -33,6 +33,7 @@ class PengajuanAulaRepository extends BaseRepository
             $retur = [
                 "submissions_id"    => $dataSubmission,
                 "tools_id"          => $tool->id,
+                "qty"               => 0,
                 "status"            => "Dipinjam",
                 "created_by"        => Auth::user()->email,
                 "updated_by"        => Auth::user()->email,
@@ -43,6 +44,7 @@ class PengajuanAulaRepository extends BaseRepository
             $errorTools = [
                 "submissions_id"    => $dataSubmission,
                 "tools_id"          => $tool->id,
+                "qty"               => 0,
                 "created_by"        => Auth::user()->email,
                 "updated_by"        => Auth::user()->email,
                 "created_at"        => now(),

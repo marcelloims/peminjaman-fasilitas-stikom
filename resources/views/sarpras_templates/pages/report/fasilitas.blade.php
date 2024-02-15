@@ -23,6 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $qtyError = 0; ?>
                             @foreach ($data as $item)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
@@ -31,11 +32,13 @@
                                     @if (count($item->errorTools) > 0)
                                         @foreach ($item->errorTools as $key)
                                             <td class="text-center">{{ $key->qty }}</td>
+                                            <?php $qtyError = $key->qty; ?>
                                         @endforeach
                                     @else
-                                        <td class="text-center">{{ $key->qty = 0 }}</td>
+                                        <?php $qtyError = count($item->errorTools); ?>
+                                        <td class="text-center">{{ $qtyError }}</td>
                                     @endif
-                                    <td class="text-center">{{ $item->qty - $key->qty }}</td>
+                                    <td class="text-center">{{ $item->qty - $qtyError }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
